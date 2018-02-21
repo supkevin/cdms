@@ -265,3 +265,4 @@ venv3
 .vscode  
 /MSP.Web/App_Data 
 /MSP.UI/App_Data
+*.sql
