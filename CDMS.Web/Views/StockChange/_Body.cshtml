@@ -1,0 +1,135 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.StockChangeComplex
+
+@{
+    Layout = null;
+
+    var defaultAttribute = new { @class = "form-control" };
+}
+<div class="grid-container outline">
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.StockChange.StockChangeID, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.StockChange.StockChangeID, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.StockChange.StockChangeID, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute)
+       })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.StockChange.ChangeDate, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.StockChange.ChangeDate, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.StockChange.ChangeDate, "DateTemplate",
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+            })
+        </div>
+
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.StockChange.ChangeReasonID, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.StockChange.ChangeReasonID, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.StockChange.ChangeReasonID,
+                    ViewBag.ChangeReasonList as SelectList, "TextSelect".ToLocalized(),
+                    Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.StockChange.WarehouseOldID, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.StockChange.WarehouseOldID, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.StockChange.WarehouseOldID,
+                    ViewBag.WarehouseOldList as SelectList, "TextSelect".ToLocalized(),
+                    Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.StockChange.WarehouseNewID, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.StockChange.WarehouseNewID, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.StockChange.WarehouseNewID,
+                    ViewBag.WarehouseNewList as SelectList, "TextSelect".ToLocalized(),
+                    Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.StockChange.ChangePersonID, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.StockChange.ChangePersonID, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">      
+            @Html.DropDownListFor(m => m.StockChange.ChangePersonID,
+                ViewBag.UserList as SelectList, "TextSelect".ToLocalized(),
+                Html.MergeAttributes(
+                    new
+                    {
+                        @class = "selectpicker text-danger with-ajax after-init user",
+                        data_show_subtext = "true",
+                        data_live_search = "true",
+                        data_abs_ajax_url = string.Format("{0}", Url.Action("GetForAutocomplete", "User")),
+                    }, defaultAttribute)
+                )
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.StockChange.Remarks, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.StockChange.Remarks, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-5">
+            @Html.TextAreaFor(m => m.StockChange.Remarks,
+            Html.MergeAttributes(new { @cols = 80, @rows = 3 }, defaultAttribute)
+            )
+        </div>
+    </div>
+
+    <!--(start)List(start)-->
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered updownleftright fixTable" id="table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-nowrap style="width:120px"></th>
+                        <th class="text-nowrap">@Html.OutputText("ProductID".ToLocalized())</th>                                                                                                
+                        <th class="text-nowrap" style="width:180px">@Html.OutputText("Qty".ToLocalized())</th>                                                
+                        <th class="text-nowrap">@Html.OutputText("Remarks".ToLocalized())</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ChildList.Count() > 0)
+                    {
+                        foreach (var item in Model.ChildList)
+                        {
+                            try
+                            {
+                                Html.RenderPartial("_Item", item);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw;
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--(end)List(end)-->
+</div>

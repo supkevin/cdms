@@ -1,0 +1,107 @@
+﻿<link href='@Url.Content("~/Content/responsive-table.css")' rel="stylesheet" />
+<form class="form-inline" role="form" onsubmit="return false;" id="myForm">
+    <table class="table table-striped table-bordered table-rwd">
+        <tr>
+            <td data-th="序號" class="col-1 title">
+                @Html.Label("TextSupplierID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="序號" class="col-2">
+                <div class="form-inline">
+                    <input type="text" name="start" class="form-control"/>
+                    @("TextTo".ToLocalized())
+                    <input type="text" name="finish" class="form-control"/>
+                </div>
+            </td>
+            <td data-th="序號" class="col-1 title">
+                @Html.Label("TextSupplierName".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="序號" class="col-2">
+                <input type="text" name="txt" class="form-control" />
+            </td>
+        </tr>
+    </table>
+    <input type="button" id="SearchButton" class="btn btn-warning" value="@Html.OutputText("ButtonSearch".ToLocalized())" />
+    @Html.ActionLink("ButtonCreate".ToLocalized(), "Create", "Company",
+    new { area = "" },
+    new { @class = "btn btn-success fancybox fancybox.iframe" })
+</form>
+
+<hr />
+<div id="MyContent">
+</div>
+@section scripts{
+    <script>
+        $(function () {
+
+            $('#SearchButton').click(function () {
+                $('#p').val('1');
+                Init();
+            });
+
+            $("#SearchText").keypress(function (e) {
+                code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) {
+                    $('#p').val('1');
+                    Init();
+                }
+            });
+
+            $("#SearchText").on('change',
+                function (e) {
+                    $('#p').val('1');
+                    Init();
+                }
+            );
+
+            $('.fancybox').fancybox({
+                closeBtn: false, // 是否顯示關閉按紐
+                helpers: {
+                    // 防點擊背景時關閉
+                    overlay: { closeClick: false }
+                },
+                keys: {
+                    // 防點擊ESC時關閉
+                    close: null
+                },
+                'autoSize': false,
+                height: window.innerHeight,
+                maxWidth: 900,
+                padding: 10,
+                margin: 20
+            });
+
+            Init();
+        });
+
+        function Init() {
+
+            var p = $('#p').val();
+       
+            var url = '@Url.Action("_List", "Company", new { area = "" })';
+            
+            // 利用這方法可以把所有欄位送到controller
+            var data = $('#myForm').serializeArray();
+
+            // 加入隱藏欄位
+            data.push({ name: 'page', value: p });
+            data.push({ name: 'orderby', value: 'CompanyID' });
+            data.push({ name: 'sort', value: 'desc' });
+
+            console.log('data', data);
+
+            postAjax(url, data, function (data) {
+                    $("#MyContent").html(data);
+                });
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

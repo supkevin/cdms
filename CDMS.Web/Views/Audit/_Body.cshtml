@@ -1,0 +1,293 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.QuotationComplex
+
+@{
+    Layout = null;
+
+    var defaultAttribute = new { @class = "form-control", required = "required" };
+
+}
+<div class="grid-container outline">
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.QuotationID, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Quotation.QuotationID, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute)
+       })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.Activate, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Quotation.Activate,
+               ViewBag.YseNoList as SelectList, null,
+               Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.QuotationDate, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Quotation.QuotationDate,
+           "DateTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+           })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.ValidateDate, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Quotation.ValidateDate,
+           "DateTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+           })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.CustomerID, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+
+            @Html.DropDownListFor(m => m.Quotation.CustomerID,
+                ViewBag.CompanyList as SelectList, "TextSelect".ToLocalized(),
+                Html.MergeAttributes(
+                    new
+                    {
+                        @class = "selectpicker text-danger with-ajax after-init customer",
+                        data_show_subtext = "true",
+                        data_live_search = "true",
+                        data_abs_ajax_url = string.Format("{0}", Url.Action("GetForCustomerAutocomplete", "Company")),
+                    }, defaultAttribute)
+                )
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.ContactPerson, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Quotation.ContactPerson,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtContactPerson" }, defaultAttribute)
+                })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.ContactPhone, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Quotation.ContactPhone,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtContactPhone" }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.InvoiceAddress, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.EditorFor(m => m.Quotation.InvoiceAddress,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtInvoiceAddress" }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.ShippingAddress, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.EditorFor(m => m.Quotation.ShippingAddress,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtShippingAddress" }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.ShippingModeID, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Quotation.ShippingModeID,
+            ViewBag.ShippingModeList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.ShippingFee, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Quotation.ShippingFee,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.Total, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Quotation.Total,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.QuotePerson, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Quotation.QuotePerson,
+                ViewBag.UserList as SelectList, "TextSelect".ToLocalized(),
+                Html.MergeAttributes(
+                    new
+                    {
+                        @class = "selectpicker text-danger with-ajax after-init user",
+                        data_show_subtext = "true",
+                        data_live_search = "true",
+                        data_abs_ajax_url = string.Format("{0}", Url.Action("GetForAutocomplete", "User")),
+                    }, defaultAttribute)
+                )
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Quotation.Remarks, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.TextAreaFor(m => m.Quotation.Remarks,
+            Html.MergeAttributes(new { @cols = 80, @rows = 3 }, defaultAttribute)
+            )
+        </div>
+    </div>
+
+    <!--(start)List(start)-->
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered updownleftright fixTable" id="table">
+                <thead>
+                    <tr class="active">                        
+                        <th class="text-nowrap" style="width:280px">@Html.OutputText("ProductID".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:100px">@Html.OutputText("PriceKindID".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:100px">@Html.OutputText("ConditionID".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:100px">@Html.OutputText("Discount".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:100px">@Html.OutputText("Price".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:100px">@Html.OutputText("Qty".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("Amount".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("Remarks".ToLocalized())</th>
+                    </tr>
+                </thead>
+                <tbody sytle="white-space: nowrap;">
+                    @if (Model.ChildList.Count() > 0)
+                    {
+                        foreach (var item in Model.ChildList)
+                        {
+                            try
+                            {
+                                Html.RenderPartial("_Item", item);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw;
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--(end)List(end)-->
+    <!--(end)List(end)-->
+    <!--(start)audit(start)-->
+    <div class="row">
+        <div class="col-6 text-danger">
+            <b>請輸入報價單審核結果：</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("ReviewDate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Quotation.ReviewDate,
+           "DateTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+           })
+        </div>
+        <div class="col-1 title">
+            @Html.Label("Result".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Quotation.Result,
+            ViewBag.ResultTypeList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("Auditor".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            <div class="form-inline">
+                @Html.EditorFor(m => m.Quotation.Auditor,
+                    new
+                    {
+                        htmlAttributes = Html.MergeAttributes(
+                            new
+                            {
+                                @class = "auto-complete",
+                                data_autocomplete_url = Url.Action("UserNameTemplate", "User"),
+                                id = "txtUserID"
+                            }, defaultAttribute)
+                    })
+                @Html.DisplayFor(m => m.Quotation.Auditor, "UserNameTemplate",
+                   new
+                   {
+                       htmlAttributes = Html.MergeAttributes(
+                                new
+                                {
+                                    @class = "auto-complete-name",
+                                    id = "txtUserName",
+                                    readOnly = "ReadOnly",
+                                }, defaultAttribute)
+                   })
+            </div>
+        </div>
+    </div><!--(end)audit(end)-->
+    @*<!--(start)toolbar(start)-->
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" />
+                    <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+                </div>
+            </div>
+        </div>
+        <!--(end)toolbar(end)-->*@
+</div>

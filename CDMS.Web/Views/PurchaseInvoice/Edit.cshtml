@@ -1,0 +1,49 @@
+﻿@model CDMS.Model.ViewModel.PurchaseInvoiceComplex
+
+@{
+    Layout = "~/Views/Shared/_GridForm.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_ProgramName.cshtml", new ViewDataDictionary { { "id", "程式名稱修改" } })
+
+@using (Ajax.BeginForm("Edit", "PurchaseInvoice", new { area = "" }, 
+    new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_Body")
+}
+
+@section scripts{   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // 存檔時需移除下拉選單disabled屬性才讀的到值
+            $("input[type='submit']").on('click', function () {                                
+                $('#InvoiceStatusID').removeAttr('disabled');                
+            });
+
+            // 上下左右
+            $('#table').enableCellNavigation();
+      
+            // 輸入公司代碼帶聯絡人及電話
+            $('body').on('autocompleteselect', '#txtCompanyID', function (event, node) {
+                $('#txtCompanyName').val(node.item.source.ShortName);
+                $('#txtContactPerson').val(node.item.source.ContactPerson);
+                $('#txtContactPhone').val(node.item.source.Telephone1);
+            });//$('body').on('autocompleteselect'
+
+            // 輸入公司代碼清空欄位
+            $('body').on('keydown', '#txtCompanyID', function (event, node) {
+                // 輸入公司代碼帶聯絡人及電話
+                $('#txtCompanyName').val('');
+                $('#txtContactPerson').val('');
+                $('#txtContactPhone').val('');
+            });//$('body').on('keydown'
+        });//$(document).ready(
+    </script>   
+}
+
+
+
+
+

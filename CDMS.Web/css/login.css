@@ -1,0 +1,307 @@
+@charset "utf-8";
+body {
+	margin: 0;
+	padding: 0;
+	color: #000;
+	font-family: "微軟正黑體";
+	font-size: 100%;
+	line-height: 1.4;
+	background-image: url(../image/bg.jpg);
+	background-repeat: no-repeat;
+	-moz-background-size: cover;
+    background-size: cover;
+}
+#userlogin #loginarea {
+	height: auto;
+	width: 350px;
+	background-color: #FFF;
+	padding: 10px;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-bottom: 10px;
+	margin-left: auto;
+	solid;			border-radius: 10px;
+}
+#loginarea_back {
+	height: auto;
+	width: 350px;
+	background-color: #23849d;
+	opacity:0.8;
+	padding: 10px;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-bottom: 10px;
+	margin-left: auto;
+
+
+	solid;					border-radius: 10px;
+}
+#usermain {
+	text-align: center;
+	background-color: #7DBEFF;
+}
+#inputarea {
+	height: auto;
+	width: auto;
+	background-color: #FFF;
+	padding: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	solid;			border-radius: 10px;
+}
+
+#userlogin #form1 #loginarea img {
+	margin-top: 0px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	text-align: center;
+	vertical-align: middle;
+}
+#userlogin #form1 #loginarea #loginsubmit {
+	float: right;
+	margin-right: 20px;
+	font-family: "微軟正黑體";
+	font-size: 18px;
+	height: 30px;
+	width: 80px;
+	vertical-align: middle;
+}
+#userlogin #logo img {
+	vertical-align: middle;
+}
+
+
+
+
+
+/* ~~ 元素/標籤選取器 ~~ */
+ul, ol, dl { /* 由於瀏覽器之間的差異，最佳作法是在清單中使用零寬度的欄位間隔及邊界。為了保持一致，您可以在這裡指定所要的量，或在清單包含的清單項目 (LI、DT、DD) 上指定所要的量。請記住，除非您寫入較為特定的選取器，否則在此執行的作業將重疊顯示到 .nav 清單。 */
+	padding: 0;
+	margin: 0;
+}
+a img { /* 這個選取器會移除某些瀏覽器在影像由連結所圍繞時，影像周圍所顯示的預設藍色邊框 */
+	border: none;
+	vertical-align: middle;
+}
+h1 {
+	font-size: 36px;
+	border-top-color: #06C;
+	border-right-color: #06C;
+	border-bottom-color: #06C;
+	border-left-color: #06C;
+	background-color: #5E86E3;
+	height: 70px;
+	width: 220px;
+	text-align: center;
+	vertical-align: bottom;
+	color: #FFF;
+	margin-top: 20px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	margin-left: 30px;
+	float: left;
+	padding: 5px;
+}
+h2 {
+	font-family: "微軟正黑體";
+	font-size: 30px;
+	color: #000;	
+}
+h3 {
+	font-family: "微軟正黑體";
+	font-size: 24px;
+	color: #000;	
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding: 0px;	
+}
+
+#data {
+	float: left;
+	width: 100%;
+	margin-top: 20px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	padding: 10px;
+	border: 1px solid #999;
+	height: 550px;
+
+	solid;				border-radius: 10px;
+}
+
+
+
+/* ~~ 網站連結的樣式設定必須保持此順序，包括建立滑過 (Hover) 效果的選取器群組在內。~~ */
+a:link {
+	color: #000000;
+	text-decoration: none; /* 除非您要設定非常獨特的連結樣式，否則最好提供底線，以便快速看出 */
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* 這個選取器群組可以讓使用鍵盤導覽的使用者，也和使用滑鼠的使用者一樣擁有相同的滑過體驗。 */
+	text-decoration: none;
+	text-align: center;
+}
+
+/* ~~ 這個固定寬度的容器環繞著所有其他 Div ~~ */
+.container {
+	width: 1280px;
+	background-color: #FFF;
+	margin: 0 auto; /* 兩側的自動值與寬度結合後，版面便會置中對齊 */
+	overflow: hidden;
+}
+/* ~~ 這是版面的欄位。~~ 
+
+1) 欄位間隔只會置於 Div 的頂端或底部。這些 Div 內的元素在兩側會有欄位間隔，可讓您不需進行「方塊模型計算」。請記住，如果對 Div 本身加入任何側邊的欄位間隔或邊框，在計算「總」寬度時，就會將這些加入您定義的寬度。您也可以選擇移除 Div 中元素的欄位間隔，然後在其中放置沒有寬度的第二個 Div，並依設計所需放置欄位間隔。
+
+2) 尚未為這些欄位提供邊界，因為它們全都是浮動的。如果必須加入邊界，請避免將其放在浮動方向的一側 (例如將右邊界放在設定為向右浮動的 Div 上)。在許多時候，您都可以改用欄位間隔。對於必須違反此規則的 Div，您應該在 Div 的規則中加入 "display:inline" 宣告，以防止某些版本的 Internet Explorer 將邊界加倍。
+
+3) 因為可在文件中多次使用類別 (也可對單一的元素套用多個類別)，所以已為欄位指定類別名稱，而非 ID。例如，您可在必要時將兩個側邊列 Div 堆疊起來。如有需要，也可以將這些名稱輕鬆地變更為 ID (只要您在每份文件中只使用一次)。
+
+4) 如果想要將導覽放在右方而非左方，只要將這些欄設定為往反方向浮動 (全部往右，而非全部往左)，它們就會以相反順序呈現。您不需要在 HTML 原始碼中移動 Div。
+
+*/
+.sidebar {
+	float: left;
+	width: 280px;
+	background-color: #7DBEFF;
+}
+.content {
+	width: 1000px;
+	float: left;
+	background-color: #FFF;
+	padding-top: 10px;
+	padding-right: 0;
+	padding-bottom: 10px;
+	padding-left: 0;
+}
+.container .content h1 {
+	width: 300px;
+	solid;border-radius:10px;
+}
+
+
+/* ~~ 這個群組選取器會在 .content 區域空間中提供清單 ~~ */
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px; /* 這個欄位間隔反映出上方標題和段落規則中的右方間隔。當欄位間隔位於下方時，便可將清單中的其他元素間隔開來；當位於左方時，則可藉此建立縮排。這些動作均可依需要進行調整。 */
+}
+
+/* ~~ 導覽清單樣式 (如果選擇使用 Spry 之類的預製飛出選單，則可移除) ~~ */
+ul.nav {
+	list-style: none; /* 這會建立連結的上方邊框，其他則都會使用下方邊框放置在 LI 上 */
+	margin-bottom: 220px; /* 這會在下方的內容上建立導覽間的間距 */
+}
+ul.nav li {
+	margin-left: 10px;
+	margin-top: 20px;
+	border: 0px solid #000;
+	margin-right: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+#info {
+	font-size: 16px;
+	margin: 20px;
+}
+.container .sidebar #logo a img {
+	float: none;
+	margin-left: 0px;
+}
+.container .sidebar #logo {
+	text-align: center;
+	font-size: 30px;
+	color: #000;
+	font-style: normal;
+	text-decoration: none;
+}
+
+
+
+ul.nav a, ul.nav a:visited { /* 將這些選取器放入群組，即可確保您的連結即使在受到點擊後仍保有按鈕外觀 */
+	display: block; /* 這會為連結提供區塊屬性，使連結能填滿包含它的整個 LI，讓整個區域都能回應滑鼠點按動作。 */
+	width: 240px;  /*這個寬度使整個按鈕都可用於 IE6 的點按動作。如果不需要支援 IE6，就可將其移除。請從側邊列容器的寬度減去此連結的間距來計算適當的寬度。 */
+	text-decoration: none;
+	background-color: #5E86E3;
+	height: 70px;
+	text-align: center;
+	vertical-align: baseline;
+	font-size: 16px;
+	color: #FFF;
+	padding: 0px;
+}
+.container .content #print a img {
+	vertical-align: middle;
+}
+
+#print {
+	float: right;
+	margin-right: 20px;
+	vertical-align: middle;
+	font-family: "微軟正黑體";
+	font-size: 30px;
+
+}
+
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* 這會同時變更滑鼠及鍵盤導覽器的背景及文字顏色 */
+	background-color: #3399CC;
+	color: #FFF;
+	text-align: center;
+}
+
+/* ~~ 其他 float/clear 類別 ~~ */
+.fltrt {  /* 這個類別可用來讓元素在頁面中浮動，浮動的元素必須位於頁面上相鄰的元素之前。 */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* 這個類別可用來讓元素在頁面左方浮動，浮動的元素必須位於頁面上相鄰的元素之前。 */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* 這個類別可放置在 <br /> 或空白的 Div 上，當做接在 #container 內最後一個浮動 Div 後方的最後一個元素 (如果已移除 .container 上的 overflow:hidden) */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+#userlogin {
+	float: none;
+	height: auto;
+	width: 800px;
+	;
+	padding: 0px;
+	text-align: center;
+	margin-top: 80px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+#userlogin #logo  {
+	text-align: center;
+	margin: 0px auto;
+	;
+	font-family: "微軟正黑體";
+	font-size: 38px;
+}
+.container .sidebar #logo img {
+	margin-top: 10px;
+}
+
+.container .sidebar .nav a img  {
+	vertical-align: middle;
+	margin-top: 5px;
+}
+#userlogin img {
+	margin: 3px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}

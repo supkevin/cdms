@@ -1,0 +1,124 @@
+﻿@model CDMS.Model.ViewModel.ProductViewModel
+
+@{
+    Layout = "~/Views/Shared/_GridForm.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_ProgramName.cshtml", new ViewDataDictionary { { "id", "產品資料維護" } })
+
+@using (Ajax.BeginForm("Create", "Product", new { area = "" },
+                            new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_Body")
+
+    <div class="grid-container outline">
+        <!--(start)toolbar(start)-->
+        <div class="row">
+            <div class="col-6">
+                <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" />
+                <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+            </div>
+        </div>
+        <!--(end)toolbar(end)-->
+    </div>    
+}
+
+@section scripts{
+
+<script type="text/javascript">
+    function GenerateProductName(){
+        var productID = $('#ProductID').val();
+        var brandID = $('#BrandID').val();
+        $('#ProductName').val('');
+
+        if (productID && brandID) {
+            $('#ProductName').val(productID + ' ' + brandID);
+        }
+    }
+
+    $(document).ready(function () {
+        $('#ProductID').on('input', function () {
+            GenerateProductName();
+        });
+
+        $('#BrandID').on('change', function () {            
+            GenerateProductName();
+        });
+    });
+</script>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            var options = {
+                ajax: {
+                    @*url: '@Url.Action("GetForSupplierAutocomplete", "Company")',*@
+                    data: function () {
+                        var params = {
+                            term: '{{{q}}}'
+                        };
+                        //if (gModel.selectedGroup().hasOwnProperty('ContactGroupID')) {
+                        //    params.GroupID = gModel.selectedGroup().ContactGroupID;
+                        //}
+                        return params;
+                    }
+                },
+                clearOnEmpty: false,
+                preserveSelected: true,
+                locale: {
+                    emptyTitle: '請選擇',
+                    currentlySelected: '目前選取',
+                    searchPlaceholder: '關鍵字',
+                    statusInitialized: '請輸入關鍵字查詢',
+                    statusNoResults: '查無資料',
+                },
+                preprocessData: function (data) {
+                    var contacts = [];
+                    //console.log('data', data);
+
+                    contacts.push({ value: '', text: '@("TextSelect".ToLocalized())'});
+
+                    if (data) {
+                        $.each(data, function (index, item) {
+                            contacts.push(
+                                {
+                                    'value': item.Value,
+                                    'text': item.Value + '-' + item.Label,
+                                    'data': {
+                                        'icon': 'icon-person',
+                                        'subtext': ''
+                                    },
+                                    'disabled': false
+                                }
+                                );
+                        });
+                    }
+                    return contacts;
+                },
+            };
+
+            $('.selectpicker.after-init').each(function (index, value) {
+                var self = $(value);
+
+                var selected = self.val();
+
+                self.find('[value != ""]').remove();
+                self.selectpicker('refresh');
+            });
+
+            $('.selectpicker').selectpicker().filter('.with-ajax').ajaxSelectPicker(options);
+
+            $('.selectpicker').on('changed.bs.select', function (e) {
+                // do something...
+                console.log('changed', $(this).val());
+            });
+        });
+</script>
+}
+
+
+
+
+
+

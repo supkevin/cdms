@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_GridForm3.cshtml";
+}
+
+@using (Ajax.BeginForm("Create", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_Receivable")
+
+    <!--(start)toolbar(start)-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+                </div>
+            </div>
+        </div>
+    </div>
+   <!--(end)toolbar(end)-->
+}
+
+
+

@@ -1,0 +1,210 @@
+﻿@using CDMS.Web.Helpers
+@model IEnumerable<CDMS.Model.ViewModel.BankDepositListViewModel>
+
+@{
+    Layout = null;
+}
+@{
+    var defaultAttribute = new { @class = "form-control" };
+    var labelAttribute = new { @class = "control-label" };
+}
+
+@*測試捉所有ViewBag*@
+@*@{
+    string[] ignore = { "ActionName", "ControllerName" };
+    var routeValues = new RouteValueDictionary();
+
+    foreach (var viewBagItem in ViewContext.ViewData.Where(x => ignore.Contains(x.Key) == false))
+    {
+        if (viewBagItem.Value != null)
+        {
+            var type = viewBagItem.Value.GetType();
+
+            if (type == typeof(string) || type == typeof(string[]))
+            {
+                <p> @viewBagItem.Key @@: @viewBagItem.Value </p>;
+                routeValues.Add(viewBagItem.Key, viewBagItem.Value);
+            }
+        }
+    }
+}*@
+
+@functions{
+
+    private string GeneratePageLink(int page, string action = "_List")
+    {
+
+        string[] ignore = { "ActionName", "ControllerName" };
+        var routeValues = new RouteValueDictionary();
+
+        foreach (var viewBagItem in ViewContext.ViewData.Where(x => ignore.Contains(x.Key) == false))
+        {
+            if (viewBagItem.Value != null)
+            {
+                var type = viewBagItem.Value.GetType();
+
+                if (type == typeof(string) || type == typeof(string[]))
+                {
+                    routeValues.Add(viewBagItem.Key, viewBagItem.Value);
+                }
+            }
+        }
+
+        routeValues.Add("page", page);
+
+        var result = Url.Action("_List", (RouteValueDictionary)routeValues);
+        return result;
+    }
+}
+@*付款日期
+    供應商名稱
+    現金金額
+    付款行庫
+    帳號
+    支票號碼
+    支票金額
+    到期日
+    票據狀況
+    備註*@
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">
+                <th>@Html.OutputText("TextFunction".ToLocalized())</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CheckNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Summary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DealDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpiryDate)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.DebitAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BankAccountID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CheckStatus)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <button class="btn btn-primary" data-key="@item.SeqNo">@("ButtonSave".ToLocalized())</button>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.CheckNum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Summary)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.CompanyName)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(m => item.DealDate, "DateTemplate")
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(m => item.ExpiryDate, "DateTemplate")
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(m => item.Amount) @*不論收款或付款*@
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => item.BankAccountID,
+                              ViewBag.BankAccountList as SelectList, null,
+                             Html.MergeAttributes(
+                                 new
+                                 {
+                                     @class = "selectpicker text-danger",
+                                     data_container = "body",
+                                     data_key = "BankAccountID",
+                                     data_selected_value = item.BankAccountID
+                                 }, defaultAttribute))
+                        </td>
+                        <td>
+                            @*data_container = "body" 避免產生scroll bar*@
+                            @Html.DropDownListFor(m => item.CheckStatus,
+                              ViewBag.CheckStatusList as SelectList, null,
+                               Html.MergeAttributes(
+                               new
+                               {
+                                   @class = "selectpicker text-danger",
+                                   data_container = "body",          
+                                   data_key = "CheckStatus",
+                                   data_selected_value = item.CheckStatus == null ? "" : item.CheckStatus
+                               }, defaultAttribute))
+                        </td>
+                    </tr>
+                }
+                <script>                    
+                    $('select[data-key]').each(function (index, item) {
+                        var self = $(item);
+                        self.val(self.data('selectedValue'));
+                    });
+                    $('.selectpicker').selectpicker('refresh');
+                </script>
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Hidden("p", (Int32)@ViewBag.p)
+@using PagedList
+@using PagedList.Mvc
+@Html.PagedListPager((IPagedList)Model,
+        page => GeneratePageLink(page),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>"
+        },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "MyContent"
+
+        }))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

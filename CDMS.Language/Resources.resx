@@ -1,0 +1,1602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ButtonBatchCreate" xml:space="preserve">
+    <value>批次新增</value>
+    <comment>Button</comment>
+  </data>
+  <data name="ButtonClose" xml:space="preserve">
+    <value>關閉</value>
+    <comment>Button</comment>
+  </data>
+  <data name="ButtonCreate" xml:space="preserve">
+    <value>新增</value>
+    <comment>Button</comment>
+  </data>
+  <data name="ButtonDelete" xml:space="preserve">
+    <value>刪除</value>
+    <comment>Button</comment>
+  </data>
+  <data name="ButtonEdit" xml:space="preserve">
+    <value>編輯</value>
+    <comment>Button</comment>
+  </data>
+  <data name="ButtonSearch" xml:space="preserve">
+    <value>查詢</value>
+    <comment>Button</comment>
+  </data>
+  <data name="CX_Birthday" xml:space="preserve">
+    <value>生日</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="CX_Country" xml:space="preserve">
+    <value>國家</value>
+    <comment>Field(Country)</comment>
+  </data>
+  <data name="CX_Country_Remarks" xml:space="preserve">
+    <value>國別備註</value>
+    <comment>Field(Country)</comment>
+  </data>
+  <data name="CX_Dept_Name" xml:space="preserve">
+    <value>單位</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="CX_From_Date" xml:space="preserve">
+    <value>出發日期</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="CX_Group_Name" xml:space="preserve">
+    <value>組別</value>
+    <comment>NowOverSeaViewModel</comment>
+  </data>
+  <data name="CX_Name" xml:space="preserve">
+    <value>姓名</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="CX_OnBoard_Date" xml:space="preserve">
+    <value>到職日</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="CX_OverSea_Remark" xml:space="preserve">
+    <value>出國備註</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="CX_OverType" xml:space="preserve">
+    <value>出差類別</value>
+    <comment>Field(OverType)</comment>
+  </data>
+  <data name="CX_PID" xml:space="preserve">
+    <value>工號</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="CX_Place_Remark" xml:space="preserve">
+    <value>地點備註</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="CX_Remark" xml:space="preserve">
+    <value>備註</value>
+    <comment>NowOverSeaViewModel</comment>
+  </data>
+  <data name="CX_Title" xml:space="preserve">
+    <value>職稱</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="CX_To_Date" xml:space="preserve">
+    <value>返台日期</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="FG_IsWorkCard" xml:space="preserve">
+    <value>工作簽</value>
+    <comment>Field(OverSea)</comment>
+  </data>
+  <data name="ID_Country" xml:space="preserve">
+    <value>出差國家</value>
+    <comment>Field(Country)</comment>
+  </data>
+  <data name="ID_OverType" xml:space="preserve">
+    <value>種類</value>
+    <comment>Field(OverType)</comment>
+  </data>
+  <data name="MenuBirthday" xml:space="preserve">
+    <value>出差人員生日</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuCountry" xml:space="preserve">
+    <value>出差國別設定</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuHistory" xml:space="preserve">
+    <value>歷史資料查詢</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuOverStaff" xml:space="preserve">
+    <value>人員管理</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuNowOverSea" xml:space="preserve">
+    <value>目前出差海外人數表</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuOverSea" xml:space="preserve">
+    <value>出差人員設定</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuOverSeaDisplay" xml:space="preserve">
+    <value>出差人員顯示</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuOverType" xml:space="preserve">
+    <value>出差類別設定</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuStaffReport" xml:space="preserve">
+    <value>人員報表</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MessageComplete" xml:space="preserve">
+    <value>完成!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="MessageDataHasLinking" xml:space="preserve">
+    <value>此資料有關連性,無法刪除!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="MessageDeleteConfirm" xml:space="preserve">
+    <value>確定刪除資料，刪除後將無法復原資料!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="MessageEmployeeSearchError" xml:space="preserve">
+    <value>查無此工號，請確定輸入無誤!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="MessageNoData" xml:space="preserve">
+    <value>查無資料</value>
+    <comment>Message</comment>
+  </data>
+  <data name="NQ_Sort" xml:space="preserve">
+    <value>排序</value>
+    <comment>Field</comment>
+  </data>
+  <data name="NQ_Sub_People" xml:space="preserve">
+    <value>人數</value>
+    <comment>NowOverSeaViewModel</comment>
+  </data>
+  <data name="NQ_Total_People" xml:space="preserve">
+    <value>合計</value>
+    <comment>NowOverSeaViewModel</comment>
+  </data>
+  <data name="TextAppName" xml:space="preserve">
+    <value>管理系統</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextBirthdayCount" xml:space="preserve">
+    <value>生日次數</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextCompanyName" xml:space="preserve">
+    <value>&amp;copy; 2017 - 鼎泰豐小吃店股份有限公司</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextDefault" xml:space="preserve">
+    <value>預設</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextEnd" xml:space="preserve">
+    <value>迄</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextFunction" xml:space="preserve">
+    <value>功能</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextiCount" xml:space="preserve">
+    <value>序號</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextInput" xml:space="preserve">
+    <value>請輸入</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextIsGo" xml:space="preserve">
+    <value>已出發</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextIsIn" xml:space="preserve">
+    <value>已回國</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextIsNotGo" xml:space="preserve">
+    <value>未出發</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextIsOut" xml:space="preserve">
+    <value>出差中</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextMing" xml:space="preserve">
+    <value>名</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextNearOneWeekBirthday" xml:space="preserve">
+    <value>近一週生日人員</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextNearTwoMonthBirthday" xml:space="preserve">
+    <value>近兩月生日人員</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextNoData" xml:space="preserve">
+    <value>無資料</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextSelect" xml:space="preserve">
+    <value>請選擇</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextStart" xml:space="preserve">
+    <value>起</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextStatus" xml:space="preserve">
+    <value>狀態</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextTeam" xml:space="preserve">
+    <value>組</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextTotalCount" xml:space="preserve">
+    <value>合計</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextUserRemark1" xml:space="preserve">
+    <value>備註：藍底表示：出差期間會遇到生日！</value>
+    <comment>Text</comment>
+  </data>
+  <data name="ButtonExport" xml:space="preserve">
+    <value>匯出</value>
+    <comment>Button</comment>
+  </data>
+  <data name="TestFalse" xml:space="preserve">
+    <value>否</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextTrue" xml:space="preserve">
+    <value>是</value>
+    <comment>Text</comment>
+  </data>
+  <data name="MenuSet" xml:space="preserve">
+    <value>設定</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="CX_Feeback_Remarks" xml:space="preserve">
+    <value>回饋屬性備註</value>
+    <comment>Field(Feedback)</comment>
+  </data>
+  <data name="CX_Feedback" xml:space="preserve">
+    <value>回饋屬性</value>
+    <comment>Field(Feedback)</comment>
+  </data>
+  <data name="CX_Observation" xml:space="preserve">
+    <value>觀察構面</value>
+    <comment>Field(Observation)</comment>
+  </data>
+  <data name="CX_Observation_Remarks" xml:space="preserve">
+    <value>觀察構面備註</value>
+    <comment>Field(Observation)</comment>
+  </data>
+  <data name="CX_Track" xml:space="preserve">
+    <value>後續追蹤狀況</value>
+    <comment>Field(Track)</comment>
+  </data>
+  <data name="CX_Track_Remarks" xml:space="preserve">
+    <value>後續追蹤狀況備註</value>
+    <comment>Field(Track)</comment>
+  </data>
+  <data name="CX_Workplace" xml:space="preserve">
+    <value>工作崗位</value>
+    <comment>Field(Workplace)</comment>
+  </data>
+  <data name="CX_Workplace_Remarks" xml:space="preserve">
+    <value>工作崗位備註</value>
+    <comment>Field(Workplace)</comment>
+  </data>
+  <data name="MenuFeedback" xml:space="preserve">
+    <value>回饋屬性設定</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuObservation" xml:space="preserve">
+    <value>觀察構面設定</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuTrack" xml:space="preserve">
+    <value>後續追蹤狀況設定</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuWorkplace" xml:space="preserve">
+    <value>工作崗位設定</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="CX_Store_Name" xml:space="preserve">
+    <value>門市</value>
+    <comment>Field(Store)</comment>
+  </data>
+  <data name="CX_Store_Remarks" xml:space="preserve">
+    <value>門市備註</value>
+    <comment>Field(Store)</comment>
+  </data>
+  <data name="MenuInspection" xml:space="preserve">
+    <value>個人巡檢資料</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuInspectionTop" xml:space="preserve">
+    <value>巡檢管理</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuInspectionReport" xml:space="preserve">
+    <value>巡檢報表</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="CX_Send_To_Mail" xml:space="preserve">
+    <value>資料夾信箱</value>
+  </data>
+  <data name="MessageOverSeaNotYourData" xml:space="preserve">
+    <value>工號{0}於日期{1}查無出差資料!!請確定您的日期正確或請聯絡人資部新增海外出差資料!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="CX_Color" xml:space="preserve">
+    <value>顏色</value>
+    <comment>Field(Workplace)</comment>
+  </data>
+  <data name="CX_Content" xml:space="preserve">
+    <value>記錄內容</value>
+    <comment>Field(Inspection)</comment>
+  </data>
+  <data name="CX_Date" xml:space="preserve">
+    <value>日期</value>
+    <comment>Field(Inspection)</comment>
+  </data>
+  <data name="ID_Feedback" xml:space="preserve">
+    <value>回饋屬性</value>
+    <comment>Field(Feedback)</comment>
+  </data>
+  <data name="ID_Observation" xml:space="preserve">
+    <value>觀察構面</value>
+    <comment>Field(Observation)</comment>
+  </data>
+  <data name="ID_Store" xml:space="preserve">
+    <value>店別</value>
+    <comment>Field(Store)</comment>
+  </data>
+  <data name="ID_Track" xml:space="preserve">
+    <value>後續追蹤狀況</value>
+    <comment>Field(Track)</comment>
+  </data>
+  <data name="ID_Workplace" xml:space="preserve">
+    <value>工作崗位</value>
+    <comment>Field(Workplace)</comment>
+  </data>
+  <data name="MessageFeedback2Error" xml:space="preserve">
+    <value>回饋屬性為建議時，請選擇後續追蹤狀況!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="MessagePleaseCreateStoreFirst" xml:space="preserve">
+    <value>請先新增店別資料!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="Inspection_Image" xml:space="preserve">
+    <value>巡檢圖片</value>
+    <comment>Field(Inspection_Image)</comment>
+  </data>
+  <data name="MenuInspectionReportD" xml:space="preserve">
+    <value>巡檢報告</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="TextPen" xml:space="preserve">
+    <value>筆</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextInspectionPeople" xml:space="preserve">
+    <value> 巡店人員</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextReportTitle" xml:space="preserve">
+    <value>報告大綱</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextGoTitle" xml:space="preserve">
+    <value>回大綱</value>
+    <comment>Text</comment>
+  </data>
+  <data name="MessagePleaseCreateObservationFirst" xml:space="preserve">
+    <value>請先新增觀察構面資料!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="CX_Improve" xml:space="preserve">
+    <value>建議改善</value>
+    <comment>Field(Inspection)</comment>
+  </data>
+  <data name="ID_Status" xml:space="preserve">
+    <value>狀態</value>
+    <comment>Field(Inspection)</comment>
+  </data>
+  <data name="MenuProcess" xml:space="preserve">
+    <value>巡檢資料處理</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="Improve_Image" xml:space="preserve">
+    <value>改善圖片</value>
+    <comment>Field(Inspection_Image)</comment>
+  </data>
+  <data name="ButtonView" xml:space="preserve">
+    <value>檢視</value>
+    <comment>Button</comment>
+  </data>
+  <data name="CX_DealWith" xml:space="preserve">
+    <value>處理方式</value>
+    <comment>Field(Inspection)</comment>
+  </data>
+  <data name="DT_Process" xml:space="preserve">
+    <value>處理日期</value>
+    <comment>Field(Inspection)</comment>
+  </data>
+  <data name="ButtonCloseCase" xml:space="preserve">
+    <value>結案</value>
+    <comment>Button</comment>
+  </data>
+  <data name="DT_Close" xml:space="preserve">
+    <value>結案日期</value>
+    <comment>Field(Inspection)</comment>
+  </data>
+  <data name="MenuProduct" xml:space="preserve">
+    <value>Product</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>存檔</value>
+    <comment>Button</comment>
+  </data>
+  <data name="MenuNews" xml:space="preserve">
+    <value>最新消息維護</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuCode" xml:space="preserve">
+    <value>Code</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="CodeValue" xml:space="preserve">
+    <value>代碼值</value>
+    <comment>Field(Code)</comment>
+  </data>
+  <data name="MenuBrand" xml:space="preserve">
+    <value>Brand</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuUser" xml:space="preserve">
+    <value>User</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuCompany" xml:space="preserve">
+    <value>Company</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuBankAccount" xml:space="preserve">
+    <value>BankAccount</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="ButtonAlternative" xml:space="preserve">
+    <value>替代品設定</value>
+    <comment>Button</comment>
+  </data>
+  <data name="AlternativeID" xml:space="preserve">
+    <value>替代品編號</value>
+    <comment>Field(Alternative)</comment>
+  </data>
+  <data name="MenuAlternative" xml:space="preserve">
+    <value>替代品資料維護</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuTest" xml:space="preserve">
+    <value>_Test</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuDynamic" xml:space="preserve">
+    <value>_Dynamic</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="ProductID" xml:space="preserve">
+    <value>產品代碼</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>產品名稱</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>金額</value>
+    <comment>Field(InquiryDetail)</comment>
+  </data>
+  <data name="CompanyID" xml:space="preserve">
+    <value>公司編號</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="ConditionID" xml:space="preserve">
+    <value>條件</value>
+    <comment>Field(InquiryDetail)</comment>
+  </data>
+  <data name="ContactPerson" xml:space="preserve">
+    <value>聯絡人</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="ContactPhone" xml:space="preserve">
+    <value>聯絡電話</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="CurrencyID" xml:space="preserve">
+    <value>幣別</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>折數</value>
+    <comment>Field(InquiryDetail)</comment>
+  </data>
+  <data name="ExchangeRate" xml:space="preserve">
+    <value>匯率</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="ForeignPrice" xml:space="preserve">
+    <value>外幣單價</value>
+    <comment>Field(InquiryDetail)</comment>
+  </data>
+  <data name="InquiryDate" xml:space="preserve">
+    <value>詢價日期</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="InquiryID" xml:space="preserve">
+    <value>詢價單編號</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="MenuInquiry" xml:space="preserve">
+    <value>Inquiry</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>單價</value>
+    <comment>Field(InquiryDetail)</comment>
+  </data>
+  <data name="PriceKindID" xml:space="preserve">
+    <value>價別</value>
+    <comment>Field(InquiryDetail)</comment>
+  </data>
+  <data name="PurchaseDate" xml:space="preserve">
+    <value>進貨日期</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="PurchaseID" xml:space="preserve">
+    <value>進貨單編號</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="Qty" xml:space="preserve">
+    <value>數量</value>
+    <comment>Field(InquiryDetail)</comment>
+  </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>備註</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="Remind" xml:space="preserve">
+    <value>預定到貨提醒(天數)</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="ScheduleDate" xml:space="preserve">
+    <value>預定到貨日期</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="SeqNo" xml:space="preserve">
+    <value>SeqNo</value>
+    <comment>Field(InquiryDetail)</comment>
+  </data>
+  <data name="TextPleaseInput" xml:space="preserve">
+    <value>請輸入查詢條件</value>
+    <comment>Text</comment>
+  </data>
+  <data name="ValidateDate" xml:space="preserve">
+    <value>詢價單有效日期</value>
+    <comment>Field(Inquiry)</comment>
+  </data>
+  <data name="BizCost" xml:space="preserve">
+    <value>業務成本</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="BOM" xml:space="preserve">
+    <value>物料清單(BOM)</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="KindID" xml:space="preserve">
+    <value>產品類別</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="LatestCost" xml:space="preserve">
+    <value>最新進貨成本</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="Linked" xml:space="preserve">
+    <value>業務成本與銷售成本連動</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="ListPrice" xml:space="preserve">
+    <value>牌價</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="RealPrice" xml:space="preserve">
+    <value>實價</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="SafeStock" xml:space="preserve">
+    <value>安全存量</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="SalesCost" xml:space="preserve">
+    <value>銷售成本</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="SetPrice" xml:space="preserve">
+    <value>定價</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="SPEC" xml:space="preserve">
+    <value>規格說明</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="SupplierID" xml:space="preserve">
+    <value>供應商</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="UnitID" xml:space="preserve">
+    <value>單位</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>內容</value>
+    <comment>Field(News)</comment>
+  </data>
+  <data name="DepartmentID" xml:space="preserve">
+    <value>單位</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="NewsID" xml:space="preserve">
+    <value>消息編號</value>
+    <comment>Field(News)</comment>
+  </data>
+  <data name="NewsTypeID" xml:space="preserve">
+    <value>消息類別</value>
+    <comment>Field(News)</comment>
+  </data>
+  <data name="OffDate" xml:space="preserve">
+    <value>下架日期</value>
+    <comment>Field(News)</comment>
+  </data>
+  <data name="ReleaseDate" xml:space="preserve">
+    <value>發佈日期</value>
+    <comment>Field(News)</comment>
+  </data>
+  <data name="SetTop" xml:space="preserve">
+    <value>置頂否</value>
+    <comment>Field(News)</comment>
+  </data>
+  <data name="AccountID" xml:space="preserve">
+    <value>帳號</value>
+    <comment>Field(BankAccount)</comment>
+  </data>
+  <data name="Activate" xml:space="preserve">
+    <value>啟用</value>
+    <comment>Field(Code)</comment>
+  </data>
+  <data name="BankID" xml:space="preserve">
+    <value>銀行編號</value>
+    <comment>Field(BankAccount)</comment>
+  </data>
+  <data name="BrandID" xml:space="preserve">
+    <value>廠牌編碼</value>
+    <comment>Field(Brand)</comment>
+  </data>
+  <data name="BrandName" xml:space="preserve">
+    <value>廠牌名稱</value>
+    <comment>Field(Brand)</comment>
+  </data>
+  <data name="CompanyKindID" xml:space="preserve">
+    <value>廠商類別</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>廠商全稱</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="SortOrder" xml:space="preserve">
+    <value>排序</value>
+    <comment>Field(Code)</comment>
+  </data>
+  <data name="TextKeyWord" xml:space="preserve">
+    <value>關鍵字</value>
+    <comment>Text</comment>
+  </data>
+  <data name="UserID" xml:space="preserve">
+    <value>員工編號</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>員工姓名</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="MenuPurchase" xml:space="preserve">
+    <value>Purchase</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="AccountMonth" xml:space="preserve">
+    <value>帳款月份</value>
+    <comment>Field(Purchase)</comment>
+  </data>
+  <data name="InvoiceAmount" xml:space="preserve">
+    <value>發票金額</value>
+    <comment>Field(Purchase)</comment>
+  </data>
+  <data name="InvoiceID" xml:space="preserve">
+    <value>發票號碼</value>
+    <comment>Field(Purchase)</comment>
+  </data>
+  <data name="PostingTime" xml:space="preserve">
+    <value>PostingTime</value>
+    <comment>Field(Purchase)</comment>
+  </data>
+  <data name="WarehouseID" xml:space="preserve">
+    <value>倉庫編號</value>
+    <comment>Field(Purchase)</comment>
+  </data>
+  <data name="MenuQuotation" xml:space="preserve">
+    <value>Quotation</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="Auditor" xml:space="preserve">
+    <value>審核人</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="CustomerID" xml:space="preserve">
+    <value>客戶編號</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="InvoiceAddress" xml:space="preserve">
+    <value>發票地址</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="QuotationDate" xml:space="preserve">
+    <value>報價日期</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="QuotationID" xml:space="preserve">
+    <value>報價單編號</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="QuotePerson" xml:space="preserve">
+    <value>報價人</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>審核結果</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="ReviewDate" xml:space="preserve">
+    <value>審核日期</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="ShippingAddress" xml:space="preserve">
+    <value>出貨地址</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="ShippingFee" xml:space="preserve">
+    <value>運費</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="ShippingModeID" xml:space="preserve">
+    <value>運送方式</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="TaxID" xml:space="preserve">
+    <value>統一編號</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>總金額</value>
+    <comment>Field(Quotation)</comment>
+  </data>
+  <data name="MenuSales" xml:space="preserve">
+    <value>Sales</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="InvoiceDate" xml:space="preserve">
+    <value>發票日期</value>
+    <comment>Field(Sales)</comment>
+  </data>
+  <data name="SalesDate" xml:space="preserve">
+    <value>銷售日期</value>
+    <comment>Field(Sales)</comment>
+  </data>
+  <data name="SalesID" xml:space="preserve">
+    <value>銷貨單編號</value>
+    <comment>Field(Sales)</comment>
+  </data>
+  <data name="ButtonImage" xml:space="preserve">
+    <value>圖片上傳</value>
+    <comment>Button</comment>
+  </data>
+  <data name="ChangeDate" xml:space="preserve">
+    <value>異動日期</value>
+    <comment>Field(StockChange)</comment>
+  </data>
+  <data name="ChangePersonID" xml:space="preserve">
+    <value>經手人</value>
+    <comment>Field(StockChange)</comment>
+  </data>
+  <data name="ChangeReasonID" xml:space="preserve">
+    <value>異動原因</value>
+    <comment>Field(StockChange)</comment>
+  </data>
+  <data name="MenuStockChange" xml:space="preserve">
+    <value>StockChange</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="WarehouseNewID" xml:space="preserve">
+    <value>原倉庫編號</value>
+    <comment>Field(StockChange)</comment>
+  </data>
+  <data name="WarehouseOldID" xml:space="preserve">
+    <value>新倉庫編號</value>
+    <comment>Field(StockChange)</comment>
+  </data>
+  <data name="StockChangeID" xml:space="preserve">
+    <value>庫存異動單號</value>
+    <comment>Field(StockChange)</comment>
+  </data>
+  <data name="MenuSalesInvoice" xml:space="preserve">
+    <value>SalesInvoice</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="DeductAmount" xml:space="preserve">
+    <value>抵扣金額</value>
+    <comment>Field(SalesInvoice)</comment>
+  </data>
+  <data name="DiscountAmount" xml:space="preserve">
+    <value>折讓金額</value>
+    <comment>Field(SalesInvoice)</comment>
+  </data>
+  <data name="InvoiceStatusID" xml:space="preserve">
+    <value>發票狀態</value>
+    <comment>Field(SalesInvoice)</comment>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>稅額</value>
+    <comment>Field(SalesInvoice)</comment>
+  </data>
+  <data name="TaxExcluded" xml:space="preserve">
+    <value>貨款(未稅)</value>
+    <comment>Field(SalesInvoice)</comment>
+  </data>
+  <data name="TaxIncluded" xml:space="preserve">
+    <value>發票金額(已稅)</value>
+    <comment>Field(SalesInvoice)</comment>
+  </data>
+  <data name="TaxLevelID" xml:space="preserve">
+    <value>課稅別</value>
+    <comment>Field(SalesInvoice)</comment>
+  </data>
+  <data name="MenuPurchaseInvoice" xml:space="preserve">
+    <value>PurchaseInvoice</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="CodeName" xml:space="preserve">
+    <value>代碼名稱</value>
+    <comment>Field(Code)</comment>
+  </data>
+  <data name="MenuProductAlternative" xml:space="preserve">
+    <value>MenuProductAlternative</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="MenuProductImage" xml:space="preserve">
+    <value>產品圖片上傳</value>
+    <comment>Menu</comment>
+  </data>
+  <data name="LinkToNextPageFormat" xml:space="preserve">
+    <value>下一筆</value>
+    <comment>Text</comment>
+  </data>
+  <data name="LinkToPreviousPageFormat" xml:space="preserve">
+    <value>上一筆</value>
+    <comment>Text</comment>
+  </data>
+  <data name="PageCountAndCurrentLocationFormat" xml:space="preserve">
+    <value>第 {0} 筆 / 共 {1} 筆</value>
+    <comment>Text</comment>
+  </data>
+  <data name="ButtonLogin" xml:space="preserve">
+    <value>登入</value>
+    <comment>Button</comment>
+  </data>
+  <data name="MessageLoginError" xml:space="preserve">
+    <value>MessageLoginError</value>
+    <comment>Message</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>使用者密碼</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="ButtonAudit" xml:space="preserve">
+    <value>審核</value>
+    <comment>Button</comment>
+  </data>
+  <data name="MessageProductIDError" xml:space="preserve">
+    <value>請輸入正確產品代碼!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="MessageUserIDError" xml:space="preserve">
+    <value>請輸入正確使用者代碼!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="ChangePersonName" xml:space="preserve">
+    <value>修改人</value>
+    <comment>Field(StockChange)</comment>
+  </data>
+  <data name="ProductKindName" xml:space="preserve">
+    <value>類別</value>
+    <comment>Field(StockQueryViewModel)</comment>
+  </data>
+  <data name="Shortfall" xml:space="preserve">
+    <value>不足量</value>
+    <comment>Field(StockQueryViewModel)</comment>
+  </data>
+  <data name="UnitName" xml:space="preserve">
+    <value>單位</value>
+    <comment>Field(StockQueryViewModel)</comment>
+  </data>
+  <data name="MessageDateTimeError" xml:space="preserve">
+    <value>日期格式錯誤!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="CodeType" xml:space="preserve">
+    <value>代碼類別</value>
+    <comment>Field(Code)</comment>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>住址</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="AnnualTarget" xml:space="preserve">
+    <value>年度責任金額</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="BeginDate" xml:space="preserve">
+    <value>帳號啟用日期</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>EMAIL帳號</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>帳號停用日期</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="OnboardDate" xml:space="preserve">
+    <value>到職日</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="PermissionID" xml:space="preserve">
+    <value>使用權限組別</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="QuotationLevelID" xml:space="preserve">
+    <value>報價授權等級</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="SupervisorID" xml:space="preserve">
+    <value>直屬主管</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="Telephone" xml:space="preserve">
+    <value>聯絡電話</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="TitleID" xml:space="preserve">
+    <value>職稱</value>
+    <comment>Field(User)</comment>
+  </data>
+  <data name="Clerk" xml:space="preserve">
+    <value>業務員</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="ClerkMobile" xml:space="preserve">
+    <value>業務員手機</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="FactoryAddress" xml:space="preserve">
+    <value>工廠地址</value>
+  </data>
+  <data name="Fax" xml:space="preserve">
+    <value>傳真機號碼</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>廠商全稱</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="NextMonth" xml:space="preserve">
+    <value>下月帳(每月__日)</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <value>廠商簡稱</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="Telephone1" xml:space="preserve">
+    <value>聯絡電話1</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="Telephone2" xml:space="preserve">
+    <value>聯絡電話2</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>戶名</value>
+    <comment>Field(BankAccount)</comment>
+  </data>
+  <data name="BankName" xml:space="preserve">
+    <value>銀行名稱</value>
+    <comment>Field(BankAccount)</comment>
+  </data>
+  <data name="InitialAmount" xml:space="preserve">
+    <value>期初金額</value>
+    <comment>Field(BankAccount)</comment>
+  </data>
+  <data name="InitialDate" xml:space="preserve">
+    <value>期初日期</value>
+    <comment>Field(BankAccount)</comment>
+  </data>
+  <data name="LastDate" xml:space="preserve">
+    <value>支票最後使用日期</value>
+    <comment>Field(BankAccount)</comment>
+  </data>
+  <data name="LastNumber" xml:space="preserve">
+    <value>支票最後使用號碼</value>
+    <comment>Field(BankAccount)</comment>
+  </data>
+  <data name="Adjust" xml:space="preserve">
+    <value>調整數量</value>
+    <comment>Field(StockTrackViewModel)</comment>
+  </data>
+  <data name="Purchase" xml:space="preserve">
+    <value>進貨數量</value>
+    <comment>Field(StockTrackViewModel)</comment>
+  </data>
+  <data name="Sales" xml:space="preserve">
+    <value>銷貨數量</value>
+    <comment>Field(StockTrackViewModel)</comment>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>庫存數量</value>
+    <comment>Field(StockTrackViewModel)</comment>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>調貨數量</value>
+    <comment>Field(StockTrackViewModel)</comment>
+  </data>
+  <data name="TextCriteria" xml:space="preserve">
+    <value>查詢條件：</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextDateStartEnd" xml:space="preserve">
+    <value>日期區間</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextProductKind" xml:space="preserve">
+    <value>產品類別</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextProductStartEnd" xml:space="preserve">
+    <value>產品區間</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextTo" xml:space="preserve">
+    <value>至</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextWarehouseNo" xml:space="preserve">
+    <value>倉庫編號</value>
+    <comment>Text</comment>
+  </data>
+  <data name="AlternativeCount" xml:space="preserve">
+    <value>替代品數量</value>
+    <comment>Field(AlternativeListViewModel)</comment>
+  </data>
+  <data name="AlternativeName" xml:space="preserve">
+    <value>替代品名稱</value>
+    <comment>Field(AlternativeListViewModel)</comment>
+  </data>
+  <data name="TextProductName" xml:space="preserve">
+    <value>產品名稱</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextSupplierID" xml:space="preserve">
+    <value>廠商編號</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextSupplierName" xml:space="preserve">
+    <value>廠商名稱</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextInquireDate" xml:space="preserve">
+    <value>詢價日期</value>
+    <comment>Text</comment>
+  </data>
+  <data name="ButtonPrint" xml:space="preserve">
+    <value>列印</value>
+    <comment>Button</comment>
+  </data>
+  <data name="MessageChaneDelete2UpdateComplete" xml:space="preserve">
+    <value>資料已被使用改為停用!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="MessageChaneDelete2UpdateComplete2" xml:space="preserve">
+    <value>完成!!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="DiscountRate" xml:space="preserve">
+    <value>折扣率</value>
+    <comment>Field(Company)</comment>
+  </data>
+  <data name="resourcekey" xml:space="preserve">
+    <value>{0}AAA{1}</value>
+  </data>
+  <data name="Alternative" xml:space="preserve">
+    <value>替代品</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="ButtonModify" xml:space="preserve">
+    <value>維護</value>
+    <comment>Button</comment>
+  </data>
+  <data name="ProductImage" xml:space="preserve">
+    <value>產品圖片</value>
+    <comment>Field(Product)</comment>
+  </data>
+  <data name="CustomerName" xml:space="preserve">
+    <value>客戶名稱</value>
+    <comment>Field(Quote)</comment>
+  </data>
+  <data name="ButtonShowAlternative" xml:space="preserve">
+    <value>替代品</value>
+    <comment>Button</comment>
+  </data>
+  <data name="QtyTotal" xml:space="preserve">
+    <value>合計庫存量</value>
+    <comment>Field(StockQueryViewModel)</comment>
+  </data>
+  <data name="QtyWarehouse1" xml:space="preserve">
+    <value>倉庫-1</value>
+    <comment>Field(StockQueryViewModel)</comment>
+  </data>
+  <data name="QtyWarehouse2" xml:space="preserve">
+    <value>倉庫-2</value>
+    <comment>Field(StockQueryViewModel)</comment>
+  </data>
+  <data name="Shortage" xml:space="preserve">
+    <value>不足量</value>
+    <comment>Field(StockQueryViewModel)</comment>
+  </data>
+  <data name="ButtonDetails" xml:space="preserve">
+    <value>明細</value>
+    <comment>Button</comment>
+  </data>
+  <data name="ChangeType" xml:space="preserve">
+    <value>異動原因</value>
+    <comment>Field(StockTrackViewModel)</comment>
+  </data>
+  <data name="CompanySupplier" xml:space="preserve">
+    <value>客戶廠商</value>
+    <comment>Field(StockTrackViewModel)</comment>
+  </data>
+  <data name="SourceID" xml:space="preserve">
+    <value>憑證單號</value>
+    <comment>Field(StockTrackViewModel)</comment>
+  </data>
+  <data name="TextWarehouse" xml:space="preserve">
+    <value>倉庫</value>
+    <comment>Text</comment>
+  </data>
+  <data name="ChangeReason" xml:space="preserve">
+    <value>異動原因</value>
+    <comment>Field(StockTrack)</comment>
+  </data>
+  <data name="TextAccountMonth" xml:space="preserve">
+    <value>帳款月份</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextCustomerID" xml:space="preserve">
+    <value>客戶編號</value>
+    <comment>Text</comment>
+  </data>
+  <data name="BankAccount" xml:space="preserve">
+    <value>帳號</value>
+    <comment>Field(ReceiptListViewModel)</comment>
+  </data>
+  <data name="BankAccountID" xml:space="preserve">
+    <value>託收(存入)銀行帳號</value>
+    <comment>Field(Receipt)</comment>
+  </data>
+  <data name="CashAmount" xml:space="preserve">
+    <value>現金金額</value>
+    <comment>Field(Receipt)</comment>
+  </data>
+  <data name="CheckAmount" xml:space="preserve">
+    <value>支票金額</value>
+    <comment>Field(Receipt)</comment>
+  </data>
+  <data name="CheckNum" xml:space="preserve">
+    <value>支票號碼</value>
+    <comment>Field(Receipt)</comment>
+  </data>
+  <data name="DueDate" xml:space="preserve">
+    <value>到期日</value>
+    <comment>Field(Receipt)</comment>
+  </data>
+  <data name="ReceiptDate" xml:space="preserve">
+    <value>收款日期</value>
+    <comment>Field(Receipt)</comment>
+  </data>
+  <data name="ReceiptID" xml:space="preserve">
+    <value>收款記錄編號</value>
+    <comment>Field(Receipt)</comment>
+  </data>
+  <data name="ReturnAmount" xml:space="preserve">
+    <value>退回金額</value>
+    <comment>Field(Receipt)</comment>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>票據狀況</value>
+    <comment>Field(ReceiptListViewModel)</comment>
+  </data>
+  <data name="PayDate" xml:space="preserve">
+    <value>付款日期</value>
+    <comment>Field(Payment)</comment>
+  </data>
+  <data name="SupplierName" xml:space="preserve">
+    <value>供應商名稱</value>
+    <comment>Field(PaymentListViewModel)</comment>
+  </data>
+  <data name="TextBankAccount" xml:space="preserve">
+    <value>託收(付款)銀行</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextCheckNum" xml:space="preserve">
+    <value>支票號碼</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextCheckStatus" xml:space="preserve">
+    <value>票據狀況</value>
+  </data>
+  <data name="TextDealItem" xml:space="preserve">
+    <value>託收/開立</value>
+  </data>
+  <data name="TextReceiveDate" xml:space="preserve">
+    <value>收(開)票日期</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextSort" xml:space="preserve">
+    <value>排列方式</value>
+  </data>
+  <data name="TextTicketType" xml:space="preserve">
+    <value>單證類別</value>
+    <comment>Text</comment>
+  </data>
+  <data name="CheckStatus" xml:space="preserve">
+    <value>票據狀況</value>
+    <comment>Field(BankDeposit)</comment>
+  </data>
+  <data name="DealDate" xml:space="preserve">
+    <value>收(開)票日期</value>
+    <comment>Field(BankDeposit)</comment>
+  </data>
+  <data name="DebitAmount" xml:space="preserve">
+    <value>票面金額</value>
+    <comment>Field(BankDeposit)</comment>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>到期日期</value>
+    <comment>Field(BankDeposit)</comment>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>託收/開立</value>
+    <comment>Field(BankDeposit)</comment>
+  </data>
+  <data name="TextDepositSummary" xml:space="preserve">
+    <value>託收/開立</value>
+    <comment>Text</comment>
+  </data>
+  <data name="ButtonPosting" xml:space="preserve">
+    <value>確定過帳</value>
+    <comment>Button</comment>
+  </data>
+  <data name="TextPostingYearMonth" xml:space="preserve">
+    <value>請輸入過帳條件：</value>
+    <comment>Text</comment>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>本期餘額</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="LastBalance" xml:space="preserve">
+    <value>上期餘額</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="PaymentAmountTotal" xml:space="preserve">
+    <value>本期已付款金額合計</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="PurchaseAmountTotal" xml:space="preserve">
+    <value>進貨金額合計</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="PurchaseDeductTotal" xml:space="preserve">
+    <value>進貨抵扣金額合計</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="PurchaseDiscountTotal" xml:space="preserve">
+    <value>進貨折讓金額合計</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="PurchaseTaxTotal" xml:space="preserve">
+    <value>進貨稅額合計</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="ReceiptAmountTotal" xml:space="preserve">
+    <value>本期已收款金額合計</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="SalesAmountTotal" xml:space="preserve">
+    <value>銷貨金額合計</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="SalesDeductTotal" xml:space="preserve">
+    <value>銷貨抵扣金額合計</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="SalesDiscountTotal" xml:space="preserve">
+    <value>銷貨折讓金額合計</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="SalesTaxTotal" xml:space="preserve">
+    <value>銷貨稅額</value>
+    <comment>Field(ReceivableSummaryViewModel)</comment>
+  </data>
+  <data name="DealItem" xml:space="preserve">
+    <value>交易項目</value>
+    <comment>Field(Receivable)</comment>
+  </data>
+  <data name="PurchaseAmount" xml:space="preserve">
+    <value>進貨金額</value>
+    <comment>Field(Receivable)</comment>
+  </data>
+  <data name="PurchaseTax" xml:space="preserve">
+    <value>進貨稅額</value>
+    <comment>Field(Receivable)</comment>
+  </data>
+  <data name="SalesAmount" xml:space="preserve">
+    <value>銷貨金額</value>
+    <comment>Field(Receivable)</comment>
+  </data>
+  <data name="SalesTax" xml:space="preserve">
+    <value>銷貨稅額</value>
+    <comment>Field(Receivable)</comment>
+  </data>
+  <data name="VoucherID" xml:space="preserve">
+    <value>憑證單號</value>
+    <comment>Field(Receivable)</comment>
+  </data>
+  <data name="ButtonReceivableDetail" xml:space="preserve">
+    <value>對帳明細表</value>
+    <comment>Button</comment>
+  </data>
+  <data name="ButtonReconciliation" xml:space="preserve">
+    <value>對帳單</value>
+    <comment>Button</comment>
+  </data>
+  <data name="TextBalance" xml:space="preserve">
+    <value>本期餘額</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextLastBalance" xml:space="preserve">
+    <value>上期餘額</value>
+    <comment>Text</comment>
+  </data>
+  <data name="PaidAmount" xml:space="preserve">
+    <value>本期已付金額</value>
+    <comment>Field(ReconciliationViewModel)</comment>
+  </data>
+  <data name="ReceivedAmount" xml:space="preserve">
+    <value>本期已收金額</value>
+    <comment>Field(ReconciliationViewModel)</comment>
+  </data>
+  <data name="TextTotalAmount" xml:space="preserve">
+    <value>帳款總額</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextSalesDate" xml:space="preserve">
+    <value>銷售日期</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextSortOrder" xml:space="preserve">
+    <value>排列方式</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextClassification" xml:space="preserve">
+    <value>分類方式</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextCompanyStartEnd" xml:space="preserve">
+    <value>廠商編號</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextCompanyType" xml:space="preserve">
+    <value>廠商類別</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextCustomerStartEnd" xml:space="preserve">
+    <value>客戶編號</value>
+    <comment>Text</comment>
+  </data>
+  <data name="TextQty" xml:space="preserve">
+    <value>數量</value>
+    <comment>Text</comment>
+  </data>
+  <data name="ButtonStatistics" xml:space="preserve">
+    <value>統計表匯出</value>
+    <comment>Button</comment>
+  </data>
+  <data name="GrossProfitMargin" xml:space="preserve">
+    <value>毛利率%</value>
+    <comment>Field(ProductSalesRankingViewModel)</comment>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>排行</value>
+    <comment>Field(ProductSalesRankingViewModel)</comment>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>銷售總金額</value>
+    <comment>Field(ProductSalesRankingViewModel)</comment>
+  </data>
+  <data name="TotalProfit" xml:space="preserve">
+    <value>銷售總毛利</value>
+    <comment>Field(ProductSalesRankingViewModel)</comment>
+  </data>
+  <data name="TotalQty" xml:space="preserve">
+    <value>銷售量</value>
+    <comment>Field(ProductSalesRankingViewModel)</comment>
+  </data>
+  <data name="TotalSalesCost" xml:space="preserve">
+    <value>銷售總成本</value>
+    <comment>Field(ProductSalesRankingViewModel)</comment>
+  </data>
+</root>

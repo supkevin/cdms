@@ -1,0 +1,12 @@
+﻿@*數字欄位focus全選無法輸入非數字*@
+
+@using CDMS.Web.Helpers
+@model decimal?
+@{
+    var htmlAttributes = ViewData["htmlAttributes"] ?? new { };
+    htmlAttributes = Html.MergeAttributes(new { type = "number", @class ="text-right", onfocus ="this.select();"}, htmlAttributes);
+
+    var value = Model.HasValue ? Model.Value : 0;
+}
+
+@Html.TextBox("", value , (IDictionary<string,object>)htmlAttributes)

@@ -1,0 +1,165 @@
+﻿@model CDMS.Model.OverSea
+
+@{
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+@using (Ajax.BeginForm("Edit", "OverSea", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID_OverSea)
+    @Html.HiddenFor(model => model.CX_PID)
+    @Html.HiddenFor(model => model.CX_Name)
+    @Html.HiddenFor(model => model.CX_Dept_Name)
+    @Html.HiddenFor(model => model.CX_Title)
+    @Html.HiddenFor(model => model.CX_OnBoard_Date)
+    @Html.HiddenFor(model => model.CX_Birthday)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Html.OutputText("ButtonEdit".ToLocalized())" class="btn btn-primary" />
+            <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_PID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_PID, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.CX_PID)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Name, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.CX_Name)
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID_OverType, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ID_OverType, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ID_OverType, ViewBag.OverTypeList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID_Country, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ID_Country, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ID_Country, ViewBag.CountryList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_From_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_From_Date, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CX_From_Date, new { htmlAttributes = new { @class = "form-control datepicker", required = "required", placeholder = "TextInput".ToLocalized() + "CX_From_Date".ToLocalized() } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_To_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_To_Date, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CX_To_Date, new { htmlAttributes = new { @class = "form-control datepicker", required = "required", placeholder = "TextInput".ToLocalized() + "CX_To_Date".ToLocalized() } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Dept_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Dept_Name, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.CX_Dept_Name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Title, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.CX_Title)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_OnBoard_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_OnBoard_Date, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.CX_OnBoard_Date)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Birthday, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.CX_Birthday)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_OverSea_Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_OverSea_Remark, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.CX_OverSea_Remark, new { @class = "form-control", @cols = 80, @rows = 10 })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Place_Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Place_Remark, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.CX_Place_Remark, new { @class = "form-control", @cols = 80, @rows = 10 })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FG_IsWorkCard, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.CheckBoxFor(model => model.FG_IsWorkCard) @*, new { @checked = "checked" }*@
+    </div>
+}
+
+@section scripts{
+
+
+    <script type="text/javascript">
+
+        var btn = $('.btn');
+
+        function OnBegin() {
+            btn.button('loading');
+        }
+
+        function OnSuccess(response) {
+            if (response.Status == true) {
+                parent.Init();
+                parent.jQuery.fancybox.close();
+            }
+            alert(response.Message);
+        }
+
+        function OnComplete() {
+            btn.button('reset');
+        }
+    </script>
+
+    <script src="~/Scripts/jquery-ui-datepickeroption.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+    </script>
+}
+
+
+
+
+
+
+
+

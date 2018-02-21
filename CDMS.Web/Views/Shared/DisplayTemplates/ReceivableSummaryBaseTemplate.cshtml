@@ -1,0 +1,154 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.ReceivableSummaryViewModel
+
+@{
+    Layout = null;
+
+    var defaultAttribute = new { @class = "form-control" };
+    var labelAttribute = new { @class = "control-label" };
+
+    var display = "hidden";
+}
+<table class="table table-striped table-bordered table-rwd">
+    <tbody>
+        <tr>
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.CompanyID)
+            </td>
+            <td data-th="@(Model.CompanyID.ToLocalized())" colspan="3">
+                @Html.DisplayFor(model => model.CompanyID)
+                @Html.DisplayFor(model => model.CompanyName)
+            </td>
+
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.AccountMonth)
+            </td>
+            <td data-th="@(Model.AccountMonth.ToLocalized())">
+                @Html.DisplayFor(model => model.AccountMonth)
+            </td>
+
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.Balance)
+            </td>
+            <td data-th="" class="text-right">
+                @Html.DisplayFor(model => model.Balance)元
+            </td>
+        </tr>
+        <tr>
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.SalesAmountTotal)
+            </td>
+            <td data-th="" class="text-right">
+                @Html.DisplayFor(model => model.SalesAmountTotal)元
+            </td>
+
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.PurchaseAmountTotal)
+            </td>
+            <td data-th="" class="text-right">
+                @Html.DisplayFor(model => model.PurchaseAmountTotal)元
+            </td>
+
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.SalesDiscountTotal)
+            </td>
+            <td data-th="" class="text-right">
+                @Html.DisplayFor(model => model.SalesDiscountTotal)元
+            </td>
+           
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.PurchaseDiscountTotal)
+            </td>
+            <td data-th="" class="text-right">
+                @Html.DisplayFor(model => model.PurchaseDiscountTotal)元
+            </td>
+        </tr>
+        <tr>
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.SalesTaxTotal )
+            </td>
+            <td data-th="" class="text-right">
+                @Html.DisplayFor(model => model.SalesTaxTotal )元
+            </td>
+
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.PurchaseTaxTotal)
+            </td>
+            <td data-th="" class="text-right">
+                @Html.DisplayFor(model => model.PurchaseTaxTotal)元
+            </td>
+
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.SalesDeductTotal)
+            </td>
+            <td data-th="" class="text-right">
+                @Html.DisplayFor(model => model.SalesDeductTotal)元
+            </td>
+
+            <td data-th="" class="col-1 title">
+                @Html.DisplayNameFor(model => model.PurchaseDeductTotal)
+            </td>
+            <td data-th="" class="text-right">
+                @Html.DisplayFor(model => model.PurchaseDeductTotal)元
+            </td>
+        </tr>
+
+        @*<tr>
+            <td width="13%"><div align="right">客戶編號：</div></td>
+            <td colspan="3">
+                104004
+                培林貿易(股)公司
+            </td>
+            <td width="12%"><div align="right">帳款月份：</div></td>
+            <td>17/07</td>
+            <td><div align="right">本期餘額：</div></td>
+            <td><div align="right">-62,265元</div></td>
+        </tr>
+        <tr>
+            <td width="13%"><div align="right">銷貨金額合計：</div></td>
+            <td width="9%"><div align="right">17,535元</div></td>
+            <td width="11%"><div align="right">進貨金額合計：</div></td>
+            <td width="9%"><div align="right"> 74,000元</div></td>
+            <td width="12%"><div align="right">銷貨折讓合計：</div></td>
+            <td width="13%">
+                <div align="right">
+                    0
+                    元
+                </div>
+            </td>
+            <td width="13%"><div align="right">進貨折讓合計：</div></td>
+            <td width="20%">
+                <div align="right">
+                    1,000
+                    元
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><div align="right">銷貨稅額合計：</div></td>
+            <td>
+                <div align="right">
+                    400
+                    元
+                </div>
+            </td>
+            <td><div align="right">進貨稅額合計：</div></td>
+            <td>
+                <div align="right">
+                    5,200
+                    元
+                </div>
+            </td>
+            <td><div align="right">銷貨抵扣合計：</div></td>
+            <td><div align="right"> 2,000元</div></td>
+            <td><div align="right">進貨抵扣合計：</div></td>
+            <td>
+                <div align="right">
+                    0
+                    元
+                </div>
+            </td>
+        </tr>*@
+    </tbody>
+</table>

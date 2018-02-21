@@ -1,0 +1,9 @@
+﻿@model string
+
+@{
+    SelectListItem info = ((SelectList)ViewBag.CompanyList).Where(x => x.Value == Model).SingleOrDefault();
+}
+<!---->
+<input class="form-control auto-complete-name text-box single-line" 
+       id="txtCompanyName" name="txtCompanyName" 
+       readOnly="ReadOnly" required="required" type="text" value="@( info == null ? "" : info.Text)" />  

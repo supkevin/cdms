@@ -1,0 +1,92 @@
+﻿<h4>
+    @Html.OutputText("MenuCountry".ToLocalized())
+</h4>
+<form class="form-inline" role="form" onsubmit="return false;">
+    <div class="form-group">
+        <input type="text" id="SearchText" class="form-control col-xs-4" placeholder="@Html.OutputText("CX_Country".ToLocalized())" />
+    </div>
+    <div class="form-group">
+        <select id="OrderBy" class="form-control col-xs-4">
+            <option value="ID_Country">@Html.OutputText("TextDefault".ToLocalized())</option>
+            <option value="NQ_Sort" selected="selected">@Html.OutputText("NQ_Sort".ToLocalized())</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <select id="Sort" class="form-control col-xs-4" data-show-icon="true">
+            <option value="asc" selected="selected">▲</option>
+            <option value="desc" >▼</option>
+        </select>
+    </div>
+    <input type="button" id="SearchButton" class="btn btn-warning" value="@Html.OutputText("ButtonSearch".ToLocalized())" />
+</form>
+<hr />
+<div id="Content">
+</div>
+@section scripts{
+    <script>
+        $(function () {
+
+            $('#SearchButton').click(function () {
+                $('#p').val('1');
+                Init();
+            });
+
+            $("#SearchText").keypress(function (e) {
+                code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) {
+                    $('#p').val('1');
+                    Init();
+                }
+            });
+
+            $('.fancybox').fancybox({
+                minHeight: 400,
+                closeBtn: false, // 是否顯示關閉按紐
+                helpers: {
+                    // 防點擊背景時關閉
+                    overlay: { closeClick: false }
+                },
+                keys: {
+                    // 防點擊ESC時關閉
+                    close: null
+                }
+            });
+
+            Init();
+        });
+
+        function Init() {
+
+            var p = $('#p').val();
+            var txt = $('#SearchText').val();
+            var orderby = $('#OrderBy').val();
+            var sort = $('#Sort').val();
+           // var btn = $('.btn');
+            $.ajax({
+                cache: false,
+                type: "Post",
+                url: '@Url.Action("_List", "Country", new { area = "" })',
+                async: false,
+                data: { page: p, txt: txt, orderby: orderby, sort: sort },
+                beforeSend: function () {
+                   // btn.button('loading');
+                },
+                complete: function () {
+                   
+                },
+                success: function (data) {
+                    $("#Content").html(data);
+                  //  btn.button('reset');
+                },
+                error: function (xhr, status, error) {
+                    alert('xhr:' + xhr.status + 'status:' + status + ' ,error:' + status);
+                    //alert(JSON.parse(xhr.responseText));
+                }
+            });
+        }
+    </script>
+}
+
+
+
+

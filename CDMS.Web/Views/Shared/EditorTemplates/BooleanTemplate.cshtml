@@ -1,0 +1,12 @@
+﻿@model bool?
+
+@*@Html.DropDownList("", new SelectList(
+    new[] {
+        new { Value = "true", Text = "是" },
+        new { Value = "false", Text = "否" },
+        },
+        "Value", "Text",
+        Model
+    ))*@
+
+@Html.CheckBox("", Model.GetValueOrDefault(), new { @class="form-control"})

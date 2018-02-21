@@ -1,0 +1,227 @@
+﻿@using CDMS.Web.Helpers
+@model CDMS.Model.ViewModel.InquiryDetailViewModel
+
+@{
+    var debug = new
+    {
+        @class = "form-control hidden",
+        readOnly = "ReadOnly"
+    };
+
+    var defaultAttribute = new { @class = "form-control", style = "width: 100%" };
+}
+
+@using (Html.BeginCollectionItem("ChildList"))
+{
+    <tr>
+        <td>
+            <input type="button" value="@Html.OutputText("ButtonDelete".ToLocalized())"
+                   class="btn btn-danger delete-item" data-key="@Model.SeqNo" />
+        </td>
+        <td>
+            <div class="form-inline nested-group">
+@*-----------------kevin新增修改   begin------------------*@
+                @Html.DropDownListFor(m => m.ProductID,
+                ViewBag.ProductNameList as SelectList, "TextSelect".ToLocalized(),
+                Html.MergeAttributes(
+                new
+                   {
+                       @class = "selectpicker text-danger with-ajax after-init",
+                       data_show_subtext = "true",
+                       data_live_search = "true",
+                       data_abs_ajax_url = string.Format("{0}", Url.Action("GetForAutocomplete", "Product")),
+                  }, defaultAttribute))
+@*-----------------kevin新增修改   end------------------*@
+
+
+
+
+                @*@Html.TextBoxFor(m => m.ProductID,
+                    new
+                    {
+                        @class = "form-control auto-complete product",
+                        style = "width:45%",
+                        data_autocomplete_url = Url.Action("GetForAutocomplete", "Product"),
+                        Required = "Required"
+                    })*@
+
+
+
+                @Html.EditorFor(m => m.ProductName,
+                new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form-control auto-complete-name",
+                        style = "width:45%",
+                        readOnly = "ReadOnly",
+                        Required = "Required"
+                    }
+                })
+            </div>
+        </td>
+        <td width="80px">
+            @Html.DropDownListFor(model => model.PriceKindID,
+            ViewBag.PriceKindList as SelectList, "TextSelect".ToLocalized(),
+            new { @class = "form-control price-kind", data_key = "PriceKindID" })
+        </td>
+
+
+        <td width="80px">
+            @Html.DropDownListFor(m => m.ConditionID,
+            ViewBag.ConditionKindList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </td>
+
+        <td width="100px">
+            @Html.EditorFor(m => m.Discount,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { data_key = "Discount", max = "100", min = "0", type = "number" }, defaultAttribute)
+                })
+        </td>
+        <td>
+            @Html.EditorFor(m => m.ForeignPrice,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { type = "number", data_key = "ForeignPrice" }, defaultAttribute)
+                })
+        </td>
+        <td>
+            @Html.EditorFor(m => m.Price,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { data_key = "Price", type = "number" }, defaultAttribute)
+                })
+        </td>
+        <td width="80px">
+            @Html.EditorFor(m => m.Qty,
+                new { htmlAttributes = Html.MergeAttributes(new { data_key = "Qty" }, defaultAttribute) })
+        </td>
+        <td>
+            @Html.EditorFor(m => m.Amount,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { data_key = "Amount", readOnly = "readOnly" }, defaultAttribute)
+                })
+        </td>
+        <td>
+            @Html.EditorFor(m => m.Remarks,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })
+
+            @Html.TextBoxFor(m => m.OriginalPrice,
+                Html.MergeAttributes(new { data_key = "OriginalPrice", @class = "hidden" }, defaultAttribute)
+                )
+            @Html.TextBoxFor(m => m.SeqNo, debug)
+            @Html.TextBoxFor(m => m.InquiryID, debug)
+            @Html.TextBoxFor(m => m.IsDirty, new { @class = "form-control dirty-item hidden" })
+        </td>
+    </tr>
+}
+<script type="text/javascript">
+        $(document).ready(function () {
+            // 上下左右
+            $('#table').enableCellNavigation();
+        });//$(document).ready(
+</script>
+
+@*-----------------kevin新增修改   begin------------------*@
+<script type="text/javascript">
+        var globaldata = [];
+
+        $(document).ready(function () {
+            var options = {
+                ajax: {
+                    @*url: '@Url.Action("GetForSupplierAutocomplete", "Company")',*@
+                    data: function () {
+                        var params = {
+                            term: '{{{q}}}'
+                        };
+                        //if (gModel.selectedGroup().hasOwnProperty('ContactGroupID')) {
+                        //    params.GroupID = gModel.selectedGroup().ContactGroupID;
+                        //}
+                        return params;
+                    }
+                },
+                clearOnEmpty: false,
+                preserveSelected: true,
+                locale: {
+                    emptyTitle: '請選擇',
+                    currentlySelected: '目前選取',
+                    searchPlaceholder: '關鍵字',
+                    statusInitialized: '請輸入關鍵字查詢',
+                    statusNoResults: '查無資料',
+                },
+                preprocessData: function (data) {
+                    var contacts = [];
+                    globaldata = [];
+                    //console.log('data', data);
+                    $('#txtContactPerson').val('');
+                    $('#txtContactPhone').val('');
+
+                    contacts.push({ value: '', text: '@("TextSelect".ToLocalized())' });
+
+                    if (data) {
+                        $.each(data, function (index, item) {
+                            //
+                            globaldata.push(item);
+
+                            contacts.push(
+                                {
+                                    'value': item.Value,
+                                    'text': item.Value + '-' + item.Label,
+                                    'data': {
+                                        'icon': 'icon-person',
+                                        'subtext': ''
+                                    },
+                                    'disabled': false
+                                }
+                                );
+                        });
+                    }
+                    return contacts;
+                },
+            };
+
+            $('.selectpicker.after-init').each(function (index, value) {
+                var self = $(value);
+
+                var selected = self.val();
+                self.find('[value != "' + selected + '"]').remove();
+
+                self.selectpicker('refresh');
+            });
+
+            $('.selectpicker').selectpicker().filter('.with-ajax').ajaxSelectPicker(options);
+
+            $('.selectpicker').on('changed.bs.select', function (e) {
+                console.log('globaldata', globaldata);
+                var value = $(this).val();
+
+                var wanted = $.grep(globaldata, function (item) {
+                    console.log('v', item.Value, item.Value == value);
+                    return item.Value == value;
+                });
+
+                //// do something...
+                //console.log('changed', $(this).val(), wanted);
+
+                //console.log('wanted', 'undefined' == wanted);
+                //console.log('wanted-1', wanted.length);
+
+                if (wanted.length == 0)
+                {
+                    $('#txtContactPerson').val('');
+                    $('#txtContactPhone').val('');
+                    return;
+                }
+
+                var source = wanted[0].Source;
+                $('#txtContactPerson').val(source.ContactPerson);
+                $('#txtContactPhone').val(source.Telephone1);
+            });
+        });
+</script>
+@*-----------------kevin新增修改   end------------------*@

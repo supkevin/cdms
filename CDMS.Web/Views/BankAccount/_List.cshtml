@@ -1,0 +1,122 @@
+﻿@model IEnumerable<CDMS.Model.BankAccount>
+
+@{
+    Layout = null;
+}
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">
+                <th>@Html.OutputText("TextFunction".ToLocalized())</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BankID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BankName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccountID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccountName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InitialAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InitialDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </th>               
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+
+                            @Html.ActionLink("ButtonEdit".ToLocalized(), "Edit", "BankAccount",
+                            new { id = item.SeqNo, area = "" }, new { @class = "btn btn-primary fancybox fancybox.iframe" })
+
+                            @*代碼有使用不可刪除*@
+                            @*@if (!item.Inspection.Any())
+                                {
+                                    @Html.ActionLink("ButtonDelete".ToLocalized(), "Delete", "Product",
+                                    new { id = item.ProductID, area = "" }, new { @class = "btn btn-danger fancybox fancybox.iframe" })
+                                }*@
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => item.BankID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.BankName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.AccountID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.AccountName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.InitialAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.InitialDate, "DateTemplate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.LastDate,"DateTemplate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.LastNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Remarks)
+                        </td>                      
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Hidden("p", (Int32)@ViewBag.p)
+@using PagedList
+@using PagedList.Mvc
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("_List",
+       new { txt = ViewBag.txt, orderby = ViewBag.orderby, sort = ViewBag.sort, page }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>"
+        },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "MyContent"
+        }))
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,132 @@
+﻿/*自定Grid System*/
+/*https://codepen.io/anon/pen/jaeZNP*/
+body {
+  background: #eee;
+}
+
+/*.row {
+    margin-top: 10px;
+}*/
+
+.grid-container {
+    width: 96%;
+    max-width: 1200px;
+    margin: auto; /*讓div保持在畫面中間*/
+    /*border-right: 1px solid #525252;
+      border-bottom: 1px solid #525252;*/
+}
+
+.grid-container * {
+    box-sizing: border-box;   
+}
+
+.title {
+    text-align: right;
+}
+
+.row:before, .row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+[class*='col-'] {
+    float: left;
+    min-height: 1px;
+    width: 16.66%;
+    /*padding: 12px;*/
+    padding: 4px;
+    /*background: #eee;*/
+    /*border-top: 1px solid #525252;
+  border-left: 1px solid #525252;*/
+}
+
+.col-1 {
+    width: 16.66%;
+}
+
+.col-2 {
+    width: 33.33%;
+}
+
+.col-3 {
+    width: 50%;
+}
+
+.col-4 {
+    width: 66.664%;
+}
+
+.col-5 {
+    width: 83.33%;
+}
+
+.col-6 {
+    width: 100%;
+}
+
+/*中螢幕*/
+@media all and (max-width: 800px) {
+    .col-1 {
+        width: 33.33%;
+    }
+
+    .col-2 {
+        width: 50%;
+    }
+
+    .col-3 {
+        width: 100%;
+    }
+
+    .col-4 {
+        width: 100%;
+    }
+
+    .col-5 {
+        width: 100%;
+    }
+
+    .col-6 {
+        width: 100%;
+    }
+
+    .row .col-2:last-of-type {
+        width: 100%;
+    }
+
+    .row .col-5 ~ .col-1 {
+        width: 100%;
+    }
+}
+
+/*小螢幕*/
+@media all and (max-width: 650px) {
+    .title {
+        text-align :left;     
+    }
+
+    .col-1 {
+        width: 50%;
+    }
+
+    .col-2 {
+        width: 100%;
+    }
+
+    .col-3 {
+        width: 100%;
+    }
+
+    .col-4 {
+        width: 100%;
+    }
+
+    .col-5 {
+        width: 100%;
+    }
+
+    .col-6 {
+        width: 100%;
+    }
+}

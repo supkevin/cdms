@@ -1,0 +1,249 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.UserViewModel
+
+@{
+    var defaultAttribute = new { @class = "form-control" };
+
+    // 動態
+    var readOnly = ((Model != null) && (Model.UserID != null)) ?
+    (object)new
+    {
+        @class = "form-control",
+        @readonly = "readonly"
+    } :
+    (object)new
+    {
+        @class = "form-control",
+    };
+}
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.UserID,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(readOnly, defaultAttribute)
+                })
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.UserName,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.DepartmentID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.DepartmentID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.DepartmentID,
+            ViewBag.DepartmentList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.TitleID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.TitleID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.TitleID,
+               ViewBag.TitleList as SelectList, "TextSelect".ToLocalized(),
+               Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.OnboardDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.OnboardDate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.OnboardDate, "DateTemplate")
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.SupervisorID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.SupervisorID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @*@Html.EditorFor(model => model.SupervisorID,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })*@
+            @Html.DropDownListFor(model => model.SupervisorID,
+                ViewBag.UserList as SelectList, "TextSelect".ToLocalized(),
+                Html.MergeAttributes(
+                    new
+                    {
+                        @class = "selectpicker text-danger",
+                        data_show_subtext = "true",
+                        data_live_search = "true"
+                    }, defaultAttribute)
+                )
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.PermissionID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.PermissionID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.PermissionID,
+               ViewBag.PermissionList as SelectList, "TextSelect".ToLocalized(),
+               Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.Email,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.Password,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.AnnualTarget, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.AnnualTarget, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.AnnualTarget,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.QuotationLevelID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.QuotationLevelID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.QuotationLevelID,
+               ViewBag.QuotationLevelList as SelectList, "TextSelect".ToLocalized(),
+               Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.Telephone,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.Address,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.BeginDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.BeginDate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.BeginDate, "DateTemplate")
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.EndDate, "DateTemplate")
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.TextAreaFor(model => model.Remarks,
+               new
+               {
+                   @class = "form-control",
+                   @cols = 80,
+                   @rows = 4
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Activate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Activate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.Activate,
+               ViewBag.YseNoList as SelectList, null,
+               new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+

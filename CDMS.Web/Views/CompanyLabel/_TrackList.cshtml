@@ -1,0 +1,99 @@
+﻿@model IEnumerable<CDMS.Model.ViewModel.StockTrackDetailViewModel>
+
+@{
+    Layout = null;
+}	
+
+@functions{
+    private string ConvertWarehouseName(string id) {
+        if (string.IsNullOrEmpty(id)) return "N/A";
+        return Warehouse.FromValue(id).Text;
+    }
+
+    private string ConvertWarehouseName(CDMS.Model.ViewModel.StockTrackDetailViewModel info)
+    {
+        return "OK";
+    }
+}
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">                
+                <th>
+                    @Html.DisplayNameFor(m => m.ProductID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.ChangeDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.SourceID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.CompanySupplier)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.ChangeReason)
+                </th>                
+                <th>
+                    @Html.DisplayNameFor(m => m.WarehouseID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Qty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Price)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>        
+                        <td>
+                            @Html.DisplayFor(m => item.ProductID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.ChangeDate, "DateTemplate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.SourceID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.CompanyName)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(m => item.ChangeReason)
+                        </td>
+                        <td>
+                            @Utility.GetWarehouseName(item.WarehouseID)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(m => item.StockQty)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(m => item.Price)
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+

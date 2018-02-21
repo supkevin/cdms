@@ -1,0 +1,41 @@
+﻿@model CDMS.Model.ViewModel.SalesInvoiceComplex
+
+@{
+    Layout = "~/Views/Shared/_GridForm.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_ProgramName.cshtml", new ViewDataDictionary { { "id", "銷貨發票資料維護" } })
+
+@using (Ajax.BeginForm("Edit", "SalesInvoice", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_Body")
+
+      <!--(start)toolbar(start)-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-warning" id="btnAdd">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    @Html.OutputText("ButtonCreate".ToLocalized())
+                </button>
+                <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" name="action:Edit" />
+                <input type="submit" value="@Html.OutputText("ButtonDelete".ToLocalized())" class="btn btn-danger" name="action:Delete" />
+
+                @Html.ActionLink("ButtonPrint".ToLocalized(), "Print", new { id = Model.Sales.SalesID, area = "" }, new { @class = "btn btn-primary hidden" })
+                <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+            </div>
+        </div>
+    </div>
+   <!--(end)toolbar(end)-->
+}
+
+@section scripts{
+       
+}
+
+
+
+
+

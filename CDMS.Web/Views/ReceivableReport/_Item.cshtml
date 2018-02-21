@@ -1,0 +1,95 @@
+﻿@model IEnumerable<CDMS.Model.ViewModel.ReceivableDetailViewModel>
+
+@{
+    Layout = null;
+}
+
+@*
+    憑證編號
+    產品編號
+    產品名稱
+    數量
+    單價
+    金額
+*@
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">
+                <th colspan="6" class="text-left">
+                    進銷貨單明細：
+                </th>
+            </tr>
+            <tr class="active">                
+                <th>
+                    @Html.DisplayNameFor(model => model.VoucherID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Qty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>                  
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td class='text-right'>
+                            @Html.DisplayFor(m => item.VoucherID)
+                        </td>
+                        <td class='text-right'>
+                            @Html.DisplayFor(m => item.ProductID)
+                        </td>
+                        <td class='text-right'>
+                            @Html.DisplayFor(m => item.ProductName)
+                        </td>
+                        <td class='text-right'>
+                            @Html.DisplayFor(m => item.Qty)
+                        </td>
+                        <td class='text-right'>
+                            @Html.DisplayFor(m => item.Price)
+                        </td>
+                        <td class='text-right'>
+                            @Html.DisplayFor(m => item.Amount)
+                        </td>   
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

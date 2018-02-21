@@ -1,0 +1,152 @@
+﻿@*前端共用函式*@
+
+@*Using's are needed to ensure helpers function correctly.*@
+@using System.Web.Mvc;
+@using System.Web.Routing;
+@using System.Web.Mvc.Html;
+@using System.Web.Mvc.Routing;
+@using System.Web.Mvc.Razor;
+@using CDMS.Model;
+@using CDMS.Web.Controllers;
+@using System.Dynamic;
+@using System.Linq.Expressions;
+@using System.Reflection;
+@using System.Runtime.CompilerServices;
+@using Microsoft.CSharp.RuntimeBinder;
+@using System.Diagnostics;
+
+@functions {
+    private static WebViewPage MyPage { get { return PageContext.Page as WebViewPage; } }
+    private static System.Web.Mvc.HtmlHelper<dynamic> MyHtml { get { return MyPage.Html; } }
+    private static UrlHelper MyUrl { get { return MyPage.Url; } }
+    private static dynamic MyViewBag { get { return MyPage.ViewBag; } }
+}
+
+@helper ReplaceCrLf(string strText)
+{
+    @MyHtml.Raw(Html.Encode(strText).Replace(Environment.NewLine, "<br />"));
+}
+
+@*可任意拖到.cshml上使用*@
+@helper ReCaptchaWidget()
+{
+    <div class="g-recaptcha" data-sitekey="6Le_GAETAAAAAEabMGnbfZWSd3hpxH-szWXF__Sx"></div>
+}
+
+@functions {
+
+    public static string GetWarehouseName(string id)
+    {
+        if (string.IsNullOrEmpty(id)) return "N/A";
+        return CDMS.Model.Warehouse.FromValue(id).Text;
+    }
+
+    public static string GetWarehouseName(string old , string id)
+    {
+        if (string.IsNullOrEmpty(old) || string.IsNullOrEmpty(id)) return "N/A";
+        if (old == id ) return "不變";
+
+        return CDMS.Model.Warehouse.FromValue(id).Text;
+    }
+
+    public static string GetChangeReasonName(string id)
+    {
+        if (string.IsNullOrEmpty(id)) return "N/A";
+        return CDMS.Model.ChangeReason.FromValue(id).Text;
+    }
+
+    private static IEnumerable<string> GetMembers()
+    {
+        //var tTarget = MyPage.ViewBag as IDynamicMetaObjectProvider;
+        var tTarget = MyViewBag as IDynamicMetaObjectProvider;
+        IEnumerable<string> info = null;
+
+        if (tTarget != null)
+        {
+            info = tTarget.GetMetaObject(Expression.Constant(tTarget)).GetDynamicMemberNames();
+        }
+
+        return info;
+    }
+
+    public static object GetProperty(object o, string member)
+    {
+        if (o == null) throw new ArgumentNullException("o");
+        if (member == null) throw new ArgumentNullException("member");
+        Type scope = o.GetType();
+        IDynamicMetaObjectProvider provider = o as IDynamicMetaObjectProvider;
+
+        if (provider != null)
+        {
+            ParameterExpression param = Expression.Parameter(typeof(object));
+            DynamicMetaObject mobj = provider.GetMetaObject(param);
+            GetMemberBinder binder =
+                (GetMemberBinder)Microsoft.CSharp.RuntimeBinder.Binder.GetMember(0, member, scope, new CSharpArgumentInfo[] { CSharpArgumentInfo.Create(0, null) });
+            DynamicMetaObject ret = mobj.BindGetMember(binder);
+            BlockExpression final = Expression.Block(
+                Expression.Label(CallSiteBinder.UpdateLabel),
+                ret.Expression
+            );
+            LambdaExpression lambda = Expression.Lambda(final, param);
+            Delegate del = lambda.Compile();
+            return del.DynamicInvoke(o);
+        }
+        else
+        {
+            return o.GetType().GetProperty(member, BindingFlags.Public | BindingFlags.Instance).GetValue(o, null);
+        }
+    }
+
+    // 
+    public static string GeneratePageLink(int page, string action = "_List")
+    {
+        // 
+        string[] ignore = { "ActionName", "ControllerName" };
+        var routeValues = new RouteValueDictionary();
+
+
+        //foreach (var viewBagItem in ViewContext.ViewData.Where(x => ignore.Contains(x.Key) == false))
+        //{
+        //    if (viewBagItem.Value != null)
+        //    {
+        //        if (viewBagItem.Value.GetType() == typeof(string))
+        //        {
+        //            routeValues.Add(viewBagItem.Key, viewBagItem.Value);
+        //        }
+        //    }
+        //}
+
+        try
+        {
+            var target = MyViewBag as IDynamicMetaObjectProvider;
+            var meataObject = target.GetMetaObject(Expression.Constant(target));
+            var names = meataObject.GetDynamicMemberNames();
+
+            //var PropetyValue = MyViewBag.GetType().GetProperty(property.Name).GetValue(d, null);
+
+            foreach (var key in names.Where(x=> ignore.Contains(x) == false))
+            {
+                var viewBagValue = GetProperty(MyViewBag, key);
+
+                if (viewBagValue != null)
+                {
+                    var type = viewBagValue.GetType();
+
+                    if (type == typeof(string) || type == typeof(string[]))
+                    {
+                        routeValues.Add(key, viewBagValue);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+
+        routeValues.Add("page", page);
+
+        var result = MyUrl.Action(action, (RouteValueDictionary)routeValues);
+        return result;
+    }
+}

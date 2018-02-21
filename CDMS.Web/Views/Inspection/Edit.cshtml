@@ -1,0 +1,269 @@
+﻿@model CDMS.Model.Inspection
+@{
+    Layout = "~/Views/Shared/_Form.cshtml";
+    var display = "hidden";
+}
+
+<form id="form1" method="post" enctype="multipart/form-data">
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID_Inspection)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Html.OutputText("ButtonEdit".ToLocalized())" class="btn btn-primary" name="action:Edit" />
+            <input type="submit" value="@Html.OutputText("ButtonDelete".ToLocalized())" class="btn btn-danger" name="action:Delete" />
+            <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="progress">
+            <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Date, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CX_Date, new { htmlAttributes = new { @class = "form-control datepicker", required = "required", placeholder = "TextInput".ToLocalized() + "CX_Date".ToLocalized() } })
+        </div>
+    </div>
+
+    <div class="form-group @display">
+        @Html.LabelFor(model => model.ID_Country, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ID_Country, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ID_Country, ViewBag.CountryList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID_Store, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ID_Store, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ID_Store, ViewBag.SotreList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID_Workplace, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ID_Workplace, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ID_Workplace, ViewBag.WrokPlaceList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID_Feedback, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ID_Feedback, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ID_Feedback, ViewBag.FeedBackList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID_Observation, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ID_Observation, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ID_Observation, ViewBag.ObservationList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Content, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Content, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.CX_Content, new { @class = "form-control", required = "required", @cols = 80, @rows = 6 })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Improve, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Improve, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.CX_Improve, new { @class = "form-control", required = "required", @cols = 80, @rows = 6 })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID_Track, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ID_Track, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ID_Track, ViewBag.TrackList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Inspection_Image".ToLocalized(), htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Inspection_Image, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            <input type="file" name="file" class="form-control" multiple />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <ul class="list-group">
+                @foreach (var item in Model.Inspection_Image.Where(x => (x.FG_Type ?? 0) == (int)GlobalSettings.ImageType.Before))
+                {
+                    <li class="list-group-item clearfix">
+                        <a href="" class="btn btn-danger deleteimage" name="@item.ID_Inspection_Image">@Html.OutputText("ButtonDelete".ToLocalized())</a>
+                        @Html.DisPlayImage(item.BI_Inspection_Image, 0, "", "")
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery-ui-datepickeroption.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $(".datepicker").datepicker();        
+
+
+            $("input[name='action:Delete']").click(function () {
+                return confirm('@Html.OutputText("MessageDeleteConfirm".ToLocalized())');
+            });
+
+
+            //刪圖片
+            $(".deleteimage").on("click", function () {
+
+                if (!confirm("@Html.OutputText("MessageDeleteConfirm".ToLocalized())"))
+                    return false;
+
+                var id = $(this).attr("name");
+
+                $.ajax({
+                    cache: false,
+                    type: "Post",
+                    url: '@Url.Action("Delete", "InspectionImage", new { area = "" })',
+                    async: false,
+                    data: { id: id },
+                    beforeSend: function () {
+
+                    },
+                    complete: function () {
+
+                    },
+                    success: function (response) {
+                        if (response.Status == true) {
+                            parent.Init();
+                            $.fancybox.update();                         
+                        } else {
+                            alert(response.Message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert('xhr:' + xhr.status + 'status:' + status + ' ,error:' + status);
+                       // alert(JSON.parse(xhr.responseText));
+                    }
+                });
+            });
+
+            //下拉店
+            $(document).on('change', '#ID_Country', function () {
+
+                var id_country = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("GetForSelect", "Store", null)',
+                    type: 'post',
+                    async: true,
+                    data: { id_country: id_country },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    },
+                    success: function (data) {
+                        //console.log('ok');
+                        if (data.length > 0) {
+                            //清除
+                            $("#ID_Store option").remove();
+                            //新增
+                            $("#ID_Store").append($("<option></option>").attr("value", "").text('@Html.OutputText("TextSelect".ToLocalized())'));
+                            $.each(data, function (index, item) {
+                                //console.log(index);
+                                $("#ID_Store").append($("<option></option>").attr("value", item.ID_Store).text(item.CX_Store_Name));
+                            });
+                        } else {
+                            //console.log('no');
+                            alert("@Html.OutputText("MessagePleaseCreateStoreFirst".ToLocalized())");
+                            parent.Init();
+                            parent.jQuery.fancybox.close();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert('xhr:' + xhr.status + 'status:' + status + ' ,error:' + status);
+                       // alert(JSON.parse(xhr.responseText));
+                    }
+                });
+            });
+
+
+            //送出多按紐ajaxForm 
+            $('.progress').hide();
+            var btn = $('.btn');
+            //progress
+            var bar = $('.progress-bar');
+            //var percent = $('.percent');
+            //送出
+            //https://stackoverflow.com/questions/15410265/file-upload-progress-bar-with-jquery
+            $("#form1").ajaxForm({//因為要判斷兩個按紐所以用ajaxForm
+                url: "@Url.Action("Edit","Inspection")",
+                type: "post",
+                beforeSubmit: function () {
+                    btn.button('loading');
+                    //console.log('2');
+                    //progress
+                    $('.progress').show();   //出現條
+                    var percentVal = '0%';
+                    bar.width(percentVal);
+                    bar.html(percentVal);
+                }, uploadProgress: function (event, position, total, percentComplete) {
+                    //progress
+                    var percentVal = percentComplete + '%';
+                    bar.width(percentVal);
+                    bar.html(percentVal);
+                    //console.log('4');
+                },
+                success: function (response) {
+                    //console.log('3');
+                    btn.button('reset');//因為沒有complete先寫在這
+                    if (response.Status == true) {
+                        parent.Init();
+                        parent.jQuery.fancybox.close();
+                    }
+                    $('.progress').hide();//完成時隱藏
+                    alert(response.Message);
+                    return false;//阻止自動提交
+                },
+                complete: function (xhr) {
+
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

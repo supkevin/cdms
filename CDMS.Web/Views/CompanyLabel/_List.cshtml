@@ -1,0 +1,154 @@
+﻿@model IEnumerable<CDMS.Model.ViewModel.StockTrackViewModel>
+
+@{
+    Layout = null;
+}
+@*測試捉所有ViewBag*@
+@*@{
+    string[] ignore = { "ActionName", "ControllerName" };
+    var routeValues = new RouteValueDictionary();
+
+    foreach (var viewBagItem in ViewContext.ViewData.Where(x => ignore.Contains(x.Key) == false))
+    {
+        if (viewBagItem.Value != null)
+        {
+            var type = viewBagItem.Value.GetType();
+
+            if (type == typeof(string) || type == typeof(string[]))
+            {
+                <p> @viewBagItem.Key @@: @viewBagItem.Value </p>;
+                routeValues.Add(viewBagItem.Key, viewBagItem.Value);
+            }
+        }
+    }
+}*@
+
+@functions{
+
+    private string GeneratePageLink(int page, string action = "_List")
+    {
+
+        string[] ignore = { "ActionName", "ControllerName" };
+        var routeValues = new RouteValueDictionary();
+
+        foreach (var viewBagItem in ViewContext.ViewData.Where(x => ignore.Contains(x.Key) == false))
+        {
+            if (viewBagItem.Value != null)
+            {
+                var type = viewBagItem.Value.GetType();
+
+                if (type == typeof(string) || type == typeof(string[]))
+                {
+                    routeValues.Add(viewBagItem.Key, viewBagItem.Value);
+                }
+            }
+        }
+
+        routeValues.Add("page", page);
+
+        var result = Url.Action("_List", (RouteValueDictionary)routeValues);
+        return result;
+    }
+}
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">
+                <th>@Html.OutputText("TextFunction".ToLocalized())</th>
+                <th>
+                    @Html.DisplayNameFor(m => m.ProductID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Purchase)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Sales)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Adjust)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Transfer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Stock)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <button data-product='@item.ProductID'
+                                    data-date-start='@item.ChangeStartDate'
+                                    data-date-finish='@item.ChangeFinishDate'
+                                    class='btn btn-primary details'>
+                                @("ButtonDetails".ToLocalized())
+                                </button>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.ProductID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.ProductName)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(m => item.Purchase)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(m => item.Sales)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(m => item.Adjust)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(m => item.Transfer)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(m => item.Stock)
+                            </td>
+                        </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Hidden("p", (Int32)@ViewBag.p)
+@using PagedList
+@using PagedList.Mvc
+@Html.PagedListPager((IPagedList)Model,
+        page => GeneratePageLink(page),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>"
+        },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "MyContent"
+
+        }))
+
+
+
+
+
+
+
+
+

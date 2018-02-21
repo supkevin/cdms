@@ -1,0 +1,131 @@
+﻿@using CDMS.Web.Helpers
+@model CDMS.Model.ViewModel.ReceiptViewModel
+
+@{
+    var defaultAttribute = new { @class = "form-control" };
+    var labelAttribute = new { @class = "control-label" };
+
+    // 動態
+    var readOnly =
+((Model != null) && (string.IsNullOrEmpty(Model.ReceiptID))) ?
+(object)new
+{
+    @readonly = "readonly"
+}
+: (object)new { };
+}
+
+<div class="form-inline">
+    @Html.EditorFor(m => m.ReceiptID)
+    @Html.EditorFor(m => m.CustomerID)
+    @Html.EditorFor(m => m.AccountMonth)
+    @Html.DropDownListFor(m => m.Activate,
+    ViewBag.YseNoList as SelectList, null,
+    Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute))
+</div>
+
+<table class="table table-striped table-bordered table-rwd">
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.ReceiptDate, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="@("ReceiptDate".ToLocalized())">
+            @Html.EditorFor(m => m.ReceiptDate, "DateTemplate", new
+       {
+           htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+       })
+        </td>
+
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.CheckAmount, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="@("CheckAmount".ToLocalized())">
+            @Html.EditorFor(m => m.CheckAmount, "NumericTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+           })
+        </td>
+
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.CashAmount, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="@("CashAmount".ToLocalized())">
+            @Html.EditorFor(m => m.CashAmount, "NumericTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+           })
+        </td>
+    </tr>
+
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.CheckNum, htmlAttributes: new { @class = "control-label" })
+        </td>
+        <td data-th="@("CheckNum".ToLocalized())">
+            @Html.EditorFor(m => m.CheckNum,
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+           })
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.DiscountAmount, htmlAttributes: new { @class = "control-label" })
+        </td>
+        <td data-th="@("DiscountAmount".ToLocalized())">
+            @Html.EditorFor(m => m.DiscountAmount, "NumericTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+           })
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.ReturnAmount, htmlAttributes: new { @class = "control-label" })
+        </td>
+        <td data-th="@("ReturnAmount".ToLocalized())">
+            @Html.EditorFor(m => m.ReturnAmount,"NumericTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+           })
+        </td>
+    </tr>
+
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.DueDate, htmlAttributes: new { @class = "control-label" })
+        </td>
+        <td data-th="@("DueDate".ToLocalized())">
+            @Html.EditorFor(m => m.DueDate, "DateTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+           })
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.BankAccountID, htmlAttributes: new { @class = "control-label" })
+        </td>
+        <td data-th="@("BankAccountID".ToLocalized())" colspan="3">
+            @Html.DropDownListFor(m => m.BankAccountID,
+               ViewBag.BankAccountList as SelectList, null,
+               Html.MergeAttributes(new { }, defaultAttribute))
+        </td>
+    </tr>
+
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Remarks, htmlAttributes: new { @class = "control-label" })
+        </td>
+        <td data-th="@("Remarks".ToLocalized())" colspan="5">
+            @Html.TextAreaFor(m => m.Remarks,
+            new
+            {
+                @class = "form-control",
+                @cols = 80,
+                @rows = 4
+            })
+        </td>
+    </tr>
+
+</table>

@@ -1,0 +1,172 @@
+﻿@using CDMS.Web.Helpers;
+@model  CDMS.Model.ViewModel.ProductImageComplex
+
+@{
+    Layout = "~/Views/Shared/_GridForm.cshtml";
+}
+
+<form id="form1" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="grid-container outline">
+        <div class="row">
+            <h4>
+                @Html.OutputText("MenuProductImage".ToLocalized())
+            </h4>
+        </div>
+        <div class="row">
+            <div class="col-1 title">
+                @Html.Label("ProductID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-2">
+                @Html.TextBoxFor(m => m.Product.ProductID,
+                new
+                {
+                    @class = "form-control",
+                    readOnly = "ReadOnly"
+                })
+            </div>
+            <div class="col-1 title">
+                @Html.Label("ProductName".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-2">
+                @Html.EditorFor(m => m.Product.ProductName,
+             new
+             {
+                 htmlAttributes = new
+                 {
+                     @class = "form-control",
+                     readOnly = "ReadOnly"
+                 }
+             })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-1">
+            </div>
+            <div class="col-5">
+                <input type="file" name="file" class="form-control" multiple />
+                <div class="form-group" style="margin-top:5px">
+                    <div class="progress">
+                        <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-5">
+                @if (Model.ChildList.Count() > 0)
+                {
+                    <ul class="list-group">
+                        @foreach (var item in Model.ChildList)
+                        {
+                            <li class="list-group-item clearfix">
+                                <a href="" class="btn btn-danger deleteimage"
+                                   name="@item.ImageID">@Html.OutputText("ButtonDelete".ToLocalized())</a>
+                                @Html.DisplayImageByPath(@Url.Action("GetImage", "ProductImage", new { id = item.ImageID }), 200, "", "")
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" name="action:Create" />
+                <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+            </div>
+        </div>
+    </div>
+</form>
+@section scripts{
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery-ui-datepickeroption.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            //刪圖片
+            $(".deleteimage").on("click", function () {
+
+                if (!confirm("@Html.OutputText("MessageDeleteConfirm".ToLocalized())"))
+                    return false;
+
+                var id = $(this).attr("name");
+                var url = '@Url.Action("Delete", "ProductImage")';
+                var data = { id: id };
+
+                console.log('2', data);
+
+                $.post(url, data, function (response, a, b) {
+                    OnSuccess(response);
+
+                    console.log('3');
+                    console.log('3', response);
+                    console.log('3', a);
+                    console.log('3', b);
+
+                    //console.log('3', response);
+                    //OnSuccess(response);
+                });
+            });
+
+            //送出多按紐ajaxForm
+            $('.progress').hide();
+            var btn = $('.btn');
+            //progress
+            var bar = $('.progress-bar');
+            //var percent = $('.percent');
+            //送出
+            //https://stackoverflow.com/questions/15410265/file-upload-progress-bar-with-jquery
+            $("#form1").ajaxForm({//因為要判斷兩個按紐所以用ajaxForm
+                url: "@Url.Action("Edit","ProductImage")",
+                type: "post",
+                beforeSubmit: function () {
+                    btn.button('loading');
+                    //console.log('2');
+                    //progress
+                    $('.progress').show();   //出現條
+                    var percentVal = '0%';
+                    bar.width(percentVal);
+                    bar.html(percentVal);
+                }, uploadProgress: function (event, position, total, percentComplete) {
+                    //progress
+                    var percentVal = percentComplete + '%';
+                    bar.width(percentVal);
+                    bar.html(percentVal);
+                    //console.log('4');
+                },
+                success: function (response) {
+                    OnSuccess(response);                    
+                    ////console.log('3');
+                    //btn.button('reset');//因為沒有complete先寫在這
+                    //if (response.Status == true) {
+                    //    parent.Init();
+                    //    parent.jQuery.fancybox.close();
+                    //}
+                    //$('.progress').hide();//完成時隱藏
+                    //alert(response.Message);
+                    //return false;//阻止自動提交
+                },
+                complete: function (xhr) {
+                    $('.progress').hide();//完成時隱藏
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

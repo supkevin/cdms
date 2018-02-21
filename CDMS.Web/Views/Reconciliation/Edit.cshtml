@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/_GridForm3.cshtml";
+}
+
+@using (Ajax.BeginForm("Edit", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_Receivable")
+    <br/>
+    <div id="MyItem"></div>
+    <!--(start)toolbar(start)-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+                </div>
+            </div>
+        </div>
+    </div>
+   <!--(end)toolbar(end)-->
+    @Scripts.Render("~/bundles/pureJquery")
+    <script src='@Url.Content("~/Scripts/_Custom/Ajax.js")'></script>
+    <script>
+        console.log('GetReceivableItem-1', '@ViewBag.Keys');
+        GetReceivableItem('@ViewBag.Keys'); 
+
+        function GetReceivableItem(keys) {
+            var url = '@Url.Action("_Item", new { area = "" })';
+            var data = { keys: keys }
+
+            console.log('GetReceivableItem-2', keys);
+
+            postAjax(url, data, function (result) {
+                $("#MyItem").html(result);
+            });
+        }
+    </script>
+}
+
+
+

@@ -1,0 +1,40 @@
+﻿@using CDMS.Web.Helpers;
+@model  CDMS.Model.ViewModel.ProductImageComplex
+
+@{
+    Layout = null;
+}
+<style>
+    .img{
+        margin:3px;
+    }
+</style>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-5">
+        @if (Model.ChildList.Count() > 0)
+        {
+            foreach (var item in Model.ChildList)
+            {
+                @Html.DisplayImageByPath(@Url.Action("GetImage", "ProductImage", new { id = item.ImageID }), 200, "", "img")
+            }        
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

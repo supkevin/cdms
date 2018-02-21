@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Html.OutputText("TextAppName".ToLocalized())</title>
+    <link href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/PagedList")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+    <link href=@Url.Content("~/Content/MyGridSystem.css") rel="stylesheet" />
+    <!--responsive-table-->
+    <link href='@Url.Content("~/Content/responsive-table.css")' rel="stylesheet" /> 
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("TextAppName".ToLocalized(), "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown hidden">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.OutputText("MenuInspectionTop".ToLocalized())<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("MenuInspection".ToLocalized(), "Index", "Inspection", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuProcess".ToLocalized(), "Index", "Process", null, null)
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="dropdown hidden">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.OutputText("MenuInspectionReport".ToLocalized())<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="hidden">
+                                @Html.ActionLink("MenuInspectionReportD".ToLocalized(), "His", "Inspection", null, null)
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown hidden">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.OutputText("MenuOverStaff".ToLocalized())<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("MenuOverStaff".ToLocalized(), "Index", "OverSea", null, null)
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown hidden">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.OutputText("MenuStaffReport".ToLocalized())<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="hidden">
+                                @Html.ActionLink("MenuHistory".ToLocalized(), "His", "OverSea", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuOverSeaDisplay".ToLocalized(), "Display", "OverSea", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuBirthday".ToLocalized(), "Birthday", "OverSea", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuNowOverSea".ToLocalized(), "NowOverSea", "OverSea", null, null)
+
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.OutputText("MenuSet".ToLocalized())<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @*<li class="hidden">
+                                    @Html.ActionLink("MenuOverType".ToLocalized(), "Index", "OverType", null, null)
+                                </li>
+                                <li class="hidden">
+                                    @Html.ActionLink("MenuCountry".ToLocalized(), "Index", "Country", null, null)
+                                </li>
+
+                                <li class="hidden">
+                                    @Html.ActionLink("MenuWorkplace".ToLocalized(), "Index", "Workplace", null, null)
+                                </li>
+
+                                <li class="hidden">
+                                    @Html.ActionLink("MenuFeedback".ToLocalized(), "Index", "Feedback", null, null)
+                                </li>
+
+                                <li class="hidden">
+                                    @Html.ActionLink("MenuObservation".ToLocalized(), "Index", "Observation", null, null)
+                                </li>
+
+                                <li class="hidden">
+                                    @Html.ActionLink("MenuTrack".ToLocalized(), "Index", "Track", null, null)
+                                </li>*@
+                            <li>
+                                @Html.ActionLink("MenuTest".ToLocalized(), "Index", "_Test", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuDynamic".ToLocalized(), "Index", "_Dynamic", null, null)
+                            </li>
+
+
+
+                            <li class="hidden">
+                                @Html.ActionLink("MenuAlternative".ToLocalized(), "Index", "Alternative", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuStockChange".ToLocalized(), "Index", "StockChange", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuSalesInvoice".ToLocalized(), "Index", "SalesInvoice", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuPurchaseInvoice".ToLocalized(), "Index", "PurchaseInvoice", null, null)
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+                <!--已完成-->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">系統管理<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                @Html.ActionLink("MenuNews".ToLocalized(), "Index", "News", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuCode".ToLocalized(), "Index", "Code", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuBrand".ToLocalized(), "Index", "Brand", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuUser".ToLocalized(), "Index", "User", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuCompany".ToLocalized(), "Index", "Company", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuBankAccount".ToLocalized(), "Index", "BankAccount", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuProduct".ToLocalized(), "Index", "Product", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuInquiry".ToLocalized(), "Index", "Inquiry", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuPurchase".ToLocalized(), "Index", "Purchase", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuQuotation".ToLocalized(), "Index", "Quotation", null, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("MenuSales".ToLocalized(), "Index", "Sales", null, null)
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default hidden" role="navigation" id="navfunc"></nav>
+    @*@Html.Action("_GetForMenuTitleName", "Menu", new { area = "" })*@
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="hidden">
+            <p>@Html.OutputText("TextCompanyName".ToLocalized())</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    <!--
+    <script src="~/assets/js/script.js"></script>
+    -->
+    <script src="~/Scripts/jquery.fancybox.js"></script>
+    <!--bootstrap-select-->
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+    <!--datepicker-->
+    <script src="~/Scripts/jquery-ui-datepickeroption.js"></script>
+    <!--bootbox-->
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <!--Ajax-->
+    <script src='@Url.Content("~/Scripts/_Custom/Ajax.js")'></script>
+
+    @RenderSection("scripts", required: false)
+
+    <!--menu-->
+    <script src="~/assets/menu.js"></script>
+    <script>
+        $("#navfunc").html(menu);
+    </script>
+    <!--menu END-->
+
+
+
+
+</body>
+</html>

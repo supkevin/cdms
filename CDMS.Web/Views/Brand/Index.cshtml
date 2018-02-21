@@ -1,0 +1,113 @@
+﻿<form class="form-inline" role="form" onsubmit="return false;">
+    <div class="form-group">
+        <input type="text" id="SearchText" class="form-control col-xs-4" placeholder="@Html.OutputText("BrandName".ToLocalized())" />
+    </div>
+    <div class="form-group">
+        <select id="OrderBy" class="form-control col-xs-4">
+            <option value="BrandID" selected="selected">@Html.OutputText("BrandID".ToLocalized())</option>
+            <option value="BrandName">@Html.OutputText("BrandName".ToLocalized())</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <select id="Sort" class="form-control col-xs-4" data-show-icon="true">
+            <option value="asc" selected="selected">▲</option>
+            <option value="desc">▼</option>
+        </select>
+    </div>
+    <input type="button" id="SearchButton" class="btn btn-warning" value="@Html.OutputText("ButtonSearch".ToLocalized())" />
+    @Html.ActionLink("ButtonCreate".ToLocalized(), "Create", "Brand",
+    new { area = "" },
+    new { @class = "btn btn-success fancybox fancybox.iframe" })
+</form>
+
+
+<hr />
+<div id="MyContent">
+</div>
+@section scripts{
+    <script>
+        $(function () {
+
+            $('#SearchButton').click(function () {
+                $('#p').val('1');
+                Init();
+            });
+
+            $("#SearchText").keypress(function (e) {
+                code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) {
+                    $('#p').val('1');
+                    Init();
+                }
+            });
+
+            $("#SearchText").on('change',
+                function (e) {               
+                    $('#p').val('1');
+                    Init();
+                }
+            );
+
+            $('.fancybox').fancybox({
+                closeBtn: false, // 是否顯示關閉按紐
+                helpers: {
+                    // 防點擊背景時關閉
+                    overlay: { closeClick: false }
+                },
+                keys: {
+                    // 防點擊ESC時關閉
+                    close: null
+                },
+                'autoSize': false,
+                height: window.innerHeight,
+                maxWidth: 900,
+                padding: 10,
+                margin: 20
+            });
+
+            Init();
+        });
+
+        function Init() {
+
+            var p = $('#p').val();
+            var txt = $('#SearchText').val();
+            var orderby = $('#OrderBy').val();
+            var sort = $('#Sort').val();
+            
+            console.log('txt', txt);
+
+            //var btn = $('.btn');
+            $.ajax({
+                cache: false,
+                type: "Post",
+                url: '@Url.Action("_List", "Brand", new { area = "" })',
+                async: false,
+                data: { page: p, txt: txt, orderby: orderby, sort: sort },
+                beforeSend: function () {
+                    // btn.button('loading');
+                },
+                complete: function () {                    
+                },
+                success: function (data) {                    
+                    $("#MyContent").html(data);
+                    // btn.button('reset');
+                },
+                error: function (xhr, status, error) {
+                    alert('xhr:' + xhr.status + 'status:' + status + ' ,error:' + status);
+                    //alert(JSON.parse(xhr.responseText));
+                }
+            });
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,98 @@
+﻿@model CDMS.Model.ViewModel.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<title>@Html.OutputText("TextCompanyName".ToLocalized())</title>*@
+    <meta name="Robots" content="noindex:nofollow" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style type="text/css">
+        body {
+            background: #eee;
+        }
+
+        form {
+            width: 400px;
+            margin: -250px -200px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 50px;
+            box-shadow: 5px 5px 5px rgba(0,0,0,.2);
+            background: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    </style>
+</head>
+<body>
+    @*@using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin" }))*@
+    @using (Ajax.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @*<div class="form-group" style="text-align: center;">
+            <a href="~/" target="_blank">
+                <img src="~/logo.png" />
+            </a>
+        </div>*@
+
+        <div class="form-group">
+            @Html.ValidationSummary()
+        </div>
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserID, new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.UserID, null, new { @class = "text-danger" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.UserID, new { @class = "form-control", required = "required", placeholder = "TextInput".ToLocalized() + "CX_Account".ToLocalized() })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
+            <div class="controls">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", required = "required", placeholder = "TextInput".ToLocalized() + "CX_Password".ToLocalized() })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn-lg btn btn-primary" value="@Html.OutputText("ButtonLogin".ToLocalized())" />
+        </div>        
+    }
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script>
+        var btn = $('.btn');
+
+        function OnBegin() {
+            btn.button('loading');
+        }
+
+        function OnComplete() {
+            btn.button('reset');
+        }
+
+        function OnSuccess(response) {
+
+            if (response.Status == true) {
+                location.replace(response.Url);
+            } else {
+                alert(response.Message);
+            }
+        }
+
+    </script>
+</body>
+</html>

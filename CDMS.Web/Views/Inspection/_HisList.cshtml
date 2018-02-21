@@ -1,0 +1,146 @@
+﻿@model IEnumerable<CDMS.Model.Inspection>
+
+@{
+    Layout = null;
+}
+
+<p class="form-inline">
+  
+</p>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr class="active" style="border-bottom-style:solid;border-top-style:solid;">
+                <th>
+                    @Html.OutputText("TextiCount".ToLocalized())
+                </th>            
+                <th>
+                    @Html.OutputText("CX_Date".ToLocalized())
+                </th>
+                <th>
+                    @Html.OutputText("CX_Name".ToLocalized())
+                </th>
+               
+                <th>                  
+                    @Html.OutputText("ID_Country".ToLocalized())
+                </th>
+                <th>                 
+                    @Html.OutputText("ID_Store".ToLocalized())
+                </th>
+                <th>                 
+                    @Html.OutputText("ID_Workplace".ToLocalized())
+                </th>
+                <th>                    
+                    @Html.OutputText("ID_Feedback".ToLocalized())
+                </th>
+                <th>                 
+                    @Html.OutputText("ID_Observation".ToLocalized())
+                </th>
+                <th>                    
+                    @Html.OutputText("ID_Track".ToLocalized())
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+
+                int p = Convert.ToInt32(ViewBag.p);
+                int PageSize = Convert.ToInt32(ViewBag.PageSize);
+
+                int iCount = 1 + ((p - 1) * PageSize);
+
+                foreach (var item in Model)
+                {
+                    <tr style="border-bottom-style:solid;border-top-style:solid;background-color:@item.Workplace.CX_Color;">
+
+                        <td rowspan="2" style="vertical-align: middle; text-align:center; ">@iCount.ToString()</td>
+                        <td>
+                            @Html.DisplayFor(model => item.CX_Date)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => item.CX_Name) @Html.DisplayFor(model => item.CX_PID)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => item.Country.CX_Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Store.CX_Store_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Workplace.CX_Workplace)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Feedback.CX_Feedback)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Observation.CX_Observation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Track.CX_Track)
+                        </td>
+                    </tr>
+                    <tr style="border-bottom-style:solid;border-top-style:hidden;background-color:@item.Workplace.CX_Color;">
+                        <td colspan="8">
+                            <span>@Html.DisplayWithBreaksFor(model => item.CX_Content)</span>
+                            <br />
+                            @foreach (var itemI in item.Inspection_Image)
+                            {
+                                @Html.DisPlayImage(itemI.BI_Inspection_Image, 200, item.CX_Date, "")
+                            }
+                        </td>
+                    </tr>
+                            iCount++;
+                }
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Hidden("p", (Int32)@ViewBag.p)
+@using PagedList
+@using PagedList.Mvc
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("_HisList", new { 
+    orderby = ViewBag.orderby,
+    sort = ViewBag.sort,
+    page, 
+    pagesize = ViewBag.pagesize,
+    txt =  ViewBag.txt,
+    date = ViewBag.date,
+    id_country = ViewBag.id_country,
+    id_store = ViewBag.id_store ,
+    id_workpace = ViewBag.id_workpace ,
+    id_feedback = ViewBag.id_feedback,
+    id_observation = ViewBag.id_observation,
+    id_track = ViewBag.id_track 
+}),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>"
+        },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "Content"
+
+        }))
+
+
+
+
+
+
+
+
+

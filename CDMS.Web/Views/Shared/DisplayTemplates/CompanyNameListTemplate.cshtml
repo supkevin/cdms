@@ -1,0 +1,15 @@
+﻿@model string
+
+@{
+    SelectListItem info = null ;
+
+    try
+    {
+        info = ((SelectList)ViewBag.CompanyList).Where(x => x.Value == Model).SingleOrDefault();
+    }
+    catch (Exception ex)
+    {
+
+    }
+}
+@( info == null ? "&nbsp;" : info.Text)

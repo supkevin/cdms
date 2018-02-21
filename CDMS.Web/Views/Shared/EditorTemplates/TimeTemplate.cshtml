@@ -1,0 +1,10 @@
+﻿@model DateTime?
+@{
+    var htmlAttributes = ViewData["htmlAttributes"] ?? new { };
+
+    var value = Model.HasValue ?
+        Model.Value.ToString("HH:mm") : string.Empty;
+}
+
+@*@Html.TextBox("", value, new { @class = "form-control" })*@
+@Html.TextBox("", value, htmlAttributes)

@@ -1,0 +1,127 @@
+﻿@using CDMS.Web.Helpers
+
+@{ 
+    var defaultAttribute = new { @class = "form-control", required = "required" };    
+}
+<link href='@Url.Content("~/Content/responsive-table.css")' rel="stylesheet" />
+<form class="form-inline" role="form" onsubmit="return false;" id="myForm">
+    <table class="table table-striped table-bordered table-rwd">
+        <tr>
+            <td data-th="" colspan="4">
+                @Html.Label("TextCriteria".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+        </tr>
+        <tr>
+            <td data-th="" class="col-1 title">                
+                @Html.Label("SalesDate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="" class="col-2">
+                <input type="text" id="SearchDateStart" class="form-control datepicker" style="width:45%" />
+                @("TextTo".ToLocalized())
+                <input type="text" id="SearchDateFinish" class="form-control datepicker" style="width:45%" />
+            </td>
+            <td data-th="" class="col-1 title">
+                @Html.Label("CustomerID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="" class="col-2">
+                <input type="text" id="SearchCompany" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td data-th="" class="col-1 title">
+                @Html.Label("ProductID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="" class="col-2">
+                <input type="text" id="SearchProductID" class="form-control" />
+            </td>
+            <td data-th="" class="col-1 title">
+                @Html.Label("ProductName".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="" class="col-2">
+                <input type="text" id="SearchProductName" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td data-th="" class="col-1 title">
+                @Html.Label("WarehouseID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="" class="col-2">
+                @Html.DropDownList("SearchWarehouseID", ViewBag.MultiWareHouseList as MultiSelectList,
+                Html.MergeAttributes(
+                    new { multiple = "multiple", @class = "selectpicker text-danger" }, defaultAttribute)
+                )
+            </td>
+            <td data-th="" class="col-1 title">                
+            </td>
+            <td data-th="" class="col-2">                
+            </td>
+        </tr>
+    </table>
+    <input type="button" id="SearchButton" class="btn btn-warning" value="@Html.OutputText("ButtonSearch".ToLocalized())" />
+    @Html.ActionLink("ButtonCreate".ToLocalized(), "Create", "Sales", new { area = "" }, new { @class = "btn btn-success fancybox fancybox.iframe" })
+</form>
+
+<hr />
+<div id="MyContent">
+</div>
+@section scripts{   
+    <script>
+        $(function () {
+            $('#SearchButton').click(function () {
+                $('#p').val('1');
+                Init();
+            });
+
+            $("#SearchText").keypress(function (e) {
+                code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) {
+                    $('#p').val('1');
+                    Init();
+                }
+            });
+
+            Init();
+        });
+
+        function Init() {
+
+            var start = $('#SearchDateStart').val();
+            var finsih = $('#SearchDateFinish').val();
+            var company = $('#SearchCompany').val();
+
+            var product = $('#SearchProductID').val();
+            var productName = $('#SearchProductName').val();
+            var warehouseID = $('#SearchWarehouseID').val() || [];
+
+            var p = $('#p').val();
+            var orderby = $('#OrderBy').val();
+            var sort = $('#Sort').val();
+    
+            var url = '@Url.Action("_List", "Sales", new { area = "" })';
+            var data =
+            {
+                start: start, finsih: finsih,
+                company: company,
+                product: product, productName: productName,
+                warehouseID : warehouseID,
+                page: p, orderby: orderby, sort: sort
+            };
+
+            console.log('data', data);
+
+            postAjax(url, data, function (data) {
+                $("#MyContent").html(data);
+            });
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

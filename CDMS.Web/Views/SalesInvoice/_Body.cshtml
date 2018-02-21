@@ -1,0 +1,374 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.SalesInvoiceComplex
+
+@{
+    Layout = null;
+
+    var defaultAttribute = new { @class = "form-control", required = "required" };
+    var labelAttribute = new { @class = "control-label" };
+
+    // 有發票號不可修改
+    var attribute = Model.Invoice.InvoiceID == "" ? (object)new { } : (object)new { readOnly = "readOnly" };
+}
+
+<table class="table table-striped table-bordered table-rwd">
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.CustomerID, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1"></td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.AccountMonth, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.EditorFor(m => m.Invoice.AccountMonth,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.InvoiceStatusID, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.DropDownListFor(m => m.Invoice.InvoiceStatusID,
+            ViewBag.InvoiceStatusList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { id = "InvoiceStatusID", disabled = "disabled" }, defaultAttribute))
+        </td>
+    </tr>
+
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.InvoiceDate, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.EditorFor(m => m.Invoice.InvoiceDate, "DateTemplate",
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+            })
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.InvoiceID, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.EditorFor(m => m.Invoice.InvoiceID,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.TaxLevelID, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.DropDownListFor(m => m.Invoice.TaxLevelID,
+            ViewBag.TaxLevelList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </td>
+    </tr>
+
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.TaxExcluded, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.EditorFor(m => m.Invoice.TaxExcluded, "DecimalTemplate",
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.DeductAmount, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.EditorFor(m => m.Invoice.DeductAmount, "DecimalTemplate",
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.DiscountAmount, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.EditorFor(m => m.Invoice.DiscountAmount, "DecimalTemplate",
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </td>
+    </tr>
+
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.Tax, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.EditorFor(m => m.Invoice.Tax, "DecimalTemplate",
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.TaxLevelID, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.DropDownListFor(m => m.Invoice.TaxRate,
+            ViewBag.TaxRateList as SelectList, null,
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.TaxIncluded, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" class="col-1">
+            @Html.EditorFor(m => m.Invoice.TaxIncluded, "DecimalTemplate",
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </td>
+    </tr>
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.MarkLabelFor(m => m.Invoice.Remarks, htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="" colspan="5">
+            @Html.TextAreaFor(m => m.Invoice.Remarks,
+            Html.MergeAttributes(new { @cols = 80, @rows = 3 }, defaultAttribute)
+            )
+        </td>
+    </tr>
+</table>
+
+@*<div class="grid-container outline">
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("InvoiceID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Invoice.InvoiceID, new
+       {
+           htmlAttributes = Html.MergeAttributes(attribute, defaultAttribute)
+       })
+        </div>
+        <div class="col-1 title">
+            @Html.Label("InvoiceStatusID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Invoice.InvoiceStatusID,
+            ViewBag.InvoiceStatusList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { disabled = "disabled" }, defaultAttribute))
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("CustomerID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            <div class="form-inline">
+                @Html.EditorFor(m => m.Invoice.CustomerID,
+                    new
+                    {
+                        htmlAttributes = Html.MergeAttributes(
+                            new
+                            {
+                                @class = "auto-complete",
+                                data_autocomplete_url = Url.Action("GetForCustomerAutocomplete", "Company"),
+                                id = "txtCompanyID"
+                            }, defaultAttribute)
+                    })
+                @Html.DisplayFor(m => m.Invoice.CustomerID, "CompanyNameTemplate",
+                   new
+                   {
+                       htmlAttributes = Html.MergeAttributes(
+                                new
+                                {
+                                    @class = "auto-complete-name",
+                                    id = "txtCompanyName",
+                                    readOnly = "ReadOnly",
+                                }, defaultAttribute)
+                   })
+            </div>
+        </div>
+
+        <div class="col-1 title">
+            @Html.Label("TaxID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Invoice.TaxID,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("Title".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.EditorFor(m => m.Invoice.Title, new
+        {
+            htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+        })
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("InvoiceDate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Invoice.InvoiceDate,
+           "DateTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+           })
+        </div>
+        <div class="col-1 title">
+            @Html.Label("AccountMonth".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Invoice.AccountMonth,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("TaxExcluded".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Invoice.TaxExcluded,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </div>
+        <div class="col-1 title">
+            @Html.Label("TaxLevelID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Invoice.TaxLevelID,
+            ViewBag.TaxLevelList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("DiscountAmount".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Invoice.DiscountAmount,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </div>
+        <div class="col-1 title">
+            @Html.Label("DeductAmount".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Invoice.DeductAmount,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("Tax".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Invoice.Tax,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </div>
+        <div class="col-1 title">
+            @Html.Label("TaxIncluded".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Invoice.TaxIncluded,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+            })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("Remarks".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.TextAreaFor(m => m.Invoice.Remarks,
+            Html.MergeAttributes(new { @cols = 80, @rows = 3 }, defaultAttribute)
+            )
+        </div>
+    </div>
+
+    <!--(start)List(start)-->
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-6">
+                <table class="table table-bordered updownleftright fixTable" id="table">
+                    <thead>
+                        <tr class="active">
+                            <th class="text-nowrap"></th>
+                            <th class="text-nowrap" style="width:280px">@Html.OutputText("ProductID".ToLocalized())</th>
+                            <th class="text-nowrap">@Html.OutputText("Price".ToLocalized())</th>
+                            <th class="text-nowrap">@Html.OutputText("Qty".ToLocalized())</th>
+                            <th class="text-nowrap">@Html.OutputText("Amount".ToLocalized())</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ChildList.Count() > 0)
+                        {
+                            foreach (var item in Model.ChildList)
+                            {
+                                try
+                                {
+                                    Html.RenderPartial("_Item", item);
+                                }
+                                catch (Exception ex)
+                                {
+                                    throw;
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--(end)List(end)-->
+    <!--(start)toolbar(start)-->
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <button type="button" class="btn btn-warning" id="btnAdd">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    @Html.OutputText("ButtonCreate".ToLocalized())
+                </button>
+                <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" />
+                <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+            </div>
+        </div>
+    </div>
+    <!--(end)toolbar(end)-->
+</div>*@

@@ -1,0 +1,38 @@
+﻿@{
+    
+}
+@*<link href='@Url.Content("assets/bootstrap/css/bootstrap.min.css")' rel="stylesheet" />
+<link href='@Url.Content("assets/bootstrap/fonts/font-awesome.min.css")' rel="stylesheet" />
+<link href='@Url.Content("~/assets/css/styles.css")' rel="stylesheet" />*@
+
+<div id="MyContent">
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jquery")
+    <script src='@Url.Content("~/Scripts/_Custom/Ajax.js")'></script>
+    <script>
+        $(function () {
+            Init();
+        });
+
+        function Init() {
+            var p = $('#p').val();                                   
+            var url = '@Url.Action("_Display", "News", new { area = "" })';
+            var data = { page: p };
+
+            postAjax(url, data, function (data) {
+                $("#MyContent").html(data);
+            });
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

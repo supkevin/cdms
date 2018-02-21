@@ -1,0 +1,24 @@
+﻿
+@helper DisplayStatus(string CX_From_Date, string CX_To_Date)
+{
+    string mNow = DateTime.Now.ToString("yyyy-MM-dd");
+
+    if (CX_From_Date.CompareTo(mNow) <= 0 && CX_To_Date.CompareTo(mNow) >= 0)
+    {//出差中
+        <span style="color:blue;">
+            @Html.OutputText("TextIsOut".ToLocalized())
+        </span>
+    }
+    else if (CX_From_Date.CompareTo(mNow) > 0)
+    {//未出發
+        <span style="color:green;">
+            @Html.OutputText("TextIsNotGo".ToLocalized())
+        </span>
+    }
+    else if (CX_To_Date.CompareTo(mNow) < 0)
+    {//已回國
+        <span style="color:red;">
+            @Html.OutputText("TextIsIn".ToLocalized())
+        </span>
+    }
+}

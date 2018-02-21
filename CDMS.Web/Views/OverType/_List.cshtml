@@ -1,0 +1,79 @@
+﻿@model IEnumerable<CDMS.Model.OverType>
+
+@{
+    Layout = null;
+}
+
+<p class="form-inline">
+    @Html.ActionLink("ButtonCreate".ToLocalized(), "Create", "OverType", new { area = "" }, new { @class = "btn btn-success fancybox fancybox.iframe" })
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">
+                <th>@Html.OutputText("TextFunction".ToLocalized())</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_OverType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NQ_Sort)
+                </th>               
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+
+                            @Html.ActionLink("ButtonEdit".ToLocalized(), "Edit", "OverType", new { id = item.ID_OverType, area = "" }, new { @class = "btn btn-primary fancybox fancybox.iframe" })
+
+                            @if (!item.OverSea.Any())
+                            {
+                                @Html.ActionLink("ButtonDelete".ToLocalized(), "Delete", "OverType", new { id = item.ID_OverType, area = "" }, new { @class = "btn btn-danger fancybox fancybox.iframe" })
+                            }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CX_OverType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NQ_Sort)
+                        </td>                      
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Hidden("p", (Int32)@ViewBag.p)
+@using PagedList
+@using PagedList.Mvc
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("_List", new { txt = ViewBag.txt, orderby = ViewBag.orderby, sort = ViewBag.sort, page }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>"
+        },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "Content"
+
+        }))
+
+
+
+
+

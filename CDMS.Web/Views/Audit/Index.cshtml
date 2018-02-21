@@ -1,0 +1,85 @@
+﻿<link href='@Url.Content("~/Content/responsive-table.css")' rel="stylesheet" />
+<form class="form-inline" role="form" onsubmit="return false;" id="myForm">
+    <table class="table table-striped table-bordered table-rwd">
+        <tr>
+            <td data-th="" colspan="4">
+                @Html.Label("TextCriteria".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+        </tr>
+        <tr>
+            <td data-th="" class="col-1 title">
+                @Html.Label("QuotationDate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="" class="col-2">
+                <input type="text" id="start" name="start" class="form-control datepicker" style="width:45%" />
+                @("TextTo".ToLocalized())
+                <input type="text" id="finish" name="finish" class="form-control datepicker" style="width:45%" />
+            </td>
+            <td data-th="" class="col-1 title">
+                @Html.Label("CompanyID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="" class="col-2">
+                <input type="text" id="company" name="company" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td data-th="" class="col-1 title">
+                @Html.Label("ProductID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="" class="col-2">
+                <input type="text" id="product" name="product" class="form-control" />
+            </td>
+            <td data-th="" class="col-1 title">
+                @Html.Label("ProductName".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </td>
+            <td data-th="" class="col-2">
+                <input type="text" id="productName" name="productName" class="form-control" />
+            </td>
+        </tr>
+    </table>
+    <input type="button" id="SearchButton" class="btn btn-warning" value="@Html.OutputText("ButtonSearch".ToLocalized())" />    
+</form>
+
+<hr />
+<div id="MyContent">
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $('#SearchButton').click(function () {
+                $('#p').val('1');
+                Init();
+            });
+
+            $("#SearchText").keypress(function (e) {
+                code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) {
+                    $('#p').val('1');
+                    Init();
+                }
+            });
+            Init();
+        });
+
+        function Init() {
+           var url = '@Url.Action("_List", new { area = "" })';
+            // 利用這方法可以把所有欄位送到controller
+           var source = $('#myForm').serializeArray();
+           var data = GetParameters(source);
+
+            postAjax(url, data, function (data) {
+                $("#MyContent").html(data);
+            });
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2486FB8C-6467-4814-AC49-3E606458D39A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CDMS.Service</RootNamespace>
+    <AssemblyName>CDMS.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interface\IBankDepositService.cs" />
+    <Compile Include="BankDepositService.cs" />
+    <Compile Include="Interface\ICustomerSalesRankingService.cs" />
+    <Compile Include="Interface\IReceivableService.cs" />
+    <Compile Include="Interface\IProductSalesRankingService.cs" />
+    <Compile Include="CustomerSalesRankingService.cs" />
+    <Compile Include="ReceivableService.cs" />
+    <Compile Include="PaymentService.cs" />
+    <Compile Include="ReceiptService.cs" />
+    <Compile Include="BrandService.cs" />
+    <Compile Include="BankAccountService.cs" />
+    <Compile Include="Common\MyEnumerableExtensions.cs" />
+    <Compile Include="CompanyService.cs" />
+    <Compile Include="Interface\IPaymentService.cs" />
+    <Compile Include="Interface\IReceiptService.cs" />
+    <Compile Include="Interface\IProductImageComplexService.cs" />
+    <Compile Include="Interface\IPurchaseInvoiceComplexService.cs" />
+    <Compile Include="Interface\ISalesInvoiceComplexService.cs" />
+    <Compile Include="Interface\IStockTrackService.cs" />
+    <Compile Include="Interface\IStockQueryService.cs" />
+    <Compile Include="Interface\IStockChangeComplexService.cs" />
+    <Compile Include="Interface\IMenuComplexService.cs" />
+    <Compile Include="ProductImageService.cs" />
+    <Compile Include="Interface\IProductImageService.cs" />
+    <Compile Include="Interface\ISalesComplexService.cs" />
+    <Compile Include="Interface\IQuotationComplexService.cs" />
+    <Compile Include="Interface\IPurchaseComplexService.cs" />
+    <Compile Include="ProductImageComplexService.cs" />
+    <Compile Include="PurchaseInvoiceComplexService.cs" />
+    <Compile Include="SalesInvoiceComplexService.cs" />
+    <Compile Include="MenuComplexService.cs" />
+    <Compile Include="ProductSalesRankingService.cs" />
+    <Compile Include="StockTrackService.cs" />
+    <Compile Include="StockQueryService.cs" />
+    <Compile Include="StockChangeComplexService.cs" />
+    <Compile Include="SalesComplexService.cs" />
+    <Compile Include="QuotationComplexService.cs" />
+    <Compile Include="PurchaseComplexService.cs" />
+    <Compile Include="InquiryComplexService.cs" />
+    <Compile Include="PurchaseService.cs" />
+    <Compile Include="Interface\IGlobalService.cs" />
+    <Compile Include="Interface\IInquiryComplexService.cs" />
+    <Compile Include="Interface\IPurchaseService.cs" />
+    <Compile Include="SingletonTokenService.cs" />
+    <Compile Include="GlobalService.cs" />
+    <Compile Include="GlobalSettings.cs" />
+    <Compile Include="Interface\IAlternativeViewModelService.cs" />
+    <Compile Include="Interface\IProductComplexService.cs" />
+    <Compile Include="Interface\IBankAccountService.cs" />
+    <Compile Include="Interface\ICompanyService.cs" />
+    <Compile Include="Interface\IAlternativeService.cs" />
+    <Compile Include="AlternativeService.cs" />
+    <Compile Include="AlternativeViewModelService.cs" />
+    <Compile Include="Interface\ITokenService.cs" />
+    <Compile Include="ProductComplexService.cs" />
+    <Compile Include="UserService.cs" />
+    <Compile Include="CountryService.cs" />
+    <Compile Include="FeedbackService.cs" />
+    <Compile Include="InspectionImageService.cs" />
+    <Compile Include="Interface\IBrandService.cs" />
+    <Compile Include="Interface\IUserService.cs" />
+    <Compile Include="Interface\ICodeService.cs" />
+    <Compile Include="Interface\IProductKindService.cs" />
+    <Compile Include="Interface\INewsService.cs" />
+    <Compile Include="Interface\IUnitService.cs" />
+    <Compile Include="Interface\IProductService.cs" />
+    <Compile Include="Interface\IProcessService.cs" />
+    <Compile Include="IdentityService.cs" />
+    <Compile Include="CodeService.cs" />
+    <Compile Include="ProductKindService.cs" />
+    <Compile Include="NewsService.cs" />
+    <Compile Include="UnitService.cs" />
+    <Compile Include="ProductService.cs" />
+    <Compile Include="ProcessService.cs" />
+    <Compile Include="InspectionService.cs" />
+    <Compile Include="Interface\ICountryService.cs" />
+    <Compile Include="Interface\IFeedbackService.cs" />
+    <Compile Include="Interface\IInspectionImageService.cs" />
+    <Compile Include="Interface\IInspectionService.cs" />
+    <Compile Include="Interface\IObservationService.cs" />
+    <Compile Include="Interface\IOverSeaService.cs" />
+    <Compile Include="Interface\IOverTypeService.cs" />
+    <Compile Include="Interface\IStoreService.cs" />
+    <Compile Include="Interface\ITrackService.cs" />
+    <Compile Include="Interface\IWorkplaceService.cs" />
+    <Compile Include="LinqExtension.cs" />
+    <Compile Include="ObservationService.cs" />
+    <Compile Include="OverSeaService.cs" />
+    <Compile Include="OverTypeService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoreService.cs" />
+    <Compile Include="TrackService.cs" />
+    <Compile Include="WorkplaceService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CDMS.language\CDMS.Language.csproj">
+      <Project>{88dba730-4802-4e4f-b6ba-b93033d0e3a5}</Project>
+      <Name>CDMS.Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CDMS.model\CDMS.Model.csproj">
+      <Project>{77661664-89d8-4c70-80f0-27798dfc13cd}</Project>
+      <Name>CDMS.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

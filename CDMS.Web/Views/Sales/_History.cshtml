@@ -1,0 +1,63 @@
+﻿@using CDMS.Web.Helpers
+@model CDMS.Model.ViewModel.SalesHistoryViewModel
+
+@{
+    Layout = null;
+    var defaultAttribute = new { @class = "form-control"};
+}
+
+@*
+<td width="121" height="43"><div align="right" class="style2">產品詢價紀錄：</div></td>
+<td width="135"><span class="style2">(產品編號)</span></td>
+<td width="157"><span class="style2">(詢價日期1+單價)</span></td>
+<td width="150"><span class="style2">(詢價日期2+單價)</span></td>
+<td width="153"><span class="style2">(詢價日期3+單價)</span></td>
+<td width="101"><div align="right" class="style2">庫存量：</div></td>
+<td width="201"><span class="style2">(倉庫1+倉庫2)</span></td>
+*@
+
+@functions{ 
+    public string GetDisplay(CDMS.Model.v_LatestSales info)
+    {
+        if (info == null) return "N/A";
+        return string.Format("{0:yyyy-MM-dd} + {1}", info.SalesDate, info.LatestPrice);
+    }
+} 
+<div class="table-responsive">
+    <table class="table table-bordered">       
+        <tbody>
+            @if (Model != null)
+            {
+                <tr>
+                    <td width="121">
+                        <div align="right" class="style2">產品銷貨紀錄：</div>
+                    </td>
+                    <td  width="135">
+                        <span class="style2">@Html.DisplayFor(model => model.ProductID)</span>
+                    </td>
+                    <td width="157">                        
+                        <span class="style2">@GetDisplay(Model.Inquiry1)</span>
+                    </td>
+                    <td width="150">                        
+                        <span class="style2">@GetDisplay(Model.Inquiry2)</span>
+                    </td>
+                    <td width="153">                       
+                        <span class="style2">@GetDisplay(Model.Inquiry3)</span>
+                    </td>
+                    <td width="101" class="text-right">
+                        <span class="style2">庫存量：</span>
+                    </td>                    
+                    <td width="201">
+                        <span class="style2">@Html.DisplayFor(model => model.Stock)</span>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

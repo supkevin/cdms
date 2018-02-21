@@ -1,0 +1,175 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.NewsViewModel
+
+@{
+    Layout = null;
+    var defaultAttribute = new { @class = "form-control" };
+
+    // 動態
+    var readOnly =
+        ((Model != null) && (Model.NewsID != 0)) ?
+        (object)new
+        {
+            @readonly = "readonly"
+        }
+        : (object)new { };
+}
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.DepartmentID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.DepartmentID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.DepartmentID,
+            ViewBag.DepartmentList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.NewsTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.NewsTypeID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.NewsTypeID,
+                (IEnumerable<SelectListItem>)ViewBag.NewsTypeList, "TextSelect".ToLocalized(),
+               new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.ReleaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            <div class="form-inline">
+                @Html.EditorFor(model => model.ReleaseDate, "DateTemplate",
+                new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form-control datepicker",
+                        
+                    }
+                })
+                <div class="input-group clockpicker"
+                     data-placement="bottom"
+                     data-align="top" data-autoclose="true">
+                    @{
+                        var releaseTime = Model.ReleaseDate.HasValue ?
+                            Model.ReleaseDate.Value.ToString("HH:mm") : string.Empty;
+                    }
+
+                    @Html.TextBox("txtReleaseTime", releaseTime,
+                    new
+                    {
+                        @class = "form-control",
+                        
+                    })
+
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.OffDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.OffDate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            <div class="form-inline">
+                @Html.EditorFor(model => model.OffDate, "DateTemplate",
+                new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form-control datepicker",
+                        
+                    }
+                })
+                <div class="input-group clockpicker"
+                     data-placement="bottom"
+                     data-align="top" data-autoclose="true">
+                    @{
+                        var offTime = Model.OffDate.HasValue ?
+                            Model.OffDate.Value.ToString("HH:mm") : string.Empty;
+                    }
+
+                    @Html.TextBox("txtOffTime", offTime,
+                    new
+                    {
+                        @class = "form-control",
+                        
+                    })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.SetTop, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.SetTop, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.SetTop,
+               ViewBag.YseNoList as SelectList, null,
+               new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.TextAreaFor(model => model.Content,
+               new
+               {
+                   @class = "form-control",
+                   @cols = 80,
+                   @rows = 4,
+                   
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.TextAreaFor(model => model.Remarks,
+               new
+               {
+                   @class = "form-control",
+                   @cols = 80,
+                   @rows = 4
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Activate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Activate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.Activate,
+               ViewBag.YseNoList as SelectList, null,
+               new { @class = "form-control" })
+        </div>
+    </div>
+</div>

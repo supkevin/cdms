@@ -1,0 +1,89 @@
+﻿@model IEnumerable<CDMS.Web.ViewModels.NowOverSeaViewModel>
+
+<h4>
+    @Html.OutputText("MenuNowOverSea".ToLocalized())
+</h4>
+<hr />
+<div id="Content">
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="nowoversea">
+            <thead>
+                <tr class="active">
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.CX_Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CX_Group_Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NQ_Sub_People)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NQ_Total_People)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CX_Remark)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => item.CX_Country)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.CX_Group_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.NQ_Sub_People)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.NQ_Total_People)
+                            </td>
+                            <td>
+                                @Html.DisplayWithBreaksFor(model => item.CX_Remark)
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>@Html.OutputText("TextTotalCount".ToLocalized())</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            @{
+                                
+                    var TotalCount = Model.Sum(x => x.NQ_Sub_People);
+                            }
+
+                            @TotalCount
+                        </td>
+                        <td></td>
+
+                    </tr>
+                }
+                else
+                {
+                    <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+@section scripts{
+    <script src="~/Scripts/talbemerger.js"></script>
+    <script>
+        $(function () {
+            $('#nowoversea').rowspan(4, 0);
+            $('#nowoversea').rowspan(3, 0);
+            $('#nowoversea').rowspan(0, 0);
+        });
+    </script>
+}

@@ -1,0 +1,29 @@
+﻿@model CDMS.Model.ViewModel.PaymentViewModel
+
+@{
+    Layout = "~/Views/Shared/_GridForm3.cshtml";    
+}
+
+@using (Ajax.BeginForm("Edit", "Payment", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_Body")
+
+    <!--(start)toolbar(start)-->
+    <div class="grid-container outline">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" name="action:Edit" />
+                    <input type="submit" value="@Html.OutputText("ButtonDelete".ToLocalized())" class="btn btn-danger" name="action:Delete" />
+                    <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+                </div>
+            </div>
+        </div>
+    </div>
+   <!--(end)toolbar(end)-->  
+}
+
+
+

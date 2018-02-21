@@ -1,0 +1,55 @@
+﻿@using System.Web.Mvc.Html;
+@model IEnumerable<ProductImage>
+
+@{
+    // 同一畫面可能有多個控制項要有uniqueID
+    var uniqueID = Guid.NewGuid();
+}
+
+<div id="carousel_@uniqueID" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @{
+            int index = 0;
+            string active = "";
+        }
+
+        @foreach (var item in Model)
+        {
+            active = index == 0 ? "active" : "";
+
+            <li data-target="#carousel_@uniqueID" data-slide-to="@index" class="@active"></li>
+
+            index++;
+        }
+    </ol>
+    @{
+        index = 0;
+    }
+    <div class="carousel-inner" role="listbox">
+        @foreach (var item in Model)
+        {
+            active = index == 0 ? "active" : "";
+
+            <div class="item @active">
+                @Html.DisplayImageByPath(
+                                @Url.Action("GetImage", "ProductImage",
+                                    new { id = item.ImageID }), 0)
+
+                <div class="carousel-caption">
+                                        
+                </div>
+            </div>
+
+            index++;
+        }
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel_@uniqueID" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel_@uniqueID" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>

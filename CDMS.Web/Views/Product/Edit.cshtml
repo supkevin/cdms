@@ -1,0 +1,146 @@
+﻿@using CDMS.Web.Helpers
+@model CDMS.Model.ViewModel.ProductViewModel
+
+@{
+    Layout = "~/Views/Shared/_GridForm.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_ProgramName.cshtml", new ViewDataDictionary { { "id", "產品資料維護" } })
+
+@using (Ajax.BeginForm("Edit", "Product", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_Body")
+
+    <div class="grid-container outline">
+        <div class="row hidden">
+            <div class="col-1 title">
+                @Html.MarkLabelFor(model => model.SupplierID, htmlAttributes: new { @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-2">
+                @Html.DropDownListFor(model => model.SupplierID,
+                 ViewBag.CompanyList as SelectList, "TextSelect".ToLocalized(),
+                 Html.MergeAttributes(
+                     new
+                     {
+                         @class = "selectpicker text-danger with-ajax after-init",
+                         data_show_subtext = "true",
+                         data_live_search = "true",
+                         data_abs_ajax_url = string.Format("{0}", Url.Action("GetForSupplierAutocomplete", "Company")),                         
+                     }, new { })
+                            )
+            </div>
+        </div>
+        <!--(start)toolbar(start)-->
+        <div class="row">
+            <div class="col-6">
+                <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" name="action:Edit" />
+                <input type="submit" value="@Html.OutputText("ButtonDelete".ToLocalized())" class="btn btn-danger" name="action:Delete" />
+                <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+            </div>
+        </div>
+        <!--(end)toolbar(end)-->
+    </div>
+}
+
+@section scripts{    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var options = {
+                ajax: {
+                    @*url: '@Url.Action("GetForSupplierAutocomplete", "Company")',*@
+                    data: function () {
+                        var params = {
+                            term: '{{{q}}}'
+                        };
+                        //if (gModel.selectedGroup().hasOwnProperty('ContactGroupID')) {
+                        //    params.GroupID = gModel.selectedGroup().ContactGroupID;
+                        //}
+                        return params;
+                    }
+                },
+                clearOnEmpty: false,
+                preserveSelected: true,
+                locale: {
+                    emptyTitle: '請選擇',
+                    currentlySelected: '目前選取',
+                    searchPlaceholder: '關鍵字',
+                    statusInitialized: '請輸入關鍵字查詢',
+                    statusNoResults: '查無資料',
+                },
+                preprocessData: function (data) {
+                    var contacts = [];
+                    //console.log('data', data);
+
+                    contacts.push({ value: '', text: '@("TextSelect".ToLocalized())'});
+
+                    if (data) {
+                        $.each(data, function (index, item) {
+                            contacts.push(
+                                {
+                                    'value': item.Value,
+                                    'text': item.Value + '-' + item.Label,
+                                    'data': {
+                                        'icon': 'icon-person',
+                                        'subtext': ''
+                                    },
+                                    'disabled': false
+                                }
+                                );
+                        });
+                    }
+                    return contacts;
+                },
+            };
+
+            $('.selectpicker.after-init').each(function (index, value) {
+                var self = $(value);
+
+                var selected = self.val();
+
+                self.find('[value != ' + selected + ']').remove();
+                self.selectpicker('refresh');
+            });
+
+            $('.selectpicker').selectpicker().filter('.with-ajax').ajaxSelectPicker(options);
+                        
+            $('.selectpicker').on('changed.bs.select', function (e) {
+                // do something...
+                console.log('changed', $(this).val());
+            });
+        });
+    </script>
+    @*<script>
+            $(document).ready(function () {
+                $('select[class~="selectpicker"][data-url]').each(function (index, value) {
+                    var select = $(this);
+                    var url = $(this).attr('data-url');
+                    //var id = $(this).attr('data-id');
+                    //var label = $(this).attr('data-label');
+                    console.log('sss');
+
+                    $.getJSON(url, function (data) {
+                        console.log('data', data);
+
+                        select.html('');
+
+                        $.each(data, function (key, item) {
+                            console.log(key,item);
+                            select.append('<option value="' + item['Value'] + '">' + item.Label + '</option>');
+                        });
+
+                        select.selectpicker('refresh');
+                    });
+                });
+            });
+        </script>*@
+}
+
+
+
+
+
+
+

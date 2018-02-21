@@ -1,0 +1,79 @@
+﻿@model CDMS.Model.Track
+
+@{
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+@using (Ajax.BeginForm("Edit", "Track", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID_Track)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Html.OutputText("ButtonEdit".ToLocalized())" class="btn btn-primary" />
+            <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Track, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Track, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CX_Track, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "TextInput".ToLocalized() + "CX_Track".ToLocalized() } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NQ_Sort, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.NQ_Sort, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NQ_Sort, new { htmlAttributes = new { @class = "form-control text-right", required = "required", placeholder = "TextInput".ToLocalized() + "NQ_Sort".ToLocalized() } })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Track, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Track_Remarks, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.CX_Track_Remarks, new { @class = "form-control", @cols = 80, @rows = 10 })
+        </div>
+    </div>
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        var btn = $('.btn');
+
+        function OnBegin() {
+            btn.button('loading');
+        }
+
+        function OnSuccess(response) {
+            if (response.Status == true) {
+                parent.Init();
+                parent.jQuery.fancybox.close();
+            }
+            alert(response.Message);
+        }
+
+        function OnComplete() {
+            btn.button('reset');
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+

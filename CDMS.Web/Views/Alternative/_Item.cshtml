@@ -1,0 +1,83 @@
+﻿@*https://github.com/danludwig/BeginCollectionItem*@
+@*https://jeffprogrammer.wordpress.com/2016/01/20/asp-net-mvc-5-%E4%BD%BF%E7%94%A8-begincollectionitem-%E5%8B%95%E6%85%8B%E5%A2%9E%E5%88%AA%E6%AC%84%E4%BD%8D%E8%B3%87%E6%96%99/*@
+
+@using CDMS.Web.Helpers
+@model CDMS.Model.ViewModel.AlternativeViewModel
+
+@{ 
+    var defaultAttribute = new { @class = "form-control"};
+
+    var debug = new
+    {
+        @class = "form-control hidden",
+        readOnly = "ReadOnly"
+    };
+}
+
+@using (Html.BeginCollectionItem("ChildList"))
+{
+    <tr>
+        <td>
+            <input type="button" value="@Html.OutputText("ButtonDelete".ToLocalized())"
+                   class="btn btn-danger delete-item" data-key="@Model.SeqNo" />
+        </td>
+        <td align="left">
+            <div class="form-inline nested-group" style="margin-left:20px;">
+                @Html.TextBoxFor(m => m.AlternativeID,
+                       new
+                       {
+                           @class = "form-control auto-complete",
+                           style = "width:45%",
+                           data_autocomplete_url = Url.Action("GetForAutocomplete", "Product"),
+                           Required = "Required"
+                       })
+                @Html.EditorFor(m => m.AlternativeName,
+                        new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control auto-complete-name",
+                                style = "width:45%",
+                                readOnly = "ReadOnly",
+                                Required = "Required"
+                            }
+                        })
+            </div>
+        </td>
+        @*<td>
+            @Html.DropDownListFor(m => m.AlternativeID,
+                ViewBag.ProductList as SelectList, "TextSelect".ToLocalized(),
+                Html.MergeAttributes(
+                    new
+                    {
+                        @class = "selectpicker text-danger with-ajax after-init",
+                        data_show_subtext = "true",
+                        data_live_search = "true",
+                        data_abs_ajax_url = string.Format("{0}", Url.Action("GetForSupplierAutocomplete", "Company")),
+                    }, defaultAttribute)
+                )
+        </td>*@
+        <td>
+            @Html.EditorFor(m => m.AlternativeCount,
+                new
+                {
+                    htmlAttributes =
+                    new
+                    {
+                        @class = "form-control text-right",
+                        readOnly = "readOnly",
+                        data_Key = "Stock",
+                    }
+                })
+        </td>
+
+        <td>
+            @Html.EditorFor(m => m.Remarks,
+                new { htmlAttributes = new { @class = "form-control", style = "width: 100%" } })
+
+            @Html.TextBoxFor(m => m.SeqNo, debug)
+            @Html.TextBoxFor(m => m.ProductID, debug)
+            @Html.TextBoxFor(m => m.IsDirty, new { @class = "form-control hidden dirty-item" })
+        </td>
+    </tr>
+}

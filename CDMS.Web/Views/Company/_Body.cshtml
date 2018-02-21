@@ -1,0 +1,269 @@
+﻿@using CDMS.Web.Helpers
+@model CDMS.Model.ViewModel.CompanyComplex
+
+@{
+    var defaultAttribute = new { @class = "form-control" };
+
+    // 動態
+    var readOnly =
+        ((Model != null) && (Model.CompanyID != null)) ?
+        (object)new
+        {
+            @readonly = "readonly"
+        }
+        : (object)new { };
+}
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.CompanyID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.CompanyID,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(readOnly, defaultAttribute)
+                })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.FullName,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.ShortName,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.CompanyKindID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CompanyKindID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model =>
+            model.CompanyKindID,
+            ViewBag.CompanyKindList as SelectList, "TextSelect".ToLocalized(),
+              Html.MergeAttributes(new { }, defaultAttribute)
+            )
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.TaxID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.TaxID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.TaxID,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.ContactPerson, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ContactPerson, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.ContactPerson,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Telephone1, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.Telephone1,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Telephone2, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Telephone2, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.Telephone2,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.Fax,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Clerk, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Clerk, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.Clerk,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.ClerkMobile, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ClerkMobile, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.ClerkMobile,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.NextMonth, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.NextMonth, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.NextMonth,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { type = "number" }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.Address,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.InvoiceAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.InvoiceAddress, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.InvoiceAddress,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.ShippingAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ShippingAddress, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.ShippingAddress,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.FactoryAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.FactoryAddress, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.FactoryAddress,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.TextAreaFor(model => model.Remarks,
+               new
+               {
+                   @class = "form-control",
+                   @cols = 80,
+                   @rows = 4
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Activate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Activate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.Activate,
+               ViewBag.YseNoList as SelectList, null,
+               Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+</div>
+

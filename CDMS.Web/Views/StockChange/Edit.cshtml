@@ -1,0 +1,53 @@
+﻿@model CDMS.Model.ViewModel.StockChangeComplex
+
+@{
+    Layout = "~/Views/Shared/_GridForm.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_ProgramName.cshtml", new ViewDataDictionary { { "id", "庫存異動資料維護" } })
+
+@using (Ajax.BeginForm("Edit", "StockChange", new { area = "" },
+    new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))        
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_Body")
+
+     <!--(start)toolbar(start)-->
+    <div class="grid-container outline">
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-warning" id="btnAdd">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    @Html.OutputText("ButtonCreate".ToLocalized())
+                </button>
+                <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" name="action:Edit" />
+                <input type="submit" value="@Html.OutputText("ButtonDelete".ToLocalized())" class="btn btn-danger hidden" name="action:Delete" />
+
+                @Html.ActionLink("ButtonPrint".ToLocalized(), "Print", new { id = Model.StockChange.StockChangeID, area = "" }, new { @class = "btn btn-primary hidden" })
+                <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+            </div>
+        </div>
+    </div>
+    <!--(end)toolbar(end)-->
+}
+
+@section scripts{
+    <script src='@Url.Content("~/Scripts/_Custom/UserAutoComplete.js")'></script>
+    <script src='@Url.Content("~/Scripts/_Custom/StockChange.js")'></script>
+    <script type="text/javascript">
+    GlobalSetting = function () {};
+    GlobalSetting.prototype = {
+        GetLatestSales: '@Url.Action("GetLatestSales", "Sales")',
+        GetPrice: '@Url.Action("GetPrice","Product")',
+        GetHistory: '@Url.Action("_History", new { area = "" })',
+    };
+
+    var _GlobalSetting = new GlobalSetting();
+    </script>
+}
+
+
+
+
+

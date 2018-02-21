@@ -1,0 +1,82 @@
+﻿@model CDMS.Web.ViewModels.PersonEditViewModel
+
+@{
+    Layout = "~/Views/Shared/_Form.cshtml";    
+}
+
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")" type="text/javascript"></script> 
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<form action="@Url.Action("Edit","_Dynamic")" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input type="submit" value="儲存" class="btn btn-default" />
+    <input type="button" value="Add" class="btn btn-default" id="add" />
+
+    <div id="content" class="col-md-12">
+        <table class="table table-bordered updownleftright fixTable" id="table">
+            <thead>
+                <tr class="active">
+                    <th class="text-nowrap">City</th>
+                    <th class="text-nowrap">Address</th>                    
+                    <th class="text-nowrap"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Addresses.Count() > 0)
+                {
+                   foreach (var item in Model.Addresses)
+                   {
+                       try
+                       {
+                           Html.RenderPartial("_Item", item);
+                       }
+                       catch (Exception ex)
+                       {
+
+                       }
+                   }
+                }
+                else
+                {
+                    <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
+<script>
+$(document).ready(function() {
+    $("#add").click(function () {
+        $.ajax({
+            url: '@Url.Action("AddItem")',
+            cache: false,
+            success: function (html) {
+                console.log('datd', html);
+                $('#table tbody').append('<tr>' + html + '</tr>');
+                console.log($('#table').html());
+            }
+        });
+    });
+
+    $("table").on("click", ".delete-country", function () {
+        console.log('ss', $(this).closest('tr'));
+        console.log($(this).closest('tr').length);
+
+        let target = $(this);
+        console.log('target', target);
+
+        $(this).closest('tr').hide();    
+        $(this).prev('input').val('true');
+    });
+});
+</script>
+
+
+
+
+
+

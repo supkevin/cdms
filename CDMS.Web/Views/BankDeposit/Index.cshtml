@@ -1,0 +1,130 @@
+﻿@using CDMS.Web.Helpers
+@{
+    var defaultAttribute = new { @class = "form-control", required = "required" };
+    var labelAttribute = new { @class = "control-label" };
+}
+<link href='@Url.Content("~/Content/responsive-table.css")' rel="stylesheet" />
+<form class="form-inline" role="form" onsubmit="return false;" id="myForm">
+    <table class="table table-striped table-bordered table-rwd">
+        <tr>
+            <td data-th="" colspan="4">
+                @Html.Label("TextCriteria".ToLocalized(), htmlAttributes: labelAttribute)
+            </td>
+        </tr>
+        <tr>
+            <td data-th="" class="col-1 title">
+                @Html.Label("TextSort".ToLocalized(), htmlAttributes: labelAttribute)
+            </td>
+            <td data-th="@("TextSort".ToLocalized())" class="col-1">
+                @Html.DropDownList("orderBy", ViewBag.SortList as SelectList, null,
+                Html.MergeAttributes(new { @class = "selectpicker text-danger" }, defaultAttribute))
+            </td>
+            <td data-th="" class="col-1 title">
+                @Html.Label("TextReceiveDate".ToLocalized(), htmlAttributes: labelAttribute)
+            </td>
+            <td data-th="@("TextReceiveDate".ToLocalized())" class="col-2">
+                <input type="text" name="startDate" class="form-control datepicker" />
+                @("TextTo".ToLocalized())
+                <input type="text" name="finishDate" class="form-control datepicker" />
+            </td>
+        </tr>
+        <tr>
+            <td data-th="" class="col-1 title">
+                @Html.Label("TextCheckStatus".ToLocalized(), htmlAttributes: labelAttribute)
+            </td>
+            <td data-th="@("TextCheckStatus".ToLocalized())" class="col-1">
+               @Html.DropDownList("checkStatus", ViewBag.CheckStatusList as MultiSelectList, null,
+                Html.MergeAttributes(new { multiple = "multiple", @class = "selectpicker text-danger" }, defaultAttribute))
+            </td>
+            <td data-th="" class="col-1 title">
+                @Html.Label("TextCheckNum".ToLocalized(), htmlAttributes: labelAttribute)
+            </td>
+            <td data-th="@("TextCheckNum".ToLocalized())" class="col-2" colspan="2">
+                <input type="text" name="start" class="form-control" />
+                @("TextTo".ToLocalized())
+                <input type="text" name="finish" class="form-control" />
+            </td>
+        </tr>
+        <tr>     
+            <td data-th="" class="col-1 title">
+                @Html.Label("TextDepositSummary".ToLocalized(), htmlAttributes: labelAttribute)
+            </td>
+            <td data-th="@("TextDepositSummary".ToLocalized())" class="col-1">
+                @Html.DropDownList("summary", ViewBag.DepositSummaryList as MultiSelectList, null,
+                Html.MergeAttributes(new { multiple = "multiple", @class = "selectpicker text-danger" }, defaultAttribute))
+            </td>
+            <td data-th="" class="col-1 title">
+                @Html.Label("TextBankAccount".ToLocalized(), htmlAttributes: labelAttribute)
+            </td>
+            <td data-th="@("BankAccountID".ToLocalized())" colspan="3">
+                @Html.DropDownList("bankAccount",
+                ViewBag.BankAccountList as MultiSelectList, null,
+                Html.MergeAttributes(new { multiple = "multiple", @class = "selectpicker text-danger" }, defaultAttribute))
+            </td>      
+        </tr>   
+    </table>
+    <input type="button" id="SearchButton" class="btn btn-warning" value="@Html.OutputText("ButtonSearch".ToLocalized())" />
+    @Html.ActionLink("ButtonCreate".ToLocalized(), "Create", new { area = "" }, new { @class = "btn btn-success fancybox fancybox.iframe" })
+</form>
+
+<hr />
+<div id="MyContent" style="overflow-x: auto;white-space: nowrap;"></div>
+
+@section scripts{    
+    <script>
+        $(function () {
+            $('#SearchButton').click(function () {
+                $('#p').val('1');
+                Init();
+            });
+
+            $('#MyContent').on('click', 'button.btn.btn-primary', function () {
+                console.log('click');
+                var key = $(this).data('key');
+                var row = $(this).closest('tr').first();
+                
+                var txtBankAccount = row.find("select[data-key='BankAccountID']");
+                var txtCheckStatus = row.find("select[data-key='CheckStatus']");
+
+                var bankAccount = txtBankAccount.val();
+                var checkStatus = txtCheckStatus.val();
+
+                console.log('row', row, bankAccount, checkStatus);
+                var action = '@Url.Action("Edit")';
+                var data = { SeqNo: key, BankAccountID: bankAccount, CheckStatus: checkStatus };
+
+                console.log('data', data);
+
+                postAjax(action, data, function (response) {
+                    console.log('response', response);
+
+                    if (response.Status == true) {
+                        console.log('OnSuccess-1');
+                        bootbox.alert(response.Message, function () {                                                                        
+                        });
+                    }                    
+                });
+            });
+            
+           Init();
+        });
+
+        function Init() {
+            var url = '@Url.Action("_List", new { area = "" })';            
+            var data = GetParameters($('#myForm').serializeArray());
+            postAjax(url, data, function (result) {
+                $("#MyContent").html(result);
+            });
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

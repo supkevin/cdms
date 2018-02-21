@@ -1,0 +1,35 @@
+﻿@model DateTime?
+@{
+    var value = Model.HasValue ?
+                Model.Value.ToString("yyyy-MM-dd") : string.Empty;
+}
+
+@Html.TextBox("", value, new { @class = "form-control datepicker" })
+
+@*@model DateTime?
+    <div class="input-group date">
+        <input type="text" class="form-control"
+               name="@ViewData.TemplateInfo.GetFullHtmlFieldName("")"
+               value="@(Model.HasValue ? Model.Value.ToString("yyyy-MM-dd") : string.Empty)" />
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>*@
+
+@*@model DateTime?
+
+@{
+    DateTime dt;
+    if (Model.HasValue)
+    {
+        dt = (DateTime)Model;
+    }
+    else
+    {
+        dt = DateTime.Now;
+    }
+}
+<div class="control input-append date">
+    @Html.TextBox("", @dt.ToString("yyyy-MM-dd"), new { @class = "form-control" })
+    <span class="add-on"><i class="icon-th"></i></span>
+</div>*@

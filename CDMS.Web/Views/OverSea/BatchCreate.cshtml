@@ -1,0 +1,168 @@
+﻿@model CDMS.Web.ViewModels.OverSeaBatchCreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+@using (Ajax.BeginForm("BatchCreate", "OverSea", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Html.OutputText("ButtonBatchCreate".ToLocalized())" class="btn btn-success" />
+            <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.OutputText("CX_PID".ToLocalized())</th>
+                        <th>@Html.OutputText("CX_Name".ToLocalized())</th>
+                        <th>@Html.OutputText("FG_IsWorkCard".ToLocalized())</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Detail.Count(); i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.EditorFor(model => Model.Detail[i].CX_PID, new { htmlAttributes = new { @class = "form-control cx_pid", placeholder = "TextInput".ToLocalized() + "CX_PID".ToLocalized() } })
+                            </td>
+                            <td class="cx_name"></td>
+                            <td>
+                                @Html.CheckBoxFor(model => model.Detail[i].FG_IsWorkCard)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Master.ID_OverType, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Master.ID_OverType, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Master.ID_OverType, ViewBag.OverTypeList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Master.ID_Country, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Master.ID_Country, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Master.ID_Country, ViewBag.CountryList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Master.CX_From_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Master.CX_From_Date, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Master.CX_From_Date, new { htmlAttributes = new { @class = "form-control datepicker", required = "required", placeholder = "TextInput".ToLocalized() + "CX_From_Date".ToLocalized() } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Master.CX_To_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Master.CX_To_Date, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Master.CX_To_Date, new { htmlAttributes = new { @class = "form-control datepicker", required = "required", placeholder = "TextInput".ToLocalized() + "CX_To_Date".ToLocalized() } })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Master.CX_OverSea_Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Master.CX_OverSea_Remark, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Master.CX_OverSea_Remark, new { @class = "form-control", @cols = 80, @rows = 10 })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Master.CX_Place_Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Master.CX_Place_Remark, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Master.CX_Place_Remark, new { @class = "form-control", @cols = 80, @rows = 10 })
+        </div>
+    </div>
+
+
+}
+@section scripts{
+    <script type="text/javascript">
+
+        var btn = $('.btn');
+
+        function OnBegin() {
+            btn.button('loading');
+        }
+
+        function OnSuccess(response) {
+            if (response.Status == true) {
+                parent.Init();
+                parent.jQuery.fancybox.close();
+            }
+            alert(response.Message);
+        }
+
+        function OnComplete() {
+            btn.button('reset');
+        }
+    </script>
+
+    <script src="~/Scripts/jquery-ui-datepickeroption.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+
+            //計算
+            $(document).on('change', '.cx_pid', function () {
+
+                var pid = $(this).val();
+
+                // var cx_pid; $(this);
+                var opid = $(this);
+                $.ajax({
+                    url: '@Url.Action("GetForAutocomplete", "Employee", null)',
+                    type: 'post',
+                    async: true,
+                    data: { pid: pid },
+
+                    beforeSend: function () {
+                       
+                    },
+                    complete: function () {
+                       
+                    },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            $.each(data, function (index, item) {
+                                opid.parent().parent().children("td[class='cx_name']").text(item.eName);
+                            });
+                        } else {
+                            opid.parent().parent().children("td[class='cx_name']").text('');
+                            alert(pid + @Html.OutputText("MessageNoData".ToLocalized()) );
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert('xhr:' + xhr.status + 'status:' + status + ' ,error:' + status);
+                       // alert(JSON.parse(xhr.responseText));
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+
+
+

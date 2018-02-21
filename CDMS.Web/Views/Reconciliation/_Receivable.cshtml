@@ -1,0 +1,191 @@
+﻿@using CDMS.Model.ViewModel;
+@model IEnumerable<CDMS.Model.ViewModel.ReconciliationViewModel>
+
+@{
+    Layout = null;
+
+    var defaultAttribute = new { @class = "form-control", required = "required" };
+    var labelAttribute = new { @class = "control-label" };
+    var summary = ViewBag.Summary as ReceivableSummaryViewModel;
+}
+
+@*測試捉所有ViewBag*@
+@*@{
+        string[] ignore = { "ActionName", "ControllerName" };
+        var routeValues = new RouteValueDictionary();
+
+        foreach (var viewBagItem in ViewContext.ViewData.Where(x => ignore.Contains(x.Key) == false))
+        {
+            if (viewBagItem.Value != null)
+            {
+                var type = viewBagItem.Value.GetType();
+
+                if (type == typeof(string) || type == typeof(string[]))
+                {
+                    <p> @viewBagItem.Key @@: @viewBagItem.Value </p>;
+                    routeValues.Add(viewBagItem.Key, viewBagItem.Value);
+                }
+            }
+        }
+    }*@
+<table class="table table-striped table-bordered table-rwd">
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.Label("TextCustomerID".ToLocalized(), htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="@("TextCustomerID".ToLocalized())" class="col-2">
+            @(string.Format("{0} {1}", summary.CompanyID, summary.CompanyName))
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.Label("TextAccountMonth".ToLocalized(), htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="@("TextAccountMonth".ToLocalized())" class="col-2">
+            @summary.AccountMonth
+        </td>
+    </tr>
+    <tr>
+        <td data-th="" class="col-1 title">
+            @Html.Label("TextLastBalance".ToLocalized(), htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="@("TextLastBalance".ToLocalized())" class="col-2">
+            @summary.LastBalance
+        </td>
+        <td data-th="" class="col-1 title">
+            @Html.Label("TextBalance".ToLocalized(), htmlAttributes: labelAttribute)
+        </td>
+        <td data-th="@("TextBalance".ToLocalized())" class="col-2">
+            @summary.Balance
+        </td>
+    </tr>
+</table>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">
+                <th>
+                    @Html.DisplayNameFor(model => model.DealDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VoucherID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DealItem)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SalesAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SalesTax)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PurchaseAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PurchaseTax)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceivedAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaidAmount)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                decimal salesAmount = 0;
+                decimal salesTax = 0;
+                decimal purchaseAmount = 0;
+                decimal purchaseTax = 0;
+                decimal receivedAmount = 0;
+                decimal paidAmount = 0;
+
+                foreach (var item in Model)
+                {
+                    salesAmount += item.SalesAmount;
+                    salesTax += item.SalesTax;
+                    purchaseAmount += item.PurchaseAmount;
+                    purchaseTax += item.PurchaseTax;
+                    receivedAmount += item.ReceivedAmount;
+                    paidAmount += item.PaidAmount;
+
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(m => item.DealDate, "DateTemplate")
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(m => item.VoucherID)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(m => item.DealItem)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(m => item.SalesAmount)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(m => item.SalesTax)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(m => item.PurchaseAmount)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(m => item.PurchaseTax)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(m => item.ReceivedAmount)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(m => item.PaidAmount)
+                        </td>
+                    </tr>
+                }
+                //合計列
+                <tr>
+                    <td class="text-right" colspan="3">
+                        合計
+                    </td>
+                    <td class="text-right">
+                        @salesAmount
+                    </td>
+                    <td class="text-right">
+                        @salesTax
+                    </td>
+                    <td class="text-right">
+                        @purchaseAmount
+                    </td>
+                    <td class="text-right">
+                        @purchaseTax
+                    </td>
+                    <td class="text-right">
+                        @receivedAmount
+                    </td>
+                    <td class="text-right">
+                        @paidAmount
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

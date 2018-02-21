@@ -1,0 +1,525 @@
+div#loginarea.container{
+	width: 500px;
+	background-color: #FFCC33;
+	padding: 20px;
+	margin: auto;
+	margin-top: 100px;
+	border-radius: 10px;
+}
+
+img#logo{
+	margin: 20px;
+	margin-bottom: 0px;
+}
+
+span.label.label-default.col-sm-2{
+	background-color: #FFCC33;
+	margin: 10px;
+	color: #333333;
+	font-size: 1.2em;
+}
+
+input#loginemail.form-control{
+  margin:10px;
+}
+
+input#loginpassword.form-control{
+  margin:10px;
+}
+
+span#login_title{
+	font-family: "微軟正黑體";
+	font-size: 3em;
+	color: #000000;
+}
+
+div#template_sun.container{
+  background-color:#f77f00;
+}
+
+div#template_sun.container{
+
+}
+
+a#page_home{
+	padding: 10px;
+	color: #f9f8f8;
+	margin-top: 20px;
+	margin-right: 3px;
+	margin-bottom: 20px;
+	margin-left: 3px;
+}
+
+span.fa.fa-home{
+  margin:10px;
+}
+
+a#page_id{
+  float:right;
+  margin-right:10px;
+}
+
+a#page_id{
+  color:#f9f8f8;
+}
+
+span.fa.fa-user{
+  margin:10px;
+}
+
+span.fa.fa-times{
+  margin:10PX;
+}
+
+div#area2{
+	height: 100px;
+	margin-top: 10px;
+	background-color: #f77f00;
+	float: right;
+	width: 78%;
+}
+
+ol.breadcrumb{
+  margin-top:20px;
+}
+
+ol#bread.breadcrumb{
+	font-size: 24px;
+	background-color: #CCCCCC;
+}
+
+span.text-primary{
+  color:#f9f8f8;
+}
+
+span#breadfont{
+  color:#f9f8f8;
+}
+
+span.breadfont{
+  color:#ffffff;
+  text-decoration:inherit;
+}
+
+div#data_area.col-lg-9.col-md-8{
+  padding:10px;
+  float:right;
+  background-color:#f9f8f8;
+}
+
+div#data_area.col-lg-9.col-md-9{
+  background-color:#ffffff;
+}
+
+div#table.col-lg-9.col-md-9{
+  background-color:#ffffff;
+}
+
+div#template_sun2.container{
+	width: 100%;
+	background-color: #CCCCCC;
+}
+
+div#cssmenu{
+  float:left;
+}
+
+div#searcharea{
+	padding: 10px;
+	width: 100%;
+	float: right;
+	background-color: #CCCCCC;
+}
+
+button.btn.btn-default{
+  float:left;
+}
+
+div#data_area{
+	width: 100%;
+	height: auto;
+	background-color: #ffffff;
+	padding: 10px;
+	margin-bottom: 10px;
+	float: right;
+	/*border-radius: 10px;*/
+}
+
+div#tabel1.table-responsive{
+  width:100%;
+  background-color:#ffffff;
+}
+
+button#export.btn.btn-default{
+  float:right;
+}
+
+body{
+	font-family: "微軟正黑體";
+}
+
+thead{
+  background-color:#dbdbdb;
+}
+
+nav#pagination_sty{
+  float:right;
+  padding:10px;
+}
+
+button#delete.btn.btn-danger{
+  margin-left:10px;
+}
+
+select.input-lg{
+  margin-left:140px;
+}
+
+span#copyright_text.text-info{
+	float: right;
+	margin-right: 30px;
+	margin-top: 10px;
+}
+
+button#add.btn.btn-primary.btn-lg{
+  margin-left:10px;
+}
+
+div#manu-title-name.col-md-12{
+  text-align:center;
+}
+
+div.col-sm-2{
+  margin-top:10px;
+	top: -72px;
+	left: 366px;
+}
+
+span{
+  margin-left:20px;
+}
+
+.register-form form.custom-form{
+  padding:55px;
+  box-sizing:border-box;
+  background-color:#ffffff;
+  box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  font:bold 14px sans-serif;
+  text-align:center;
+  margin:50px;
+  color:#333;
+}
+
+@media (max-width:400px) {
+  .register-form form.custom-form{
+	padding:55px 10px;
+  }
+}
+
+.register-form .custom-form h1{
+  display:inline-block;
+  color:#4c565e;
+  font-size:24px;
+  font-weight:bold;
+  padding:0 10px 15px;
+  margin-bottom:60px;
+  border-bottom:2px solid rgb(108, 174, 224);
+}
+
+
+.register-form .custom-form .form-group{
+  margin-bottom:25px;
+}
+
+.register-form .custom-form .label-column{
+  text-align:right;
+  color:#5F5F5F;
+}
+
+div.footer-contacts{
+	height: 40px;
+	background-color: #dbdbdb;
+}
+
+.register-form form.custom-form{
+  padding:55px;
+  box-sizing:border-box;
+  background-color:#ffffff;
+  box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  font:bold 14px sans-serif;
+  text-align:center;
+  margin:50px;
+  color:#333;
+}
+
+@media (max-width:400px) {
+  .register-form form.custom-form{
+	padding:55px 10px;
+  }
+}
+
+.register-form .custom-form h1{
+  display:inline-block;
+  color:#4c565e;
+  font-size:24px;
+  font-weight:bold;
+  padding:0 10px 15px;
+  margin-bottom:60px;
+  border-bottom:2px solid rgb(108, 174, 224);
+}
+
+.register-form .custom-form .form-group{
+  margin-bottom:25px;
+}
+
+.register-form .custom-form .label-column{
+  text-align:right;
+  color:#5F5F5F;
+}
+
+@media (max-width:768px) {
+  .register-form .custom-form .label-column{
+	text-align:left;
+  }
+}
+
+.register-form .custom-form .input-column{
+  color:#5f5f5f;
+  text-align:left;
+}
+
+.register-form .custom-form .input-column input{
+  color:#5f5f5f;
+  box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding:12px;
+  border:1px solid #dbdbdb;
+  border-radius:2px;
+  height:42px;
+}
+
+.register-form .custom-form .dropdown .dropdown-toggle{
+  background:#fff;
+  border:1px solid #dbdbdb;
+  box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  color:#333;
+  outline:none;
+}
+
+.register-form .custom-form .dropdown ul{
+  background:#fff;
+}
+
+.register-form .custom-form .dropdown ul li a{
+  background:#fff;
+  color:#333;
+  opacity:0.8;
+}
+
+.register-form .custom-form .dropdown ul li a:hover{
+  opacity:1;
+}
+
+.register-form .custom-form .submit-button{
+  border-radius:2px;
+  background:#6caee0;
+  color:#ffffff;
+  font-weight:bold;
+  box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding:14px 22px;
+  border:0;
+  margin:30px;
+  outline:none;
+}
+
+div#logo_title{
+	width: 100%;
+	background-color: #FFFFFF;
+	float: left;
+	border-radius: 10px;
+	margin: 10px;
+	padding: 10px;
+}
+
+img#logoimg{
+	margin-top: 0px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+div#logo_area.col-md-3{
+  width:250px;
+  padding:0px;
+  background-color:#dd7500;
+}
+
+
+div#header_area{
+	background-color: #333333;
+	width: 100%;
+	height: 36px;
+}
+
+.search-form{
+	margin: px px;
+	width: 100%;
+	font: normal 12px sans-serif;
+	box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+	float: right;
+}
+
+.search-form div.input-group-addon{
+  background:#fff;
+  color:#80A3BD;
+  border-bottom-left-radius:2px;
+  border-top-left-radius:2px;
+  border:1px solid #b6c3cd;
+  border-right:0;
+}
+
+.search-form .input-group input{
+  background-color:#ffffff;
+  box-shadow:none;
+  color:#4E565C;
+  outline:none;
+  border:1px solid #b6c3cd;
+  border-right:0;
+  border-left:0;
+}
+
+.search-form div.input-group-btn button{
+  border-bottom-right-radius:2px;
+  border-top-right-radius:2px;
+  background:#6caee0;
+  box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  color:#ffffff;
+  border-color:#6caee0;
+  outline:none;
+  opacity:0.9;
+}
+
+.search-form div.input-group-btn button:hover{
+  opacity:1;
+}
+
+.search-form div.input-group-btn button:focus:active{
+  background-color:#6caee0;
+  color:#ffffff;
+  outline:none;
+}
+.form-group {
+	font-size: small;
+}
+#datafunc {
+	margin: 20px;
+}
+#template_sun2 #data_area #searcharea select {
+	margin-left: 160px;
+	margin-top: 10px;
+	padding: 8px;
+	float: left;
+}
+#template_sun2 #data_area #searcharea .search-form .input-group.input-lg {
+	float: right;
+	width: 300px;
+}
+#template_sun2 #service_area {
+	background-color: #E4E4E4;
+	width: 80%;
+	margin: auto;
+	border-radius: 10px;
+}
+#logoarea .logoimg {
+	margin: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.navbar-default {
+	background-color: #003366;
+	border-color: #E7E7E7;
+	background: -webkit-linear-gradient(#23849D,#23849D);
+	background: -o-linear-gradient(#23849D,#23849D);
+	background: -moz-linear-gradient(#23849D,#23849D);
+	background: linear-gradient(#23849D,#23849D);
+}
+/* navbar */
+
+/* title */
+.navbar-default .navbar-brand {
+	color: #FFF;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+	color: #FFF;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+	color: #FFF;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+	color: #FFF;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+	color: #555;
+	background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+	color: #555;
+	background-color: #D5D5D5;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+	border-top-color: #777;
+	border-bottom-color: #777;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+	border-top-color: #333;
+	border-bottom-color: #333;
+}
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+	border-top-color: #555;
+	border-bottom-color: #555;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+	border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+	background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #CCC;
+}
+@media (max-width: 767px) {
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+	color: #FFF;
+	}
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+	color: #FFF;
+	}
+}
+/*Custom colored navbar examples
+
+Here are 4 examples of custom colored navbar :
+JSFiddle link#logoarea {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+}*/
+
+/*防止datepicker變形*/ 
+#ui-datepicker-div span {
+   margin-left:0px;
+}

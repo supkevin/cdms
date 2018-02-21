@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Html.OutputText("TextAppName".ToLocalized())</title>
+    <link href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href=@Url.Content("~/Content/MyGridSystem.css") rel="stylesheet" />
+    <link href=@Url.Content("~/Content/clockpicker-gh-pages/clockpicker.css") rel="stylesheet" />
+    <!--IE type='number'問題-->
+    <link href='@Url.Content("~/Content/number-polyfill/number-polyfill.css")' rel="stylesheet" />
+    <style>
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .style1 {
+            color: #FFFFFF;
+        }
+
+        .style2 {
+            color: #000099;
+        }
+
+        .style3 {
+            color: #FF0000;
+        }
+
+        /*停用的選項灰階*/
+        select option:disabled {
+            background-color: dimgray;
+            color: #000;
+            font-weight: bold;
+            /*background-image: url('../../image/plus_24.png');*/
+        }
+    </style>
+</head>
+@RenderSection("head", required: false)
+<body onkeydown="return (event.keyCode!=13)">
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery-ui-datepickeroption.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+
+    <script src='@Url.Content("~/Scripts/plugin/ajax-bootstrap-select/ajax-bootstrap-select.js")'></script>
+    <script src='@Url.Content("~/Scripts/_Custom/CellNavigation.js")'></script>
+
+    <!--A clock-style timepicker for Bootstrap (or jQuery)-->
+    <script src='@Url.Content("~/Scripts/clockpicker-gh-pages/clockpicker.js")'></script>
+    <!--IE type='number'問題-->
+    <script src='@Url.Content("~/Scripts/number-polyfill/number-polyfill.min.js")'></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker();
+            $('.clockpicker').clockpicker(); //初始化
+
+            // 防止readonly欄位按backspace submit
+            var inputs = document.querySelectorAll('input[readonly]');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs.item(i).onkeydown = function (e) {
+                    if (e.which === 8) return false;
+                };
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        var btn = $('.btn');
+
+        function OnBegin() {
+            console.log('OnBegin');
+            btn.button('loading');
+        }
+
+        function OnSuccess(response) {
+            console.log('OnSuccess', response);
+
+            if (response.Status == true) {
+                console.log('OnSuccess-1');
+                bootbox.alert(response.Message, function () {
+                    console.log('OnSuccess-2');
+                    parent.Init();
+
+                    if (response.CloseWindow) {
+                        parent.jQuery.fancybox.close();
+                    }
+
+                    if (response.Url) {
+                        //window.location.reload();
+                        console.log('response.Url', response.Url);
+                        window.location = response.Url;
+                    }
+                });
+            } else {
+                console.log('OnSuccess-2');
+                bootbox.alert(response.Message);
+            }
+        }//function OnSuccess(
+
+        function OnComplete(response) {
+            console.log('OnComplete', response);
+            btn.button('reset');
+        }//function OnComplete() {
+
+        function OnFailure(response) {
+            console.log('OnFailure', response);
+            bootbox.alert(response.responseText);
+        }//function OnFailure() {
+    </script>
+    <script type="text/javascript">
+        // call ajax
+        function postAjax(url, data, success) {
+            $.ajax({
+                cache: false,
+                type: "Post",
+                url: url,
+                async: false,
+                data: data,
+                beforeSend: function () {
+
+                },
+                complete: function () {
+
+                },
+                success: function (response) {
+                    success(response);
+                },
+                error: function (xhr, status, error) {
+                    alert('xhr:' + xhr.status + 'status:' + status + ' ,error:' + status);
+                }
+            });
+        }//function postAjax(
+    </script>
+    <script type="text/javascript">
+        // Show 訊息
+        function myAlert(message, callBack) {
+            bootbox.alert(message, function () {
+                if (callBack) callBack;
+            });
+        }//function myAlert
+    </script>
+    <script type="text/javascript">
+        // 處理數字型別的欄位
+        $(document).ready(function () {
+            $(".datepicker").datepicker();
+            $('.clockpicker').clockpicker(); //初始化
+
+            // 刪除按扭
+            $("input[name='action:Delete']").click(function () {
+                return confirm('@Html.OutputText("MessageDeleteConfirm".ToLocalized())');
+            });
+
+            // div 內所有數字欄位靠右
+            $('.grid-container :input[data-val-number]').each(function (index) {
+                $(this).addClass('text-right');
+                $(this).on('focus', function () {
+                    $(this).select();
+                });
+            });
+
+            // 數字型別欄位focus時全選,IE 需加這才會正常
+            $('#table').on('mouseup', 'input[data-val-number]', function (e) {
+                e.preventDefault();
+                this.onmouseup = function () { };
+            });//$('#table').on('mouseup'
+
+            // 數字型別欄位focus時全選
+            $('#table').on('focus', 'input[data-val-number]', function () {
+                $(this).addClass('text-right');
+                $(this).select();
+            });// $('#table').on('focus'
+
+            // auto-complete 全選
+            $('#table').on('focus', '.auto-complete', function () {
+                $(this).select();
+            });//$('#table').on('autocompleteselect'
+        });
+    </script>
+
+    <!--明細資料共用-->
+    <script type="text/javascript">
+
+        $('#table').on('keydown', '.form-control', function () {
+            var self = $(this);
+            var parent = self.closest('tr').first();
+            parent.find(".dirty-item").first().val(true);
+        });//$('#table').on('keydown'
+
+        $('#table').on('change', 'select', function () {
+            var self = $(this);
+            var parent = self.closest('tr').first();
+            parent.find(".dirty-item").first().val(true);
+        });//$('#table').on('keydown'
+
+        // autocomplete 選取
+        $('#table').on('autocompleteselect', '.auto-complete', function (event, node) {
+            console.log('this', $(this));
+
+            // 往後找第一個input
+            var parent = $(this).closest('tr').first();
+
+            var txtProductName = parent.find('input.auto-complete-name');
+            var source = node.item.source;
+            txtProductName.val(source.ProductName);
+
+            GetStock(parent, source.ProductID)
+        });//$('#table').on('autocompleteselect'
+
+        // 捉庫存
+        function GetStock(parent, product) {
+
+            console.log('GetStock', product);
+
+            var target = parent.find('input[data-key="Stock"]');
+            var url = '@Url.Action("GetStock", "Product")';
+            var data = { id: product };
+
+            postAjax(url, data, function (response) {
+                console.log('response', response, target);
+                $(target).val(response);                
+            });
+        }// function GetStock(
+
+
+        // Clear
+        function Clear(parent) {
+            var txtName = parent.find('input.auto-complete-name');
+            var txtStock = parent.find('input[data-key="Stock"]');
+            //GetStock
+            txtName.val('');
+            txtStock.val('');
+        }// function Clear(
+
+        $('#table').on('keydown', '.auto-complete', function (event, node) {
+            console.log('keydown', $(this));
+            // 清空
+            var parent = $(this).closest('tr').first();
+            Clear(parent);
+        });//$('#table').on('autocompleteselect'
+
+        // 新增的控制項註冊為autocomplete
+        $(document).on('keydown.autocomplete', '.auto-complete', function () {
+            // console.log('document');
+            var self = $(this); // 目前控制項
+            self.autocomplete({
+                source: function (request, response) {
+                    // 捉取資料的action
+                    let action = self.data("autocomplete-url");
+                    $.get(action, { term: request.term },
+                        function (data) {
+                            console.log('autocomplete', data);
+                            response($.map(data, function (item, index) {
+                                console.log('index', item);
+
+                                return {
+                                    id: index,
+                                    label: item.Value + '-' + item.Label,
+                                    value: item.Value,
+                                    source: item.Source,
+                                }
+                            }))
+                        });
+                }// source
+            });// self.autocomplete
+        });//$(document).on(
+    </script>
+    <script type="text/javascript">
+        // 新增一列
+        $("#btnAdd").click(function () {
+            var self = $(this);
+            var id = self.attr("data-key");
+
+            $.ajax({
+                data: { id: id },
+                url: '@Url.Action("_Item")',
+                cache: false,
+                success: function (html) {
+                    //var $row = $('#table tbody tr').has('td[colspan ="99"]');
+                    $('#table tbody tr').has('td[colspan ="99"]').remove();
+                    $('#table tbody').append('<tr>' + html + '</tr>');
+                }
+            });
+        });// $("#btnAdd").click(
+
+        // 刪除一列
+        $("table").on("click", ".delete-item", function () {
+
+            if (!confirm("@Html.OutputText("MessageDeleteConfirm".ToLocalized())"))
+                return false;
+
+            var self = $(this);
+            var id = self.attr("data-key");
+
+            postAjax(
+            '@Url.Action("RemoveChild", new { area = "" })',
+            { id: id },
+            function (response) {
+                if (response.Status == true) {
+                    self.closest('tr').remove();
+                }
+                myAlert(response.Message);
+            });
+        });//$("table").on(
+    </script>
+</body>
+
+
+
+</html>

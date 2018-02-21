@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Html.OutputText("TextAppName".ToLocalized())</title>
+    @*<link href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet" />*@
+    @*<link href='@Url.Content("~/Content/themes/base/jquery-ui.css")' rel="stylesheet" />*@
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<link href=@Url.Content("~/Content/MyGridSystem.css") rel="stylesheet" />*@
+    <link href='@Url.Content("~/Content/clockpicker-gh-pages/clockpicker.css")' rel="stylesheet" />
+    <!--IE type='number'問題-->
+    <link href='@Url.Content("~/Content/number-polyfill/number-polyfill.css")' rel="stylesheet" />   
+    <style>
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        /*日曆*/
+        .ui-datepicker {
+            z-index: 99 !important;
+        }
+
+        /*停用的選項灰階*/
+        select option:disabled {
+            background-color: dimgray;
+            color: #000;
+            font-weight: bold;            
+            /*background-image: url('../../image/plus_24.png');*/
+        }
+    </style>
+</head>
+<body>
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @*<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>*@
+    @*<script src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")'></script>*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery-ui-datepickeroption.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src='@Url.Content("~/Scripts/_Custom/CellNavigation.js")'></script>
+    <!--A clock-style timepicker for Bootstrap (or jQuery)-->
+    <script src='@Url.Content("~/Scripts/clockpicker-gh-pages/clockpicker.js")'></script>
+
+    <!--IE type='number'問題-->
+    <script src='@Url.Content("~/Scripts/number-polyfill/number-polyfill.min.js")'></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker();
+            $('.clockpicker').clockpicker(); //初始化
+
+            // 防止readonly欄位按backspace submit
+            var inputs = document.querySelectorAll('input[readonly]');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs.item(i).onkeydown = function (e) {
+                    if (e.which === 8) return false;
+                };
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        var btn = $('.btn');
+
+        function OnBegin() {
+            console.log('OnBegin');
+            btn.button('loading');
+        }
+
+        function OnSuccess(response) {
+            console.log('OnSuccess', response);
+
+            if (response.Status == true) {
+                console.log('OnSuccess-1');
+                bootbox.alert(response.Message, function () {
+                    parent.Init();
+
+                    if (response.CloseWindow) {
+                        parent.jQuery.fancybox.close();
+                    }
+
+                    if (response.Url) {
+                        //window.location.reload();
+                        console.log('response.Url');
+                        window.location = response.Url;
+                    }
+                });
+            } else {
+                console.log('OnSuccess-2');
+                bootbox.alert(response.Message);
+            }
+        }//function OnSuccess(
+
+        function OnComplete(response) {
+            console.log('OnComplete', response);
+            btn.button('reset');
+        }//function OnComplete() {
+
+        function OnFailure(response) {
+            console.log('OnFailure', response);
+            bootbox.alert(response.responseText);
+        }//function OnFailure() {
+    </script>
+    <script type="text/javascript">
+        // call ajax
+        function postAjax(url, data, success) {
+            $.ajax({
+                cache: false,
+                type: "Post",
+                url: url,
+                async: false,
+                data: data,
+                beforeSend: function () {
+
+                },
+                complete: function () {
+
+                },
+                success: function (response) {
+                    success(response);
+                },
+                error: function (xhr, status, error) {
+                    alert('xhr:' + xhr.status + 'status:' + status + ' ,error:' + status);
+                }
+            });
+        }//function postAjax(
+    </script>
+    <script type="text/javascript">
+        // Show 訊息
+        function myAlert(message, callBack) {
+            console.log('message', message);
+            bootbox.alert(message, function () {
+                console.log('myAlert', callBack);
+                if (callBack) callBack;
+            });
+        }//function myAlert
+    </script>
+</body>
+</html>

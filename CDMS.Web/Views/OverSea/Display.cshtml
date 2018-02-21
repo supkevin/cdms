@@ -1,0 +1,30 @@
+﻿<h4>
+    @Html.OutputText("MenuOverSeaDisplay".ToLocalized())
+</h4>
+<hr />
+
+<form class="form-inline" role="form" onsubmit="return false;">
+    <input type="button" id="Export" class="btn btn-success" value="@Html.OutputText("ButtonExport".ToLocalized())" />
+</form>
+
+<div id="Content">
+    <h4 style="color:blue;">@Html.OutputText("TextIsOut".ToLocalized())</h4>
+    @Html.Action("_DisplayList", "OverSea", new { kind = 1 })
+    <h4 style="color:red;">@Html.OutputText("TextIsNotGo".ToLocalized())</h4>
+    @Html.Action("_DisplayList", "OverSea", new { kind = 2 })
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $('#Export').click(function () {        
+                document.location.href = "@Url.Action("DisplayListExport", "OverSea")";
+                event.preventDefault();
+            });
+        });
+    </script>
+}
+
+

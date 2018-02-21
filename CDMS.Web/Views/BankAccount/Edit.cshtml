@@ -1,0 +1,26 @@
+﻿@model CDMS.Model.ViewModel.BankAccountViewModel
+
+@{
+    Layout = "~/Views/Shared/_Form.cshtml";    
+}
+
+@using (Ajax.BeginForm("Edit", "BankAccount", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SeqNo)
+
+    @Html.Partial("_Body")
+
+    <div class="col-sm-12">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" name="action:Edit" />
+                <input type="submit" value="@Html.OutputText("ButtonDelete".ToLocalized())" class="btn btn-danger" name="action:Delete" />
+                <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+            </div>
+        </div>
+    </div>
+}
+
+
+

@@ -1,0 +1,261 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.SalesComplex
+
+@{
+    Layout = null;
+
+    var defaultAttribute = new { @class = "form-control" };
+
+}
+<div class="grid-container outline">
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.SalesID, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.SalesID, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute)
+       })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.Activate, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Sales.Activate,
+               ViewBag.YseNoList as SelectList, null,
+               Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.SalesDate, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.SalesDate,
+           "DateTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+           })
+        </div>
+
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.TaxID, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.TaxID,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.CustomerID, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Sales.CustomerID,
+                ViewBag.CompanyList as SelectList, "TextSelect".ToLocalized(),
+                Html.MergeAttributes(
+                    new
+                    {
+                        @class = "selectpicker text-danger with-ajax after-init customer",
+                        data_show_subtext = "true",
+                        data_live_search = "true",
+                        data_abs_ajax_url = string.Format("{0}", Url.Action("GetForCustomerAutocomplete", "Company")),
+                        data_key = "txtCustomerID"
+                    }, defaultAttribute)
+                )
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.ContactPerson, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.ContactPerson,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtContactPerson" }, defaultAttribute)
+                })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.ContactPhone, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.ContactPhone,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtContactPhone" }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.InvoiceAddress, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.EditorFor(m => m.Sales.InvoiceAddress,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtInvoiceAddress" }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.ShippingAddress, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.EditorFor(m => m.Sales.ShippingAddress,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtShippingAddress" }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.ShippingModeID, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Sales.ShippingModeID,
+            ViewBag.ShippingModeList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.ShippingFee, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.ShippingFee,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.WarehouseID, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Sales.WarehouseID,
+            ViewBag.WarehouseList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.AccountMonth, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.AccountMonth,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.InvoiceID, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.InvoiceID,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.InvoiceDate, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.InvoiceDate, "DateTemplate",
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.InvoiceAmount, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Sales.InvoiceAmount,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.Sales.Remarks, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.TextAreaFor(m => m.Sales.Remarks,
+            Html.MergeAttributes(new { @cols = 80, @rows = 3 }, defaultAttribute)
+            )
+        </div>
+    </div>
+
+    <!--(start)List(start)-->
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered updownleftright fixTable" id="table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-nowrap"></th>
+                        <th class="text-nowrap" style="width:280px">@Html.OutputText("ProductID".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:110px">@Html.OutputText("PriceKindID".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:110px">@Html.OutputText("ConditionID".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:100px">@Html.OutputText("Discount".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:100px">@Html.OutputText("Price".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:100px">@Html.OutputText("Qty".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("Amount".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("Remarks".ToLocalized())</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ChildList.Count() > 0)
+                    {
+                        foreach (var item in Model.ChildList)
+                        {
+                            try
+                            {
+                                Html.RenderPartial("_Item", item);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw;
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--(end)List(end)-->
+
+    <!--(start)History(start)-->    
+    <div class="row">
+        <div class="col-6">
+            <div id="MyHistory"></div>
+        </div>
+    </div>
+    <!--(end)History(end)-->
+
+</div>

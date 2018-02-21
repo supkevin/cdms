@@ -1,0 +1,116 @@
+﻿@model IEnumerable<CDMS.Model.ViewModel.ReceivableSummaryViewModel>
+
+@{
+    Layout = null;
+}
+
+@*測試捉所有ViewBag*@
+@*@{
+    string[] ignore = { "ActionName", "ControllerName" };
+    var routeValues = new RouteValueDictionary();
+
+    foreach (var viewBagItem in ViewContext.ViewData.Where(x => ignore.Contains(x.Key) == false))
+    {
+        if (viewBagItem.Value != null)
+        {
+            var type = viewBagItem.Value.GetType();
+
+            if (type == typeof(string) || type == typeof(string[]))
+            {
+                <p> @viewBagItem.Key @@: @viewBagItem.Value </p>;
+                routeValues.Add(viewBagItem.Key, viewBagItem.Value);
+            }
+        }
+    }
+}*@
+
+@functions{
+
+    private string GeneratePageLink(int page, string action = "_List")
+    {
+
+        string[] ignore = { "ActionName", "ControllerName" };
+        var routeValues = new RouteValueDictionary();
+
+        foreach (var viewBagItem in ViewContext.ViewData.Where(x => ignore.Contains(x.Key) == false))
+        {
+            if (viewBagItem.Value != null)
+            {
+                var type = viewBagItem.Value.GetType();
+
+                if (type == typeof(string) || type == typeof(string[]))
+                {
+                    routeValues.Add(viewBagItem.Key, viewBagItem.Value);
+                }
+            }
+        }
+
+        routeValues.Add("page", page);
+
+        var result = Url.Action("_List", (RouteValueDictionary)routeValues);
+        return result;
+    }
+}
+
+@Html.Hidden("p", (Int32)@ViewBag.p)
+@using PagedList
+@using PagedList.Mvc
+@Html.PagedListPager((IPagedList)Model,
+        page => GeneratePageLink(page),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new PagedListRenderOptions
+        {
+            LinkToPreviousPageFormat = "LinkToPreviousPageFormat".ToLocalized(),
+            LinkToNextPageFormat = "LinkToNextPageFormat".ToLocalized(),
+            PageCountAndCurrentLocationFormat = "PageCountAndCurrentLocationFormat".ToLocalized(),
+
+            DisplayPageCountAndCurrentLocation = true,
+            DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+            DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+            DisplayLinkToLastPage = PagedListDisplayMode.Never,
+            DisplayLinkToIndividualPages = false,
+            Display = PagedListDisplayMode.IfNeeded,
+        },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "MyContent"
+
+        }))
+
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <!--(start)main(start)-->
+        <fieldset disabled>
+            @Html.DisplayFor(m => item, "ReceivableSummaryBaseTemplate")
+        </fieldset>
+        <!--(finish)main(finish)-->    
+    }
+}
+
+<script>
+        GetReceivable('@ViewBag.CurrentCompany','@ViewBag.DealItem');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

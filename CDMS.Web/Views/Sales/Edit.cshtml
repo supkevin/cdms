@@ -1,0 +1,51 @@
+﻿@model CDMS.Model.ViewModel.SalesComplex
+
+@{
+    Layout = "~/Views/Shared/_GridForm3.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_ProgramName.cshtml", new ViewDataDictionary { { "id", "銷貨單資料維護" } })
+
+@using (Ajax.BeginForm("Edit", "Sales", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("_Body")
+    <!--(start)toolbar(start)-->
+    <div class="grid-container outline">
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-warning" id="btnAdd">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    @Html.OutputText("ButtonCreate".ToLocalized())
+                </button>
+                <input type="submit" value="@Html.OutputText("ButtonSave".ToLocalized())" class="btn btn-success" name="action:Edit" />
+                <input type="submit" value="@Html.OutputText("ButtonDelete".ToLocalized())" class="btn btn-danger" name="action:Delete" />
+
+                @Html.ActionLink("ButtonPrint".ToLocalized(), "Print", new { id = Model.Sales.SalesID, area = "" }, new { @class = "btn btn-primary hidden" })
+                <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+            </div>
+        </div>
+    </div>
+    <!--(end)toolbar(end)-->
+}
+
+@section scripts{
+    <script src='@Url.Content("~/Scripts/_Custom/CustomerAutoComplete.js")'></script>
+    <script src='@Url.Content("~/Scripts/_Custom/Sales.js")'></script>    
+    <script type="text/javascript">
+        GlobalSetting = function () {};
+        GlobalSetting.prototype = {
+            GetLatestSales: '@Url.Action("GetLatestSales", "Sales")',
+            GetPrice: '@Url.Action("GetPrice","Product")',
+            GetHistory: '@Url.Action("_History", new { area = "" })',
+        };
+
+        var _GlobalSetting = new GlobalSetting();
+    </script>
+}
+
+
+
+
+

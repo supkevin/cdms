@@ -1,0 +1,56 @@
+﻿@using CDMS.Web.Helpers
+@model CDMS.Model.ViewModel.InquiryHistoryViewModel
+
+@{
+    Layout = null;
+    var defaultAttribute = new { @class = "form-control", required = "required" };
+}
+
+@*
+<td width="121" height="43"><div align="right" class="style2">產品詢價紀錄：</div></td>
+<td width="135"><span class="style2">(產品編號)</span></td>
+<td width="157"><span class="style2">(詢價日期1+單價)</span></td>
+<td width="150"><span class="style2">(詢價日期2+單價)</span></td>
+<td width="153"><span class="style2">(詢價日期3+單價)</span></td>
+<td width="101"><div align="right" class="style2">庫存量：</div></td>
+<td width="201"><span class="style2">(倉庫1+倉庫2)</span></td>
+*@
+
+<div class="table-responsive">
+    <table class="table table-bordered">       
+        <tbody>
+            @if (Model != null)
+            {
+                <tr>
+                    <td class="text-right style2">
+                        產品詢價紀錄：
+                    </td>
+                    <td class="text-center style2">
+                        @Html.DisplayFor(model => model.ProductID)
+                    </td>
+                    <td class="style2">
+                        @Html.DisplayFor(model => model.Inquiry1)
+                    </td>
+                    <td class="style2">
+                        @Html.DisplayFor(model => model.Inquiry2)
+                    </td>
+                    <td class="style2">
+                        @Html.DisplayFor(model => model.Inquiry3)
+                    </td>
+                    <td class="text-right style2">
+                        庫存量：
+                    </td>                    
+                    <td class="style2">
+                        @Html.DisplayFor(model => model.Stock)
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

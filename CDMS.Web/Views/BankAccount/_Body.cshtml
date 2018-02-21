@@ -1,0 +1,136 @@
+﻿@using CDMS.Web.Helpers
+@model CDMS.Model.ViewModel.BankAccountViewModel
+
+@{
+    var defaultAttribute = new { @class = "form-control" };
+
+    // 動態
+    var readOnly =
+        ((Model != null) && (Model.SeqNo != 0)) ?
+        (object)new
+        {
+            @readonly = "readonly"
+        }
+        : (object)new { };
+}
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.BankID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.BankID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.BankID,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(readOnly, defaultAttribute)
+                })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.BankName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.BankName,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.AccountID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.AccountID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.AccountID,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(readOnly, defaultAttribute)
+                })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.AccountName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.AccountName, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.AccountName,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.InitialAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.InitialAmount, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.InitialAmount,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.InitialDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.InitialDate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.InitialDate, "DateTemplate")
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.LastNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.LastNumber, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.LastNumber,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.LastDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.LastDate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.LastDate, "DateTemplate")
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.TextAreaFor(model => model.Remarks,
+               new
+               {
+                   @class = "form-control",
+                   @cols = 80,
+                   @rows = 4
+               })
+        </div>
+    </div>
+</div>
+

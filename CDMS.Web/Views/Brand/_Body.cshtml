@@ -1,0 +1,73 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.BrandViewModel
+
+@{
+    Layout = null;
+    var defaultAttribute = new { @class = "form-control"};
+
+    // 動態
+    var readOnly =
+        ((Model != null) && (Model.BrandID != null)) ?
+        (object)new
+        {
+            @readonly = "readonly"
+        }
+        : (object)new { };
+}
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.BrandID, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.BrandID, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.BrandID,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(readOnly, defaultAttribute)                  
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.BrandName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.BrandName, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.BrandName,
+               new
+               {
+                  htmlAttributes = Html.MergeAttributes(readOnly, defaultAttribute)  
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.TextAreaFor(model => model.Remarks,
+               new
+               {
+                   @class = "form-control",
+                   @cols = 80,
+                   @rows = 4,                   
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Activate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Activate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.Activate,
+               ViewBag.YseNoList as SelectList, null,
+               new { @class = "form-control"})
+        </div>
+    </div>
+</div>
+

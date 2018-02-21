@@ -1,0 +1,96 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.CodeViewModel
+
+@{
+    Layout = null;
+    var defaultAttribute = new { @class = "form-control" };
+
+    // 動態
+    var readOnly =
+        ((Model != null) && (Model.CodeType != "")) ?
+        (object)new
+        {
+            @readonly = "readonly"
+        }
+        : (object)new { };
+}
+<!--(start)Debug(start)-->
+<div class="col-sm-12 hidden">
+    <div class="form-group">       
+        <div class="col-md-offset-2 col-md-10">
+           @Html.EditorFor(model => model.CodeType,
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { @class=""}, defaultAttribute)
+            })
+        </div>
+    </div>
+</div>
+<!--(end)Debug(end)-->
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.CodeType, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CodeType, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownList("CodeType",
+                    ViewBag.CodeTypeList as SelectList, "TextSelect".ToLocalized(),
+               new { @class = "form-control", disabled = "disabled" })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.CodeValue, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CodeValue, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.CodeValue,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.CodeName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CodeName, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.CodeName,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.SortOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.SortOrder, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.EditorFor(model => model.SortOrder,
+               new
+               {
+                   htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+               })
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        @Html.MarkLabelFor(model => model.Activate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.Activate, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10">
+            @Html.DropDownListFor(model => model.Activate,
+               ViewBag.YseNoList as SelectList, null,
+               Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+</div>

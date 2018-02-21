@@ -1,0 +1,25 @@
+﻿@using HtmlHelpers.BeginCollectionItem
+
+@model CDMS.Web.ViewModels.AddressEditorViewModel
+
+@*@Html.TextBox(String.Format("Countries[{0}].Name", Model.Index), Model.Name,
+            new Dictionary<string, object>
+             {
+              { "data-val", "true"},
+              { "data-val-length", "Name cannot exceed 255 characters."} ,
+              { "data-val-length-max", "255"},
+              { "data-val-required", "Name is required" },
+             })*@
+@*@Html.TextBoxFor(_item => _item.City, new { @class = "positive-integer numberTextBox" })*@
+
+@using (Html.BeginCollectionItem("Addresses"))
+{
+    <tr>
+        <td>@Html.TextBoxFor(m => m.City, new { @class = "form-control" })</td>
+        <td>@Html.TextBoxFor(m => m.Street, new { @class = "form-control" })</td>
+        <td>
+            @Html.HiddenFor(m => m.IsDeleted)
+            <a class="delete-country">Delete Country</a>
+        </td>
+    </tr>
+}

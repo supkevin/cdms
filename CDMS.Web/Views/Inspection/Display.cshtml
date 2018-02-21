@@ -1,0 +1,290 @@
+﻿@model CDMS.Model.Inspection
+@{
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<form id="form1" method="post" enctype="multipart/form-data">
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID_Inspection)
+    @{
+        var display = "hidden";
+
+        // 狀態已結案無法再改狀態
+        var disable = Model.ID_Status == (int)Status.Close.Value ? "disabled" : "";
+        var isClose = Model.ID_Status == (int)Status.Close.Value ? "hidden" : "";
+    }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit"
+                   value="@Html.OutputText("ButtonEdit".ToLocalized())"
+                   class="btn btn-primary @isClose" name="action:Display" />
+            <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID_Status, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.ID_Status, "", new { @class = "text-danger" })
+        <!--以這種方式達到disabled-->
+        <div class="col-md-10">
+            @if(Model.ID_Status == (int)Status.Close.Value)
+            {
+                @Html.DropDownListFor(model => model.ID_Status, ViewBag.StatusList as SelectList, "TextSelect".ToLocalized(),
+                        new { @class = "form-control", @disabled = "disabled" })
+            }else
+            {
+                @Html.DropDownListFor(model => model.ID_Status, ViewBag.StatusList as SelectList, "TextSelect".ToLocalized(),
+                        new { @class = "form-control" })
+            }
+        </div>
+    </div>
+    <fieldset disabled>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CX_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.CX_Date, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CX_Date, new { htmlAttributes = new { @class = "form-control datepicker", required = "required", placeholder = "TextInput".ToLocalized() + "CX_Date".ToLocalized() } })
+            </div>
+        </div>
+        <div class="form-group @display">
+            @Html.LabelFor(model => model.ID_Country, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.ID_Country, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ID_Country, ViewBag.CountryList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_Store, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.ID_Store, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ID_Store, ViewBag.SotreList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_Workplace, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.ID_Workplace, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ID_Workplace, ViewBag.WrokPlaceList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group @display">
+            @Html.LabelFor(model => model.ID_Feedback, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.ID_Feedback, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ID_Feedback, ViewBag.FeedBackList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group @display">
+            @Html.LabelFor(model => model.ID_Observation, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.ID_Observation, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ID_Observation, ViewBag.ObservationList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CX_Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.CX_Content, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CX_Content, new { @class = "form-control", required = "required", @cols = 80, @rows = 6 })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CX_Improve, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.CX_Improve, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CX_Improve, new { @class = "form-control", required = "required", @cols = 80, @rows = 6 })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_Track, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.ID_Track, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ID_Track, ViewBag.TrackList as SelectList, "TextSelect".ToLocalized(), new { @class = "form-control" })
+            </div>
+        </div>
+        <!--(start)圖片顯示(start)-->
+        <div class="form-group">
+            <div class="col-md-10 text-center">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        @{
+                            int index = 0;
+                            string active = "";
+                        }
+
+                        @foreach (var item in Model.Inspection_Image.Where(x => (x.FG_Type ?? 0) == (int)GlobalSettings.ImageType.Before))
+                        {
+                            active = index == 0 ? "active" : "";
+
+                            <li data-target="#carousel-example-generic" data-slide-to="@index" class="@active"></li>
+
+                            index++;
+                        }
+                    </ol>
+                    @{
+                        index = 0;
+                    }
+                    <div class="carousel-inner" role="listbox">
+                        @foreach (var item in Model.Inspection_Image.Where(x => (x.FG_Type ?? 0) == (int)GlobalSettings.ImageType.Before))
+                        {
+                            active = index == 0 ? "active" : "";
+
+                            <div class="item @active">
+                                @*@Html.DisPlayImage(item.BI_Inspection_Image, 0, "", "")*@
+
+                                @Html.DisplayImageByPath(
+                                @Url.Action("GetImage", "InspectionImage",
+                                    new { id_inspection_image = item.ID_Inspection_Image }), 0)
+
+                                <div class="carousel-caption">
+                                </div>
+                            </div>
+
+                            index++;
+                        }
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--(end)圖片顯示(end)-->
+    </fieldset>
+    @*改善後*@
+    <fieldset disabled>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CX_DealWith, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.ValidationMessageFor(model => model.CX_DealWith, "", new { @class = "text-danger" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CX_DealWith, new { @class = "form-control", required = "required", @cols = 80, @rows = 6 })
+            </div>
+        </div>
+        <!--(start)圖片顯示(start)-->
+        <div class="form-group">
+            <div class="col-md-10 text-center">
+                <div id="carousel-after" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        @{
+                            int indexAfter = 0;
+                            string activeAfter = "";
+                        }
+
+                        @foreach (var item in Model.Inspection_Image.Where(x => (x.FG_Type ?? 0) == (int)GlobalSettings.ImageType.After))
+                        {
+                            activeAfter = indexAfter == 0 ? "active" : "";
+
+                            <li data-target="#carousel-after" data-slide-to="@indexAfter" class="@activeAfter"></li>
+
+                            indexAfter++;
+                        }
+                    </ol>
+                    @{
+                        indexAfter = 0;
+                    }
+                    <div class="carousel-inner" role="listbox">
+                        @foreach (var item in Model.Inspection_Image.Where(x => (x.FG_Type ?? 0) == (int)GlobalSettings.ImageType.After))
+                        {
+                            activeAfter = indexAfter == 0 ? "active" : "";
+
+                            <div class="item @activeAfter">
+
+                                @Html.DisplayImageByPath(
+                                @Url.Action("GetImage", "InspectionImage",
+                                    new { id_inspection_image = item.ID_Inspection_Image }), 0)
+
+                                <div class="carousel-caption">
+                                </div>
+                            </div>
+
+                            indexAfter++;
+                        }
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-after" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-after" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--(end)圖片顯示(end)-->
+    </fieldset>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery-ui-datepickeroption.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker();
+            var btn = $('.btn');
+
+            $("#form1").ajaxForm({//因為要判斷兩個按紐所以用ajaxForm
+                type: "post",
+                success: function (response) {
+                    //console.log('3');
+                    btn.button('reset');//因為沒有complete先寫在這
+                    if (response.Status == true) {
+                        parent.Init();
+                        parent.jQuery.fancybox.close();
+                    }
+                    $('.progress').hide();//完成時隱藏
+                    alert(response.Message);
+                    return false;//阻止自動提交
+                },
+                complete: function (xhr) {
+
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

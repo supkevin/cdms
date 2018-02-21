@@ -1,0 +1,131 @@
+﻿@model IEnumerable<CDMS.Model.News>
+
+@{
+    Layout = null;
+}
+@*
+    編號
+    發布日期
+    下架日期
+    發布單位(人)
+    消息類別
+    消息內容
+    備註
+*@
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">
+                <th>@Html.OutputText("TextFunction".ToLocalized())</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NewsID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OffDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartmentID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NewsTypeID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SetTop)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Activate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+
+                            @Html.ActionLink("ButtonEdit".ToLocalized(), "Edit", "News",
+                            new { id = item.NewsID, area = "" }, new { @class = "btn btn-primary fancybox fancybox.iframe" })
+
+                            @*代碼有使用不可刪除*@
+                            @*@if (!item.Inspection.Any())
+                                {
+                                    @Html.ActionLink("ButtonDelete".ToLocalized(), "Delete", "Product",
+                                    new { id = item.ProductID, area = "" }, new { @class = "btn btn-danger fancybox fancybox.iframe" })
+                                }*@
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => item.NewsID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ReleaseDate, "DateTimeTemplate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.OffDate, "DateTimeTemplate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.DepartmentID, "DepartmentNameListTemplate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NewsTypeID, "NewsTypeTemplate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Content)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Remarks)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.SetTop, "ActivateTemplate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Activate, "ActivateTemplate")
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Hidden("p", (Int32)@ViewBag.p)
+@using PagedList
+@using PagedList.Mvc
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("_List", 
+       new { txt = ViewBag.txt, orderby = ViewBag.orderby, sort = ViewBag.sort, page }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>"
+        },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "MyContent"
+        }))
+
+
+
+
+
+
+
+
+

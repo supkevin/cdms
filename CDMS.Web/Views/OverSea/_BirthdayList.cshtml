@@ -1,0 +1,116 @@
+﻿@model IEnumerable<CDMS.Model.OverSea>
+
+@{
+    Layout = null;
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr class="active" style="border-bottom-style:solid;border-top-style:solid;">
+                <th>
+                    @Html.OutputText("TextiCount".ToLocalized())
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_PID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID_Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_From_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_To_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID_OverType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_Dept_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_OnBoard_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_Birthday)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CX_Place_Remark)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FG_IsWorkCard)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                int iCount = 1;
+                foreach (var item in Model)
+                {
+
+                    <tr style="border-bottom-style:solid;border-top-style:solid;">
+                        <td rowspan="2" style="vertical-align: middle; text-align:center; ">@iCount.ToString()</td>
+                        <td>
+                            @Html.DisplayFor(model => item.CX_PID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CX_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Country.CX_Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CX_From_Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CX_To_Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.OverType.CX_OverType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CX_Dept_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CX_Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CX_OnBoard_Date)
+                        </td>
+                        <td>
+                            @Html.OutputText(item.CX_Birthday)@*+ "(" + item.NQ_MeetBirthday + ")"*@
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => item.CX_Place_Remark)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.FG_IsWorkCard)
+                        </td>
+                    </tr>
+                    <tr style="border-bottom-style:solid;border-top-style:hidden;">
+                        <td colspan="12">
+                            <span style="background-color:#CCFF99;">
+                                @Html.DisplayWithBreaksFor(model => item.CX_OverSea_Remark)
+                            </span>
+                        </td>
+                    </tr>
+
+                    iCount++;
+                }
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

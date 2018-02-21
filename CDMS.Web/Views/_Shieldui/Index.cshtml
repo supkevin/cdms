@@ -1,0 +1,159 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery Shield UI Demos</title>
+    @*<link id="themecss" rel="stylesheet" type="text/css" href="//www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+        <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+    *@
+    <link id="themecss" rel="stylesheet" type="text/css" href='@Url.Content("~/Content/shieldui/light/all.min.css")' />
+    <script src='@Url.Content("~/Scripts/shieldui/jquery-1.11.1.min.js")'></script>
+    <script src='@Url.Content("~/Scripts/shieldui/shieldui-all.min.js")'></script>
+</head>
+<body class="theme-light">
+    <div id="grid"></div>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#grid").shieldGrid({
+            dataSource: {
+                remote: {
+                    read: "_Shieldui/_List",
+                    modify: {
+                        create: {
+                            url: "/orders/OrderCreate",
+                            type: "post",
+                            data: function (edited) {
+                                var items = [];
+                                for (var i = 0; i < edited.length; i++) {
+                                    var date = edited[i].data.OrderDate ? edited[i].data.OrderDate.toJSON() : new Date().toJSON();
+                                    items.push({
+                                        ContactName: edited[i].data.ContactName,
+                                        HasDiscount: edited[i].data.HasDiscount,
+                                        OrderDate: date,
+                                        Quantity: edited[i].data.Quantity,
+                                        UnitPrice: edited[i].data.UnitPrice,
+                                        ID: edited[i].data.ID
+                                    });
+                                }
+                                return { "": items };
+                            }
+                        },
+                        update: {
+                            url: "/_Shieldui/OrderUpdate",
+                            type: "post",
+                            data: function (edited) {
+
+                                console.log('edited', edited);
+
+                                var items = [];
+                                for (var i = 0; i < edited.length; i++) {
+
+                                    console.log('data-' , edited[i].data);
+                                    
+                                    //var date = edited[i].data.OrderDate ? edited[i].data.OrderDate.toJSON() : new Date().toJSON();
+                                    var date = new Date().toJSON();
+
+                                    var item = {
+                                        ContactName: edited[i].data.ContactName,
+                                        HasDiscount: edited[i].data.HasDiscount,
+                                        OrderDate: date,
+                                        Quantity: edited[i].data.Quantity,
+                                        UnitPrice: edited[i].data.UnitPrice,
+                                        ID: edited[i].data.ID
+                                    };
+                                    items.push(item);
+                                }
+                                console.log('items' , items);
+                                return { "": items };
+                            }
+                        },
+                        remove: {
+                            url: "/orders/OrderRemove",
+                            type: "post",
+                            data: function (edited) {
+                                var items = [];
+                                for (var i = 0; i < edited.length; i++) {
+                                    items.push({
+                                        ContactName: edited[i].data.ContactName,
+                                        HasDiscount: edited[i].data.HasDiscount,
+                                        OrderDate: edited[i].data.OrderDate.toJSON(),
+                                        Quantity: edited[i].data.Quantity,
+                                        UnitPrice: edited[i].data.UnitPrice,
+                                        ID: edited[i].data.ID
+                                    });
+                                }
+                                return { "": items };
+                            }
+                        }
+                    }
+                },
+                schema: {
+                    fields: {
+                        ID: { path: "ID", type: Number },
+                        ContactName: { path: "ContactName", type: String },
+                        Quantity: { path: "Quantity", type: Number },
+                        UnitPrice: { path: "UnitPrice", type: Number },
+                        OrderDate: { path: "OrderDate", type: Date },
+                        HasDiscount: { path: "HasDiscount", type: Boolean }
+                    }
+                }
+            },
+            paging: {
+                pageSize: 5
+            },
+            rowHover: false,
+            columns: [
+                { field: "ContactName", title: "Contact Name" },
+                { field: "Quantity", title: "Quantity", width: "100px" },
+                { field: "UnitPrice", title: "UnitPrice", width: "100px" },
+                { field: "OrderDate", title: "Order Date", format: "{0:MM/dd/yyyy}" },
+                { field: "HasDiscount", title: "HasDiscount", width: "170px" },
+                {
+                    title: " ",
+                    buttons: [
+                        {
+                            cls: "deleteButton", commandName: "delete",
+                            caption: "<img src='/Content/shieldui/img/delete.png' /><span>Delete</span>"
+                        }
+                    ]
+                }
+            ],
+            editing: {
+                enabled: true,
+                event: "click",
+                type: "cell",
+                batch: true,
+                confirmation: {
+                    "delete": {
+                        enabled: true,
+                        template: function (item) {
+                            return "Delete row with ID = " + item.ID
+                        }
+                    }
+                }
+            },
+            toolbar: [
+                {
+                    buttons: [
+                        { commandName: "insert", caption: "Insert" },
+                        { commandName: "save", caption: "Save" },
+                        { commandName: "cancel", caption: "Cancel" }
+                    ],
+                    position: "top"
+                }
+            ]
+        });
+    });
+    </script>
+    <style>
+        .deleteButton img {
+            margin-right: 3px;
+            vertical-align: bottom;
+        }
+    </style>
+</body>
+</html>

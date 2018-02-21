@@ -1,0 +1,6 @@
+﻿@model string
+
+@{    
+    SelectListItem info = ((SelectList)ViewBag.DepartmentList).Where(x => x.Value == Model).SingleOrDefault();
+}
+@( info == null ? "&nbsp;" : info.Text)

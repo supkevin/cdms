@@ -1,0 +1,7 @@
+﻿@model string
+
+@{
+   SelectListItem info = ((SelectList)ViewBag.UnitKindList).Where(x => x.Value == Model).SingleOrDefault();    
+}
+
+@( info== null ? "&nbsp;" : info.Text)

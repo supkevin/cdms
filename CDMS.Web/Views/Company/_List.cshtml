@@ -1,0 +1,141 @@
+﻿@model IEnumerable<CDMS.Model.Company>
+
+@{
+    Layout = null;
+}
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="active">
+                <th>@Html.OutputText("TextFunction".ToLocalized())</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ShortName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyKindID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaxID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telephone1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactPerson)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NextMonth)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Activate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+
+                            @Html.ActionLink("ButtonEdit".ToLocalized(), "Edit", "Company",
+                            new { id = item.CompanyID, area = "" }, new { @class = "btn btn-primary fancybox fancybox.iframe" })
+
+                            @*代碼有使用不可刪除*@
+                            @*@if (!item.Inspection.Any())
+                                {
+                                    @Html.ActionLink("ButtonDelete".ToLocalized(), "Delete", "Product",
+                                    new { id = item.ProductID, area = "" }, new { @class = "btn btn-danger fancybox fancybox.iframe" })
+                                }*@
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => item.CompanyID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ShortName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CompanyKindID, "CompanyKindTemplate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.TaxID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Telephone1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ContactPerson)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.NextMonth)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Remarks)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Activate, "ActivateTemplate")
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="99">@Html.OutputText("TextNoData".ToLocalized())</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Hidden("p", (Int32)@ViewBag.p)
+
+@using PagedList
+@using PagedList.Mvc
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("_List",
+       new { start = ViewBag.start, finish = ViewBag.finish, txt = ViewBag.txt, orderby = ViewBag.orderby, sort = ViewBag.sort, page }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>"
+        },
+        new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "MyContent"
+        }))
+
+
+
+
+
+
+
+
+

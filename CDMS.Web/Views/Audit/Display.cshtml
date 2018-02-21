@@ -1,0 +1,36 @@
+﻿@model CDMS.Model.ViewModel.QuotationComplex
+
+@{
+    Layout = "~/Views/Shared/_GridForm.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_ProgramName.cshtml", new ViewDataDictionary { { "id", "程式名稱修改" } })
+
+@using (Ajax.BeginForm("Edit", "Audit", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset disabled>
+        @Html.Partial("_Body")
+    </fieldset>
+    <div class="grid-container outline">
+        <!--(start)toolbar(start)-->
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">                    
+                    <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+                </div>
+            </div>
+        </div>
+        <!--(end)toolbar(end)-->
+    </div>
+}
+
+@section scripts{
+  
+}
+
+
+
+
+

@@ -1,0 +1,252 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.InquiryComplex
+
+@{
+    Layout = null;
+
+    var defaultAttribute = new { @class = "form-control", required = "required" };
+    var display = "hidden";
+
+}
+<div class="grid-container outline">
+    @*<div class="row">
+        <div class="col-1 title">
+            @Html.Label("InquiryID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.EditorFor(m => m.Inquiry.InquiryID, new
+           {
+               htmlAttributes = Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute)
+           })
+        </div>
+    </div>*@
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("InquiryID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.InquiryID, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute)
+       })
+        </div>
+
+        <div class="col-1 title">
+            @Html.Label("Activate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+       </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Inquiry.Activate,
+               ViewBag.YseNoList as SelectList, null,
+               Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("InquiryDate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.InquiryDate,
+           "DateTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+           })
+        </div>
+
+        <div class="col-1 title">
+            @Html.Label("ValidateDate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.ValidateDate, "DateTemplate",
+           new
+           {
+               htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+           })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("CompanyID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            <div class="form-inline">
+                @Html.EditorFor(m => m.Inquiry.CompanyID,
+                    new
+                    {
+                        htmlAttributes = Html.MergeAttributes(
+                            new
+                            {
+                                @class = "auto-complete",
+                                data_autocomplete_url = Url.Action("GetForAutocomplete", "Company"),
+                                id = "txtCompanyID"
+                            }, defaultAttribute)
+                    })
+                @Html.EditorFor(m => m.Inquiry.CompanyName,
+                    new
+                    {
+                        htmlAttributes = Html.MergeAttributes(
+                            new
+                            {
+                                @class = "auto-complete-name",
+                                id = "txtCompanyName",
+                                readOnly = "ReadOnly",
+                            }, defaultAttribute)
+                    })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("ContactPerson".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.ContactPerson,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtContactPerson" }, defaultAttribute)
+                })
+        </div>
+        <div class="col-1 title">
+            @Html.Label("ContactPhone".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.ContactPhone,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { id = "txtContactPhone" }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-1 title">
+            @Html.Label("ScheduleDate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.ScheduleDate,
+           "DateTemplate",
+            new
+            {
+                htmlAttributes = Html.MergeAttributes(new { @class = "datepicker" }, defaultAttribute)
+            })
+        </div>
+        <div class="col-1 title">
+            @Html.Label("Remind".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.Remind, new
+           {
+               htmlAttributes = Html.MergeAttributes(new { @class = "text-right" }, defaultAttribute)
+           })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("CurrencyID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(m => m.Inquiry.CurrencyID,
+            ViewBag.CurrencyKindList as SelectList, "TextSelect".ToLocalized(),
+            Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+        <div class="col-1 title">
+            @Html.Label("ExchangeRate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.ExchangeRate,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { @class = "text-right" }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("PurchaseID".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.PurchaseID,
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { required = "" }, defaultAttribute)
+                })
+        </div>
+        <div class="col-1 title">
+            @Html.Label("PurchaseDate".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.Inquiry.PurchaseDate,
+           "DateTemplate",
+                new
+                {
+                    htmlAttributes = Html.MergeAttributes(new { @class = "datepicker", required = "" }, defaultAttribute)
+                })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.Label("Remarks".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-5">
+            @Html.TextAreaFor(m => m.Inquiry.Remarks,
+            Html.MergeAttributes(new { @cols = 80, @rows = 3 }, defaultAttribute)
+            )
+        </div>
+    </div>
+
+    <!--(start)List(start)-->
+    @*<div class="jumbotron">*@
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered updownleftright fixTable" id="table">
+                <thead>
+                    <tr class="active">
+                        <td class="@display">@Html.OutputText("SeqNo".ToLocalized())</td>
+                        <th class="text-nowrap" style="width:280px">@Html.OutputText("ProductID".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:110px">@Html.OutputText("ProductName".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:110px">@Html.OutputText("PriceKindID".ToLocalized())</th>
+                        <th class="text-nowrap" style="width:110px">@Html.OutputText("ConditionID".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("Discount".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("ForeignPrice".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("Price".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("Qty".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("Amount".ToLocalized())</th>
+                        <th class="text-nowrap">@Html.OutputText("Remarks".ToLocalized())</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ChildList.Count() > 0)
+                    {
+                        foreach (var item in Model.ChildList)
+                        {
+                            <tr>
+                                <td class="@display">@item.SeqNo</td>
+                                <td>@item.ProductID</td>
+                                <td>@item.ProductName</td>
+                                <td class="text-center">@Html.DisplayFor(m => item.PriceKindID, "PriceKindTemplate") </td>
+                                <td class="text-center">@Html.DisplayFor(m => item.ConditionID, "ConditionKindTemplate") </td>
+                                <td class="text-right">@item.Discount</td>
+                                <td class="text-right">@item.ForeignPrice</td>
+                                <td class="text-right">@item.Price</td>
+                                <td class="text-right">@item.Qty</td>
+                                <td class="text-right">@item.Amount</td>
+                                <td>@item.Remarks</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @*</div>*@
+    <!--(end)List(end)-->
+</div>

@@ -1,0 +1,57 @@
+﻿@using CDMS.Web.Helpers
+@model CDMS.Model.ViewModel.StockChangeDetailViewModel
+
+@{
+    var debug = new
+    {
+        @class = "form-control hidden",
+        readOnly = "ReadOnly"
+    };
+
+    var defaultAttribute = new { @class = "form-control", style = "width: 100%" };
+}
+
+@using (Html.BeginCollectionItem("ChildList"))
+{
+    <tr>
+        <td>
+            <input type="button" value="@Html.OutputText("ButtonDelete".ToLocalized())"
+                   class="btn btn-danger delete-item" data-key="@Model.SeqNo" />
+        </td>
+        <td>
+            <div class="form-inline nested-group">
+                @Html.TextBoxFor(m => m.ProductID,
+                       new
+                       {
+                           @class = "form-control auto-complete",
+                           style = "width:47%",
+                           data_autocomplete_url = Url.Action("GetForAutocomplete", "Product"),
+                           Required = "Required"
+                       })
+                @Html.EditorFor(m => m.ProductName,
+                        new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control auto-complete-name",
+                                style = "width:47%",
+                                readOnly = "ReadOnly",
+                                Required = "Required"
+                            }
+                        })
+            </div>           
+        </td>                      
+        <td>
+            @Html.EditorFor(m => m.Qty,
+                new { htmlAttributes = Html.MergeAttributes(new { @class = "text-right", data_key = "Qty", min = 0 }, defaultAttribute) })
+        </td>      
+        <td>
+            @Html.EditorFor(m => m.Remarks,
+                new { htmlAttributes = new { @class = "form-control", style = "width: 100%" } })
+          
+            @Html.TextBoxFor(m => m.SeqNo, debug)
+            @Html.TextBoxFor(m => m.StockChangeID, debug)
+            @Html.TextBoxFor(m => m.IsDirty, new { @class = "form-control hidden dirty-item" })
+        </td>
+    </tr>
+}

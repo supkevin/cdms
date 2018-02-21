@@ -1,0 +1,93 @@
+﻿@model CDMS.Model.Workplace
+
+@{
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<link href="~/Content/bootstrap-colorpicker.min.css" rel="stylesheet" />
+@using (Ajax.BeginForm("Create", "Workplace", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Html.OutputText("ButtonCreate".ToLocalized())" class="btn btn-success" />
+            <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Workplace, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Workplace, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CX_Workplace, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "TextInput".ToLocalized() + "CX_Workplace".ToLocalized() } })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Color, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Color, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            <div id="cp2" class="input-group colorpicker-component">
+                @Html.EditorFor(model => model.CX_Color, new { htmlAttributes = new { @class = "colorpicker form-control" } })
+                <span class="input-group-addon"><i></i></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NQ_Sort, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.NQ_Sort, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NQ_Sort, new { htmlAttributes = new { @class = "form-control text-right", required = "required", placeholder = "TextInput".ToLocalized() + "NQ_Sort".ToLocalized() } })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Workplace_Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Workplace_Remarks, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.CX_Workplace_Remarks, new { @class = "form-control", @cols = 80, @rows = 10 })
+        </div>
+    </div>
+}
+
+@section scripts{
+
+    <script src="~/Scripts/bootstrap-colorpicker.min.js"></script>
+
+    <script type="text/javascript">
+
+        var btn = $('.btn');
+
+        function OnBegin() {
+            btn.button('loading');
+        }
+
+        function OnSuccess(response) {
+            if (response.Status == true) {
+                parent.Init();
+                parent.jQuery.fancybox.close();
+            }
+            alert(response.Message);
+        }
+
+        function OnComplete() {
+            btn.button('reset');
+        }
+    </script>
+    <script>
+        $(function () {
+            $('#cp2').colorpicker({
+                format: 'hex',
+                horizontal: true
+            });
+        });
+    </script>
+}
+
+
+
+

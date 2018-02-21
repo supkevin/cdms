@@ -1,0 +1,78 @@
+﻿
+@model CDMS.Model.Country
+
+@{
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+@using (Ajax.BeginForm("Delete", "Country", new { area = "" }, new AjaxOptions { HttpMethod = "POST", OnBegin = "OnBegin", OnSuccess = "OnSuccess", OnComplete = "OnComplete", Confirm = "MessageDeleteConfirm".ToLocalized() }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID_Country)
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Html.OutputText("ButtonDelete".ToLocalized())" class="btn btn-danger" />
+            <input type="button" value="@Html.OutputText("ButtonClose".ToLocalized())" onclick="parent.jQuery.fancybox.close();" class="btn btn-inverse" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Country, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Country, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CX_Country, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "TextInput".ToLocalized() + "CX_Country".ToLocalized() } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Send_To_Mail, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Send_To_Mail, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CX_Send_To_Mail, new { htmlAttributes = new { @class = "form-control", placeholder = "TextInput".ToLocalized() + "CX_Send_To_Mail".ToLocalized() } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NQ_Sort, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.NQ_Sort, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NQ_Sort, new { htmlAttributes = new { @class = "form-control text-right", required = "required", placeholder = "TextInput".ToLocalized() + "NQ_Sort".ToLocalized() } })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CX_Country_Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.ValidationMessageFor(model => model.CX_Country_Remarks, "", new { @class = "text-danger" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.CX_Country_Remarks, new { @class = "form-control", @cols = 80, @rows = 10 })
+        </div>
+    </div>
+
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        var btn = $('.btn');
+
+        function OnBegin() {
+            btn.button('loading');
+        }
+
+        function OnSuccess(response) {
+            if (response.Status == true) {
+                parent.Init();
+                parent.jQuery.fancybox.close();
+            }
+            alert(response.Message);
+        }
+
+        function OnComplete() {
+            btn.button('reset');
+        }
+    </script>
+}
+
+

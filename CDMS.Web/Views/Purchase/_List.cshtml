@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CDMS.Model.ViewModel.PurchaseComplex>
+
+@{
+    Layout = null;   
+}
+<p class="form-inline hidden">
+    @Html.ActionLink("ButtonCreate".ToLocalized(), "Create", "Purchase", new { area = "" }, new { @class = "btn btn-success fancybox fancybox.iframe" })
+</p>
+
+@Html.Hidden("p", (Int32)@ViewBag.p)
+@using PagedList
+@using PagedList.Mvc
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("_List",
+           new
+           {
+               start = ViewBag.start,
+               finish = ViewBag.finish,
+               company = ViewBag.company,
+               product = ViewBag.product,
+               productName = ViewBag.productName,
+               txt = ViewBag.txt,
+               orderby = ViewBag.orderby,
+               sort = ViewBag.sort,
+               page
+           }),
+            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+            new PagedListRenderOptions
+            {
+                LinkToPreviousPageFormat = "LinkToPreviousPageFormat".ToLocalized(),
+                LinkToNextPageFormat = "LinkToNextPageFormat".ToLocalized(),
+                PageCountAndCurrentLocationFormat = "PageCountAndCurrentLocationFormat".ToLocalized(),
+
+                DisplayPageCountAndCurrentLocation = true,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                DisplayLinkToIndividualPages = false,
+                Display = PagedListDisplayMode.IfNeeded,
+            },
+            new AjaxOptions()
+            {
+                HttpMethod = "Post",
+                UpdateTargetId = "MyContent"
+            }))
+
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <!--全部欄位設為唯讀-->
+        <fieldset disabled>
+            @Html.DisplayFor(m => item, "PurchaseComplexTemplate")
+        </fieldset>
+
+        <div class="grid-container outline">
+            <div class="row">
+                <p class="form-inline">
+                    @Html.ActionLink("ButtonEdit".ToLocalized(), "Edit", "Purchase",
+                 new { id = item.Purchase.PurchaseID, area = "" }, new { @class = "btn btn-primary fancybox fancybox.iframe" })                    
+                </p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <center>
+        <h2><b>@("MessageNoData".ToLocalized())</b></h2>
+    </center>
+}

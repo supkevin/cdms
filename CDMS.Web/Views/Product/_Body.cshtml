@@ -1,0 +1,265 @@
+﻿@using CDMS.Web.Helpers
+
+@model CDMS.Model.ViewModel.ProductViewModel
+
+@{
+    Layout = null;
+    var defaultAttribute = new { @class = "form-control", };
+
+    // 動態
+    var readOnly =
+        ((Model != null) && (Model.ProductID != null)) ?
+        (object)new
+        {
+            @readonly = "readonly"
+        }
+        : (object)new { };
+}
+<div class="grid-container outline">
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.ProductID, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.ProductID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-2">
+            @*新增修改以不同的方式顯示產品編號*@
+            @if ((Model != null) && (Model.ProductID != null))
+            {
+                @Html.EditorFor(model => model.ProductID, new
+           {
+               htmlAttributes = Html.MergeAttributes(readOnly, defaultAttribute)
+           })
+
+                @Html.TextBoxFor(model => model.BrandID,
+                    Html.MergeAttributes(new { @class = "hidden" }, defaultAttribute)
+                )
+            }
+            else
+            {
+                <div class="form-inline">
+                    @Html.EditorFor(model => model.ProductID, new
+               {
+                   htmlAttributes = Html.MergeAttributes(readOnly, defaultAttribute)
+               })
+
+                    @Html.DropDownListFor(model => model.BrandID,
+                            ViewBag.BrandList as SelectList, "TextSelect".ToLocalized(),
+                            Html.MergeAttributes(new { }, defaultAttribute)
+                        )
+                </div>}
+        </div>
+
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.ProductName, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+       })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.KindID, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.KindID, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(model => model.KindID,
+               ViewBag.ProductKindList as SelectList, "TextSelect".ToLocalized(),
+               Html.MergeAttributes(new { }, defaultAttribute)
+              )
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(m => m.UnitID, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.UnitID, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(model => model.UnitID,
+               ViewBag.UnitKindList as SelectList, "TextSelect".ToLocalized(),
+               Html.MergeAttributes(new { }, defaultAttribute)
+              )
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.SafeStock, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.SafeStock, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.SafeStock, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+       })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.SupplierID, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(model => model.SupplierID,
+                ViewBag.CompanyList as SelectList, "TextSelect".ToLocalized(),
+                Html.MergeAttributes(
+                    new
+                    {
+                        @class = "selectpicker text-danger with-ajax after-init",
+                        data_show_subtext = "true",
+                        data_live_search = "true",
+                        data_abs_ajax_url = string.Format("{0}", Url.Action("GetForSupplierAutocomplete", "Company")),
+                    }, defaultAttribute)
+                )
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.LatestCost, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.LatestCost, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.LatestCost, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute)
+       })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.SalesCost, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.SalesCost, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.SalesCost, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { readOnly = "readOnly" }, defaultAttribute)
+       })
+            最新進貨成本*(1+管銷費用比率)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.BizCost, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.BizCost, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            <div class="form-inline">
+                @Html.EditorFor(m => m.BizCost, new
+           {
+               htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+           })
+                @Html.DropDownListFor(m => m.Linked,
+                   ViewBag.YseNoList as SelectList,
+                   Html.MergeAttributes(new { }, defaultAttribute)
+                  )
+                <br />
+                與銷售成本連動 (銷售成本*(1+利潤率))
+            </div>
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.ListPrice, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.ListPrice, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.ListPrice, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+       })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.SetPrice, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.SetPrice, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.SetPrice, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+       })
+        </div>
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.RealPrice, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.RealPrice, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-2">
+            @Html.EditorFor(m => m.RealPrice, new
+       {
+           htmlAttributes = Html.MergeAttributes(new { }, defaultAttribute)
+       })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.SPEC, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.SPEC, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-5">
+            @Html.TextAreaFor(model => model.SPEC,
+                Html.MergeAttributes(new { @cols = 80, @rows = 4 }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.BOM, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.BOM, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-5">
+            @Html.TextAreaFor(model => model.BOM,
+                Html.MergeAttributes(new { @cols = 80, @rows = 4 }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-5">
+            @Html.TextAreaFor(model => model.Remarks,
+                Html.MergeAttributes(new { @cols = 80, @rows = 4 }, defaultAttribute))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1 title">
+            @Html.MarkLabelFor(model => model.Activate, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.Activate, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-5">
+            @Html.DropDownListFor(model => model.Activate,
+               ViewBag.YseNoList as SelectList, null,
+               Html.MergeAttributes(new { }, defaultAttribute))
+        </div>
+    </div>
+
+    @if (Model != null && Model.ProductID != null)
+    {
+        <div class="row">
+            <div class="col-1 title">
+                @Html.Label("Alternative".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-5">
+                @Html.ActionLink("ButtonModify".ToLocalized(), "Edit", "Alternative",
+                            new { id = Model.ProductID, area = "" }, new { @class = "btn btn-primary fancybox fancybox.iframe" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-1 title">
+                @Html.Label("ProductImage".ToLocalized(), htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-5">
+                @Html.ActionLink("ButtonModify".ToLocalized(), "Index", "ProductImage",
+                            new { id = Model.ProductID, area = "" }, new { @class = "btn btn-primary fancybox fancybox.iframe" })
+            </div>
+        </div>
+
+        Html.RenderAction("_Image", new { id = Model.ProductID });
+    }
+</div>

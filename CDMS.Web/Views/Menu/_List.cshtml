@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CDMS.Model.ViewModel.MenuComplex>
+
+@{
+    Layout = null;
+}
+<div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            功能區
+        </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        @*<ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">進貨管理<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href='11詢價單登錄.html'><span>1.1詢價單登錄</span></a></li>
+                    <li><a href='12詢價單查詢.html'><span>1.2詢價單查詢</span></a></li>
+                    <li><a href='13進貨單登錄.html'><span>1.3進貨單登錄</span></a></li>
+                    <li><a href='14進貨單查詢.html'><span>1.4進貨單查詢</span></a></li>
+                </ul>
+            </li>
+        </ul>*@
+
+        @if (Model.Count() > 0)
+        {
+            // 只有有子資料的群組才出現
+            foreach (var group in Model.Where(x => x.ChildList.Count > 0))
+            {
+                <ul class="nav navbar-nav @group.Group.MenuClass">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"
+                           data-toggle="dropdown" role="button" aria-expanded="false">@group.Group.MenuName
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach (var item in group.ChildList)
+                            {
+                                @*<li><a href='@item.MenuPath'><span>@item.MenuName</span></a></li>*@
+                                <li>
+                                    @Html.ActionLink(item.MenuName, "Index", item.MenuPath, null, null)
+                                </li>
+                           }
+                        </ul>
+                    </li>
+                </ul>
+            }
+        }
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
