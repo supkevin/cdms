@@ -59,7 +59,7 @@
         <AssociationConnector Association="CDMS.Model.FK_PurchaseDetail_Product" />
         <AssociationConnector Association="CDMS.Model.FK_QuotationDetail_Product" />
         <AssociationConnector Association="CDMS.Model.FK_QuotationDetail_Quotation" />
-        <EntityTypeShape EntityType="CDMS.Model.Sales" Width="1.5" PointX="9.375" PointY="20" IsExpanded="false" />
+        <EntityTypeShape EntityType="CDMS.Model.Sales" Width="1.5" PointX="9.375" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="CDMS.Model.v_CustomerLatestSales" Width="1.5" PointX="5.375" PointY="12.75" />
         <EntityTypeShape EntityType="CDMS.Model.v_LatestSales" Width="1.5" PointX="3.375" PointY="8.75" />
         <EntityTypeShape EntityType="CDMS.Model.v_StockTrack" Width="1.5" PointX="5.375" PointY="8.75" />

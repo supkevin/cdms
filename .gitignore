@@ -266,3 +266,4 @@ venv3
 /MSP.Web/App_Data 
 /MSP.UI/App_Data
 *.sql
+/CDMS/
